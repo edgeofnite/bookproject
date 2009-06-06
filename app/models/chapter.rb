@@ -30,15 +30,11 @@ class Chapter < ActiveRecord::Base
 
   state_machine :state, :initial => :new do
     event :begin_writing do
-      transition :new => :writing
+      transition :new => :writing, :editing => :writing
     end
 
     event :begin_editing do
       transition :writing => :editing
-    end
-
-    event :write_again do
-      transition :editing => :writing
     end
 
     event :done_editing do

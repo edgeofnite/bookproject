@@ -1,7 +1,7 @@
 <h2>About Me</h2>
 <p><%= @me.aboutMe %></p>
 <h3>Chapters to Write</h3>
-<%if @chapterToWrite %>
+<%if @chaptersToWrite.empty? %>
  <% for chapter in @chaptersToWrite %>
 	<div class ="entry">
 		<p><%= link_to h(chapter.book.title + "Chapter " + chapter.number), :controller => "book", :action =>"reviewChapter", :id => chapter.book %></p>
@@ -12,7 +12,7 @@
 <% end %>
 
 <h3>Chapters to Edit</h3>
-<%if @chapterToEdit %>
+<%unless @chaptersToEdit.empty? %>
  <% for chapter in @chaptersToEdit %>
 	<div class ="entry">
 		<p><%= link_to h(chapter.book.title + "Chapter " + chapter.number), :controller => "book", :action =>"editBook", :id => chapter.book %></p>
@@ -23,7 +23,7 @@
 <% end %>
 
 
-<%if @myProjects %>
+<%unless @myProjects.empty? %>
 <h3>Projects I own</h3>
 <% for project in @myProjects %>
 	<div class ="entry">
@@ -31,8 +31,10 @@
 	</div>
  <%end%>
 <% end %>
+<% if session["person"].username=="admin" %>
+	<%= link_to h("Create new project"), :controller => "project", :action =>"createProject" %>
 
 <%= link_to "Browse All Books", :controller => "book" %><br/><br/>
 <%= link_to "Go to project page", :controller => "project", :action =>"projectPage" %><br/><br/>
-
+<%end%>
 my completed books

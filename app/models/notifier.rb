@@ -25,4 +25,13 @@ class Notifier < ActionMailer::Base
     @chapter = chapter
   end
 
+  def chapter_rewrite(chapter, sent_at = Time.now)
+    subject    "Chapter #{chapter.number} of book #{chapter.book.title}"
+    recipients "#{chapter.book.editor.username} <#{chapter.book.editor.email}>"
+    from       "bookproject@jaffestrategies.com"
+    sent_on    sent_at
+    content_type = "text/plain"
+    @chapter = chapter
+  end
+
 end

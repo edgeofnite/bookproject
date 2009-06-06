@@ -29,27 +29,43 @@ class Project < ActiveRecord::Base
   #  Editing:  - All chapters are complete, the editors can review and ask writers to fix or rewrite portions of their chapters.
   #  Complete: - Editing is done.  Editors and Writers can view and read the books
   #  Published: - Non-project members can read the books
-  NEW = 0
-  OPEN = 1
-  WRITING = 2
-  EDITING = 3
-  COMPLETE = 4
-  PUBLISHED = 5
+  state_machine :status, :initial => :new do
+    state :new, :value => 0
+    state :open, :value => 1
+    state :writing, :value => 2
+    state :editing, :value => 3
+    state :complete, :value => 4
+    state :published, :value => 5
+
+    event :begin_project do
+      transition :new => :open
+    end
+
+    event :begin_writing do
+      transition :open => :writing
+    end
+
+    event :done_writing do
+      transition :writing => :editing
+    end
+
+    event :done_editing do
+      transition :editing => :complete
+    end
+
+    event :publish do
+      transition :complete => :published
+  end
+
 
   def phase
-    return case
-           when status = Project::NEW
-             "new"
-           when status = Project::OPEN
-             "open for participants"
-           when status = Project::WRITING
-             "being writen"
-           when status = Project::EDITING
-             "being edited"
-           when status = Project::COMPLETE
-             "complete"
-           when status = Project::PUBLISHED
-             "published"
+    return case status
+           when :new then "new"
+           when :open then "open for participants"
+           when :writing then "being writen"
+           when :editing then "being edited"
+           when :complete then "complete"
+           when :published then "published"
            end
   end
 

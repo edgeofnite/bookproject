@@ -1,6 +1,6 @@
 class LoginController < ApplicationController
   layout 'default'
-  before_filter :authorize, :except => :login
+  before_filter :authorize, :except => [:login, :add_user]
   
   def index
   end
@@ -25,9 +25,12 @@ class LoginController < ApplicationController
   def add_user
     @user = User.new(params[:user])
     if request.post? and @user.save
-      flash.now[:notice] = "User #{@user.name} created"
-      @user = User.new
-    end
+      flash.now[:notice] = "User #{@user.username} created"
+      session["person"] = @user
+	  session[:user_id] = session["person"].id
+	  @user = User.new
+	  redirect_to(:action => "index")
+	end
   end
 
   def delete_user

@@ -6,6 +6,14 @@
 	</head>
 	<body>
 		<h3>Signing up for a project is a commitment. If you understand this and are willing to commit to writing a chapter every |get days| days, check below and submit</h3>
-		<form action=addUserToProject><input type=checkbox name = "Agree">I accept <br><input type="submit" value = "Sign Up!"></form>
+		<%form_for :signUp do |form| %>
+		<%= form.check_box :agree %>
+		<%= form.label :agree%><br><br>
+		<%= form.check_box :writer%>
+		<%= form.label :writer%><br><br>
+		<%= form.check_box :editor%>
+		<%= form.label :editor%><br><br>
+		<%= submit_tag "Sign me up!" %>
+		<%end%>
 	</body>
 </html>

@@ -4,12 +4,12 @@
   <td><%= project.days_per_chapter %></td>
   <td><%= project.chapters %></td>
   <td>
-	<%if project.status == Project::NEW %> NEW <% end %>
-	<%if project.status == Project::OPEN %> OPEN <% end  %>
-	<%if project.status == Project::WRITING %> WRITING <% end %>
-	<%if project.status == Project::EDITING %> EDITING <% end %>
-	<%if project.status == Project::COMPLETE %> COMPLETE <% end %>
-	<%if project.status == Project::PUBLISHED %> PUBLISHED <% end %>
+	<%if project.status == :new %> NEW <% end %>
+	<%if project.status == :open %> OPEN <% end  %>
+	<%if project.status == :writing %> WRITING <% end %>
+	<%if project.status == :editing %> EDITING <% end %>
+	<%if project.status == :complete %> COMPLETE <% end %>
+	<%if project.status == :published %> PUBLISHED <% end %>
   </td>
   <td><%= project.owner.username %></td>
 </tr>

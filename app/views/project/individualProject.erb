@@ -4,6 +4,11 @@
 <p>Each chapter should be written in  <%= @project.days_per_chapter %> days.</p>
 <p>The project signing date should be on <%= @project.signing_date %>.</p>
 
+<%if @project.status == Project::NEW %>
+<%= link_to "Sign me up!", :action => "projectSignUp", :id => @project %>
+<%end%>
+
+<%unless @project.books.empty?%>
 <h3>Books</h3>
 <!- only editable if you are the project owner->
 <table class="editable"  border="1">
@@ -30,7 +35,7 @@
 <%end%>
 </tbody>
 </table>
-
+<%end%>
 <h3>Registered Editors</h3>
 <ul>	
 <% for editor in @project.editors %>
