@@ -1,0 +1,116 @@
+# == Schema Information
+# Schema version: 20090605083306
+#
+# Table name: chapters
+#
+#  id        :integer         not null, primary key
+#  author_id :integer         not null
+#  book_id   :integer         not null
+#  due_date  :date
+#  contents  :binary
+#  title     :string(100)
+#  finished  :boolean
+#  edited    :boolean
+#  number    :integer         not null
+#  comment   :text
+#  state     :string(255)     default("new"), not null
+#
+
+b1c1:
+ id: 1
+ author_id: 2
+ book_id: 1
+ due_date: "2008-01-01"
+ title: "Chapter 1"
+ finished: true
+ edited: true
+ number: 1
+ contents: |
+  <p>She had never intended to become a murderer. But as his obsession with perfecting his craft grew, so did her own obsession—his death!	</p><p>
+  Fifi LaGrande was young, beautiful and slim when she had first begun working in the kitchen at the Beaumatin Hotel. She had started out slicing vegetables, then making soups and sauces, then soufflés and entrees, until finally she had achieved her calling: Master Pastry Chef. How everyone loved her biscuits, her pies, her tarts and tartins, her puddings and puffs, and most of all her cakes! From Pierre the busboy to Jean-Paul the cook, everyone agreed that her creations were simply sublime.	</p><p>
+  And that was when he showed up on their doorstep.	</p><p>
+  Fifi's first premonition of danger occurred as soon as she laid eyes on Gustav Beauregard. He was fat and seemingly jolly, so fat that Fifi thought she had misunderstood Marie (the m'aitre d'hotel) when she stated that Gustav was to be the new busboy. How could he possibly squeeze into the narrow spaces between the tables of the restaurant, without upsetting any of the furniture or dropping his trays of dirty dishes?	</p><p>
+  Instead, she chose to voice another concern. "But we already have a busboy," Fifi said, nodding in Pierre's direction.	</p><p>
+  "Business is booming," Marie said. "We have enough customers coming in now that we could use two busboys."	</p><p>
+  "And I get to be the head busboy," added Pierre. "Gustav can work under me."	</p><p>
+  Privately Fifi thought that Gustav did not look like the type to take orders from anyone, but she held her tongue. "It is agreed then."	</p><p>
+  "Yes," said Gustav, with a special smile in her direction. "I look forward to becoming better acquainted with you, Mademoiselle." He expanded his smile to include the others, "With all of you. I am a hard worker, and a very fast learner. You will see."	</p><p>
+  And they did.	</p><p>
+  Within a short period of time, Gustav had proved a wonder at the art of busing off tables. He could clear a complete table—six diners, seven courses plus dessert a la carte—in no time at all. Even Pierre, far from worrying about being supplanted, was in awe.	</p><p>
+  "Just look at him! How does he do it?" Pierre would say with a look at disbelief.	</p><p>
+  "I think it is because he is eating the mess," Fifi muttered under her breath, but conjured up a smile nonetheless. Really, who the busboys were and how well they worked had nothing to do with her or her pastries.	</p><p>
+  Then Marie promoted Gustav to waiting on tables. "Henri, our regular waiter, is getting older," she confided to Fifi one bright summer morning. "At the very least he could use some help in keeping up with all our customers."	</p><p>
+  "But what about busing off the tables?" Fifi asked.	</p><p>
+  "Oh, Pierre can go back to doing that solo. After all, it's not rocket science!" said Marie.	</p><p>
+  By fall, Gustav had gone from serving meals to offering helpful hints as to their composition. Fifi viewed these developments with increasing alarm.	</p><p>
+  "But planning the menu is one of your jobs!" she said to Marie.	</p><p>
+  "Oh, that's all right. I never really enjoyed doing that anyway," Marie said carelessly. "Now I can spend more time on my other duties around the hotel!"	</p><p>
+  Fifi humphed quietly to herself. And she continued to humph (although with increasing volume) when Gustav soon replaced Jean-Paul as the master chef.	</p><p>
+  "I am quite happy being the sous-chef," Jean-Paul said, when Fifi questioned him about the new order in the kitchen. "Besides, Gustav is so much better than I at cooking—have you tasted his filet mignon, his Oysters Beauregard?"	</p><p>
+  "I thought it was Oysters Rockefeller," said Fifi in a snippy tone. She had in fact tasted Gustav's cooking and privately had to agree that everything Gustav turned out was far superior to what had been the fare when Jean-Paul wore the white hat.	</p><p>
+  "Not anymore—Gustav has given that dish such a new and fresh interpretation, we must change its name!" Jean-Paul gushed enthusiastically.	</p><p>
+  And then, the final blow fell. Or, more accurately, Fifi herself took a fall, one stormy winter day—head over heels onto an icy sidewalk when she tripped over her French poodle Jacques. To her dismay, she had broken her arm.	</p><p>
+  "Such a terrible tragedy!" said Marie when she heard the news. "Oh, my poor Fifi, how you must be suffering."	</p><p>
+  "Yes, I am in such great pain," sighed Fifi, although really she was feeling much better. "I don't know how I can continue to produce my works of pastry art with only one hand!" She was about to add that of course she would give it her best shot. She was a true professional.	</p><p>
+  "That won't be necessary," said Marie.	</p><p>
+  "It won't?"	</p><p>
+  "No, you must rest and recover. Think of your health first!" insisted Marie.	</p><p>
+  "But the pastry—I cannot let you down, Marie! For your sake, and the sake of the restaurant, I will do my very best!" Fifi leaned back on her pillows with another sigh.	</p><p>
+  "No, no, you are not letting me down. As a matter of fact, the timing couldn't be better!" said Marie. "Gustav has been asking lately if he could try his hand at the desserts, and so I thought—"	</p><p>
+  "You're replacing me with Gustav?!" shrieked Fifi.	</p><p>
+  "Not a permanent replacement," Marie said soothingly. "Just until you're on your feet once more."	</p><p>
+  "It is my arm that is broken, not my feet," said Fifi.	</p><p>
+  "Just an expression, my dear," said Marie. "Now you must rest, and I will have Gustav make up a plate of petit fours for you, to speed your recovery."	</p><p>
+  "I am looking forward to it," said Fifi, shooting meaningful glances at Marie. Alas, they were wasted as Marie had already walked out the door.	</p><p>
+  And the worst thing was, Gustav (naturally) turned out to be an excellent baker! Fifi wept in despair when she tasted his cinnamon buns, his eclairs, and his seven-layer cake. His crème brulee brought more tears to her eyes, especially when everyone in the restaurant, from Pierre to Marie, declared they had never enjoyed such delicacies before.	</p><p>
+  "What, have I been serving them burnt charcoal?" fumed Fifi to Jacques. "This is all your fault, you know. If I hadn't gotten hurt, I would still be ensconced in my role as pastry chef. Instead that usurper has taken my place!"	</p><p>
+  Fifi's mood did not improve as she dressed to go to work. Six weeks of taking it easy, conserving her strength (as Marie had put it), and of eating the rich pastries sent up to her room three times a day, had all conspired to ruin her waistline. Without intending to, Fifi had become LaGrande in build as well as name.	</p><p>
+  "That does it! I cannot stand this another moment!" she declared passionately after failing to find a single dress which would still close. Jacques fled under the dresser, his whiskers twitching. "Either that Gustav goes, or I do!" she said. "I will go to Marie this minute and tell her—"	</p><p>
+  Fifi's splutterings died. Did she really want to put Marie's loyalty to the test? Suppose Marie announced the only fair way to settle this dispute was to have a bake-off contest between Fifi and Gustav? And suppose she, Fifi, lost?	</p><p>
+  "Then I will settle this another way, once and for all!"	</p><p>
+  Caught up in a storm of emotion, Fifi seized the filigree silver pie server that had been in her family for generations (along with the recipe for lemon meringue pie which had always been her pride and joy until she'd tasted Gustav's version) and swept down to the kitchen, determined to have it out with Gustav! She would show him who was boss, er, pastry chef!	</p><p>
+  Fifi ran down the stairs, her pie server held aloft. She swept through the empty dining room and into the kitchen. Gustav would be sure to be there at this time of day and she would deal with him! She would skewer him through the heart like the beast he was!	</p><p>
+  Fifi burst through the swinging doors and skidded to a sudden halt. Gustav was there, all right, only he lay face down in a pool of blood.	</p><p>
+  Someone had beaten her to it! But who?	</p>
+
+b1c2:
+ id: 2
+ author_id: 3
+ book_id: 1
+ due_date: "2008-01-08"
+ title: "Chapter 2"
+ finished: true
+ edited: false
+ number: 2
+ contents: |
+  Fifi stood dumbstruck over Gustav's dead body. This was not the wayshe had imagined her path of vengeance to end.	</p><p>
+  "You killed him." said a shaky voice from behind Fifi. She turned around to see Marie staring at her, white as sour cream icing. A week "no" was all Fifi could get out of her mouth.	</p><p>
+  Marie spotted the pie server in Fifi's hand, and fled with a shriek of terror.	</p><p>
+  Within minutes the police arrived and Fifi was arrested. After investigating the scene it was determined that the weapon was one of the kitchen's fine fillet knifes. Someone had slit Gustav's throat, but the police concluded that it wasn't Fifi. Fifi's weapon - the pie
+  Server - had no trace of blood on it, and the fillet knife had only Gustav's fingerprints on the handle. After a nerve wrecking day at the police station Fifi was released. But Marie wasn't convinced.	</p><p>
+  "What do you mean 'I'm fired?!'" Bellowed Fifi. "Now that Gustav is gone you need me more than ever! The restaurant needs a good pastry chef, and I'm finally healthy!"	</p><p>
+  "I will not employ a murderer,” hissed Marie, standing a safe five yards away. "You have already done enough for this restaurant."	</p><p>
+  So there she was: unemployed, depressed and fat. Her only consolation was that that obese, cocky, awfully perfect Gustav was dead. Fifi applied for the position of pastry chef at a few other restaurants but all turned her down. Apparently, Marie had made sure that every restaurant owner in town knew that Fifi had killed Gustav. No one in the culinary world was willing to hire Fifi, not even as a bus girl. With time she came to realize that although her life was bad when Gustav was around, it was worse now. No one lost his or her job because of Gustav. In addition, not only did Gustav's death not solve her weight issues, it made them worse. Fifi now weighed over two hundred and fifty pounds, and although she was still a mammal, she now resembled one of the marine type. Since Gustav's death Fifi had become an outcast, and what little money she had was being consumed by gross amounts of anti depressant drugs. She also found herself seriously considering eating Jacques.	</p><p>
+  Fifi was tired of all this. She wanted her life back, and that meant clearing her name. Depression was replaced with anger and determination. Fifi was back on the warpath. She would find the person who ruined her life, and show him just how dangerous huge, emotional women could be...	</p>
+
+b1c3:
+ id: 3
+ author_id: 4
+ book_id: 1
+ due_date: "2008-02-08"
+ title: 
+ finished: false
+ edited: false
+ number: 3
+ contents:
+
+b2c1:
+ id: 4
+ author_id: 6
+ book_id: 2
+ due_date: "2008-02-08"
+ title: 
+ finished: false
+ edited: false
+ number: 1
+ contents:

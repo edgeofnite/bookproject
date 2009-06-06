@@ -1,0 +1,46 @@
+<h3>Statistics</h3>
+<p>The project is now <b><%= @project.phase %></b>.</p>
+<p>Each book in this project has <%= @project.chapters %> chapters.</p>
+<p>Each chapter should be written in  <%= @project.days_per_chapter %> days.</p>
+<p>The project signing date should be on <%= @project.signing_date %>.</p>
+
+<h3>Books</h3>
+<!- only editable if you are the project owner->
+<table class="editable"  border="1">
+<thead>
+ <tr>
+   <th>Book Title</th>
+   <th id="editor">Editor</th>
+   <th>Current Chapter</th>
+   <th>Current Writer</th>
+   <th>Completed Chapters</th>
+   <th>Published</th>
+ </tr>
+</thead>
+<tbody>
+<% for book in @project.books %>
+<tr class="<%= cycle("odd", "even") %>" id="<%= book.id %>">
+<td><%= link_to h(book.title), :controller => "book", :action =>"editBook", :id => book %></td>
+<td><%= book.editor.username %></td>
+<td><%= book.cur_chapter %></td>
+<td><%= book.chapters[book.cur_chapter-1].user.username %></td>
+<td><%= book.chapters.count {|c| c.edited == true} %></td>
+<td><%= book.published %></td>
+</tr>
+<%end%>
+</tbody>
+</table>
+
+<h3>Registered Editors</h3>
+<ul>	
+<% for editor in @project.editors %>
+<li><%= h(editor.username) %></li>
+<%end%>
+</ul>
+
+<h3>Registered Writers</h3>
+<ul>	
+<% for writer in @project.writers %>
+<li><%= h(writer.username) %></li>
+<%end%>
+</ul>

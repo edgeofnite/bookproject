@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Project Page</title>
+	</head>
+	<body>
+		<h2>My Current Projects:</h2>
+                <%if @currentProjects %>
+                <%for project in @currentProjects%>
+                <a href="/project/individualProject"><%= project.name%></a><br>
+                <%end%>
+                <%else%>
+                No current projects!<br><br>
+                <%end%>
+		<h2>My Finished Projects</h2><br>
+                <%if @oldProjects %>
+                <%for project in @oldProjects%>
+                <a href="/project/individualProject"><%= project.name%></a><br>
+                <%end%>
+                <%else%>
+                No finished projects!<br><br>
+                <%end%>
+		<h2>New Projects</h2><br>
+                <%if @activeProjects %>
+                <%for project in @activeProjects%>
+                <a href="/project/individualProject"><%= project.name%></a><br>
+                <%end%>
+                <%else%>
+                No open projects!<br><br>
+                <%end%>
+                <form action="projectSignUp"><input type="submit" value="Sign Up"></form><br>
+		<h2>Other Completed Projects</h2><br>
+                <%if @completeProjects %>
+                <%for project in @completeProjects%>
+                <a href="/project/individualProject"><%= project.name%></a><br>
+                <%end%>
+                <%else%>
+                No complete projects!<br><br>
+                <%end%>
+		<a href ="/project/setProjectDetails">Create New Project</a> 
+	</body>
+</html>

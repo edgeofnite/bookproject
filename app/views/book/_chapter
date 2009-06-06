@@ -1,0 +1,5 @@
+<tr>
+   <td>
+		<%= chapter.contents%><br>End of chapter<br><br>
+	</td>
+</tr>

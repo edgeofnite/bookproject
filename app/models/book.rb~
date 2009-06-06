@@ -1,0 +1,11 @@
+class Book < ActiveRecord::Base
+  has_many :chapters, :order => "number"
+  belongs_to :uber
+  validates_presence_of :uber_id, :project_id, :chapters, :title  
+  belongs_to :projects
+  
+  def self.find_books
+    find(:all, :order => "title")
+  end
+
+end

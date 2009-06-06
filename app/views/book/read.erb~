@@ -1,0 +1,4 @@
+<%unless @book.chapters.empty? %>
+ <%= render(:partial => "chapter", :collection => @book.chapters) %>
+<% end %>
+<%= link_to "Back to personal page", :action => "personalPage", :controller => "main" %>

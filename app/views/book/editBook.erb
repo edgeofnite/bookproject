@@ -1,0 +1,18 @@
+<b>TODO</b>: Check access permissions!!!
+<%unless @book.chapters.empty? %>
+<%= render(:partial => "chapter", :collection => (@book.chapters-[@chapter])) %>
+<% end %>
+<% form_for :chapter do |form| %>
+<%= form.label :title %>
+<%= form.text_field :title %>
+<%= form.text_area :contents, :class=>"widgEditor" %>
+<%= form.label :finished %>
+<%= form.check_box :finished %>
+<%= form.label :edited %>
+<%= form.check_box :edited %>
+<br/>
+<%= form.label :comment %> <br/>
+<%= form.text_area :comment, :rows => 5, :cols => 60 %>
+<br/>
+<%= submit_tag %>
+<%end%>

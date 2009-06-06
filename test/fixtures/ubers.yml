@@ -1,0 +1,29 @@
+# == Schema Information
+# Schema version: 20090605083306
+#
+# Table name: ubers
+#
+#  id         :integer         not null, primary key
+#  user_id    :integer         not null
+#  project_id :integer
+#
+
+uberA1:
+  user_id: 11
+  project_id: 1
+
+uberA2:
+  user_id: 10
+  project_id: 1
+
+uberB3:
+  user_id: 9
+  project_id: 2
+
+uberB4:
+  user_id: 5
+  project_id: 2
+
+uberC5:
+  user_id: 6
+  project_id: 3

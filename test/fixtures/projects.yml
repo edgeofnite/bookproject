@@ -1,0 +1,40 @@
+# == Schema Information
+# Schema version: 20090605083306
+#
+# Table name: projects
+#
+#  id               :integer         not null, primary key
+#  signing_date     :date
+#  days_per_chapter :integer         default(7), not null
+#  chapters         :integer         default(8), not null
+#  status           :integer         default(0)
+#  name             :string(255)
+#  owner_id         :integer         default(1)
+#
+
+project1:
+ id: 1
+ days_per_chapter: 7
+ chapters: 8
+ status: <%= Project::WRITING %>
+ name: "Under 13 Books"
+ owner_id: 2
+ signing_date: '2009-08-12'
+
+project2:
+ id: 2
+ days_per_chapter: 30
+ chapters: 4
+ status: <%= Project::OPEN %>
+ name: "Over 13 Books"
+ owner_id: 2
+ signing_date: '2009-09-12'
+
+project3:
+ id: 3
+ days_per_chapter: 1
+ chapters: 30
+ status: <%= Project::NEW %>
+ name: "Occult Books"
+ owner_id: 3
+ signing_date: '2009-09-01'

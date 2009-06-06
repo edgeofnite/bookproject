@@ -1,0 +1,112 @@
+# == Schema Information
+# Schema version: 20090605083306
+#
+# Table name: groups
+#
+#  user_id    :integer         not null
+#  project_id :integer         not null
+#
+
+groupA1:
+  user_id: 2
+  project_id: 1
+
+groupA2:
+  user_id: 3
+  project_id: 1
+
+groupA3:
+  user_id: 4
+  project_id: 1
+
+groupA4:
+  user_id: 5
+  project_id: 1
+
+groupA5:
+  user_id: 6
+  project_id: 1
+
+groupA6:
+  user_id: 7
+  project_id: 1
+
+groupA7:
+  user_id: 8
+  project_id: 1
+
+groupA8:
+  user_id: 9
+  project_id: 1
+
+groupB1:
+  user_id: 4
+  project_id: 2
+
+groupB2:
+  user_id: 5
+  project_id: 2
+
+groupB3:
+  user_id: 6
+  project_id: 2
+
+groupB4:
+  user_id: 7
+  project_id: 2
+
+groupB5:
+  user_id: 8
+  project_id: 2
+
+groupB6:
+  user_id: 9
+  project_id: 2
+
+groupB7:
+  user_id: 10
+  project_id: 2
+
+groupB8:
+  user_id: 11
+  project_id: 2
+
+groupC1:
+  user_id: 2
+  project_id: 3
+
+groupC2:
+  user_id: 3
+  project_id: 3
+
+groupC3:
+  user_id: 4
+  project_id: 3
+
+groupC4:
+  user_id: 5
+  project_id: 3
+
+groupC5:
+  user_id: 6
+  project_id: 3
+
+groupC6:
+  user_id: 7
+  project_id: 3
+
+groupC7:
+  user_id: 8
+  project_id: 3
+
+groupC8:
+  user_id: 9
+  project_id: 3
+
+groupC8:
+  user_id: 10
+  project_id: 3
+
+groupC8:
+  user_id: 11
+  project_id: 3

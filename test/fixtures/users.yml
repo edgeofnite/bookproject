@@ -1,0 +1,133 @@
+# == Schema Information
+# Schema version: 20090605083306
+#
+# Table name: users
+#
+#  id              :integer         not null, primary key
+#  username        :string(20)      not null
+#  hashed_password :string(30)      not null
+#  age             :integer
+#  aboutMe         :string(255)
+#  salt            :string(255)
+#  email           :string(255)
+#
+
+admin:
+ id: 1
+ username: admin
+ hashed_password: <%= Digest::SHA1.hexdigest("adminadmin" + "wibble" + "ABCDEFG") %>
+ email: elliot.jaffe@gmail.com
+ age: 29
+ salt: "ABCDEFG"
+ aboutMe: >
+   I own this site and I own you!
+
+fred:
+ id: 2
+ username: fred
+ hashed_password: <%= Digest::SHA1.hexdigest("fred123" + "wibble" + "ABCDEFG") %>
+ email: elliot.jaffe@gmail.com
+ age: 29
+ salt: "ABCDEFG"
+ aboutMe: >
+   I am a small ferret, hiding in your bed
+   and nibbling on your toes
+
+barney:
+ id: 3
+ username: barney
+ hashed_password: <%= Digest::SHA1.hexdigest("barney123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ age: 28
+ salt: "HIJKLMNO"
+ aboutMe: >
+   A large bear looking for some nice tasty
+   honey and a place to sleep
+
+wilma:
+ id: 4
+ username: wilma
+ hashed_password: <%= Digest::SHA1.hexdigest("wilma123" + "wibble" + "ABCDEFG") %>
+ email: elliot.jaffe@gmail.com
+ age: 28
+ salt: "ABCDEFG"
+ aboutMe: >
+   I am a small ferret, hiding in your bed
+   and nibbling on your toes
+
+betty:
+ id: 5
+ username: betty
+ hashed_password: <%= Digest::SHA1.hexdigest("betty123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ age: 30
+ salt: "HIJKLMNO"
+ aboutMe: >
+   A large bear looking for some nice tasty
+   honey and a place to sleep
+
+dino:
+ id: 6
+ username: dino
+ hashed_password: <%= Digest::SHA1.hexdigest("dino123" + "wibble" + "ABCDEFG") %>
+ email: elliot.jaffe@gmail.com
+ age: 3
+ salt: "ABCDEFG"
+ aboutMe: >
+   I am a small ferret, hiding in your bed
+   and nibbling on your toes
+
+bambam:
+ id: 7
+ username: bambam
+ hashed_password: <%= Digest::SHA1.hexdigest("bambam123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ age: 11
+ salt: "HIJKLMNO"
+ aboutMe: >
+   A large bear looking for some nice tasty
+   honey and a place to sleep
+
+pebbles:
+ id: 8
+ username: pebbles
+ hashed_password: <%= Digest::SHA1.hexdigest("pebbles123" + "wibble" + "ABCDEFG") %>
+ email: elliot.jaffe@gmail.com
+ age: 11
+ salt: "ABCDEFG"
+ aboutMe: >
+   I am a small ferret, hiding in your bed
+   and nibbling on your toes
+
+boss:
+ id: 9
+ username: boss
+ hashed_password: <%= Digest::SHA1.hexdigest("boss123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ age: 45
+ salt: "HIJKLMNO"
+ aboutMe: >
+   A large bear looking for some nice tasty
+   honey and a place to sleep
+
+friend1:
+ id: 10
+ username: friend1
+ hashed_password: <%= Digest::SHA1.hexdigest("friend1123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ age: 25
+ salt: "HIJKLMNO"
+ aboutMe: >
+   A large bear looking for some nice tasty
+   honey and a place to sleep
+
+friend2:
+ id: 11
+ username: friend2
+ hashed_password: <%= Digest::SHA1.hexdigest("friend2123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ age: 34
+ salt: "HIJKLMNO"
+ aboutMe: >
+   A large bear looking for some nice tasty
+   honey and a place to sleep

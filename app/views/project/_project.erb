@@ -1,0 +1,15 @@
+<tr>
+  <td><%= link_to project.name, {:controller => "project", :action => "individualProject", :id => project.id } %></td>
+  <td><%= project.signing_date %></td>
+  <td><%= project.days_per_chapter %></td>
+  <td><%= project.chapters %></td>
+  <td>
+	<%if project.status == Project::NEW %> NEW <% end %>
+	<%if project.status == Project::OPEN %> OPEN <% end  %>
+	<%if project.status == Project::WRITING %> WRITING <% end %>
+	<%if project.status == Project::EDITING %> EDITING <% end %>
+	<%if project.status == Project::COMPLETE %> COMPLETE <% end %>
+	<%if project.status == Project::PUBLISHED %> PUBLISHED <% end %>
+  </td>
+  <td><%= project.owner.username %></td>
+</tr>

@@ -1,0 +1,38 @@
+<h2>About Me</h2>
+<p><%= @me.aboutMe %></p>
+<h3>Chapters to Write</h3>
+<%if @chapterToWrite %>
+ <% for chapter in @chaptersToWrite %>
+	<div class ="entry">
+		<p><%= link_to h(chapter.book.title + "Chapter " + chapter.number), :controller => "book", :action =>"reviewChapter", :id => chapter.book %></p>
+	</div>
+ <%end%>
+<% else %>
+<p> You have no chapters to write </p>
+<% end %>
+
+<h3>Chapters to Edit</h3>
+<%if @chapterToEdit %>
+ <% for chapter in @chaptersToEdit %>
+	<div class ="entry">
+		<p><%= link_to h(chapter.book.title + "Chapter " + chapter.number), :controller => "book", :action =>"editBook", :id => chapter.book %></p>
+	</div>
+ <%end%>
+<% else %>
+<p> You have no chapters to edit </p>
+<% end %>
+
+
+<%if @myProjects %>
+<h3>Projects I own</h3>
+<% for project in @myProjects %>
+	<div class ="entry">
+		<p><%= link_to h(project.name), :controller => "project", :action =>"individualProject", :id => project %></p>
+	</div>
+ <%end%>
+<% end %>
+
+<%= link_to "Browse All Books", :controller => "book" %><br/><br/>
+<%= link_to "Go to project page", :controller => "project", :action =>"projectPage" %><br/><br/>
+
+my completed books

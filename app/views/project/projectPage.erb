@@ -1,0 +1,69 @@
+<h2>My Current Projects:</h2>
+<%if ! @currentProjects.empty? %>
+<table>
+  <tr>
+  <td>Project Name</td>
+  <td>Signing Date</td>
+  <td>Days Per Chapter</td>
+  <td>Number of Chapters</td>
+  <td>Status</td>
+  <td>Owner</td>
+  </tr>
+  <%= render(:partial => "project", :collection => @currentProjects) %>
+</table>
+<%else%>
+No current projects!<br><br>
+<%end%>
+<h2>My Finished Projects</h2><br>
+<%if ! @oldProjects.empty? %>
+<table>
+  <tr>
+  <td>Project Name</td>
+  <td>Signing Date</td>
+  <td>Days Per Chapter</td>
+  <td>Number of Chapters</td>
+  <td>Status</td>
+  <td>Owner</td>
+  </tr>
+  <%= render(:partial => "project", :collection => @oldProjects) %>
+</table>
+<%else%>
+No finished projects!<br><br>
+<%end%>
+<h2>New Projects</h2><br>
+<%if ! @activeProjects.empty? %>
+<form action="projectSignUp"><input type="submit" value="Sign Up"></form><br>
+
+<table>
+  <tr>
+  <td>Project Name</td>
+  <td>Signing Date</td>
+  <td>Days Per Chapter</td>
+  <td>Number of Chapters</td>
+  <td>Status</td>
+  <td>Owner</td>
+  </tr>
+  <%= render(:partial => "project", :collection => @activeProjects) %>
+</table>
+</form>
+<%else%>
+No open projects!<br><br>
+<%end%>
+<h2>Other Completed Projects</h2><br>
+<%if ! @completeProjects.empty? %>
+<table>
+  <tr>
+  <td>Project Name</td>
+  <td>Signing Date</td>
+  <td>Days Per Chapter</td>
+  <td>Number of Chapters</td>
+  <td>Status</td>
+  <td>Owner</td>
+  </tr>
+  <%= render(:partial => "project", :collection => @completeProjects) %>
+</table>
+<%else%>
+No complete projects!<br><br>
+<%end%>
+<h2> Create New Project</h2>
+<a href ="/project/setProjectDetails">Create New Project</a> 

@@ -1,0 +1,36 @@
+class ProjectController < ApplicationController
+  layout "default"
+  before_filter :authorize
+
+  def newProject
+  end
+
+  def projectPage
+    #display projects
+    # this should be the current users active projects
+    @currentProjects = User.find(session[:user_id]).projects
+    # this should be all open projects (that can still be joined)
+    @activeProjects = Project.find(:all, :conditions => { :status => 1, :active => true}) - @currentProjects
+    # this should be the current users completed projects
+    @completeProjects = Project.find(:all, :conditions => { :status => 2, :active => false})
+    @oldProjects = Project.find(:all)
+  end
+
+  def individualProject
+    #display books
+    @project = Project.find(params[:id])
+    @books = @project.getBooks
+  end
+
+  def manageUbers
+    #display current ubers
+  end
+
+  def signUp
+    
+  end
+
+  def addUserToProject
+    
+  end
+end
