@@ -1,0 +1,15 @@
+The editor <%= @chapter.book.editor.username %> has asked you to edit
+and resubmit chapter <%= @chapter.number %> of "<%= @chapter.book.title %>".
+
+<% if @chapter.comment %>
+Your editor has written the following comments:
+<%= @chapter.comment %>
+<% end %>
+
+
+Please log into our site to edit this chapter.  When you are done writing,
+select the "Finished" button.  We will sent the chapter to your editor
+for review.
+
+Have a great time writing,
+<%= @chapter.book.project.owner.username %> and The Book Project Team

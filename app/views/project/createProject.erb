@@ -1,0 +1,14 @@
+<h1>Create New Project/Edit Existing Project</h1>
+<% form_for :project do |form| %>
+<%= form.label "Project Name" %>
+<%= form.text_field :name %><br>
+<%= form.label "Chapters Per Book" %>
+<%= form.text_field :chapters %><br>
+<%= form.label "Days Per Chapter" %>
+<%= form.text_field :days_per_chapter %><br>
+<%= form.label "Maximum writers" %>
+<%= form.text_field :max_writers %><br>
+<%= form.label "Make Private?" %>
+<%= form.check_box :private %><br/>
+<%= submit_tag %>
+<%end%>
