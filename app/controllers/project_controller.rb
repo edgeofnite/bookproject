@@ -40,21 +40,18 @@ class ProjectController < ApplicationController
 		redirect_to :controller => "main", :action => "personalPage"
 		flash[:notice] = "Cannot sign up to that project"
 	end
-	if request.post?
-		flash[:notice]=""
-		if params[:signUp][:agree]
-			if params[:signUp][:writer]=="1"
-				#@project.writers+=params["person"]
-				flash[:notice]+= "Successfully signed up to be a writer!\n\n"
-			end
-			if params[:signUp][:editor]=="1"
-				#@project.editors+=params["person"]
-				flash[:notice]+= "Successfully signed up to be an editor"
-			end
-		 else
-			#flash[:notice] = "You must agree"
-		end
-	end
+    if request.post?
+      flash[:notice]=""
+      if params[:signUp][:writer]=="1"
+        @project.writers.push(session["person"])
+        flash[:notice]+= "Successfully signed up to be a writer!<br/>"
+      end
+      if params[:signUp][:editor]=="1"
+        @project.editors.push(session["person"])
+        flash[:notice]+= "Successfully signed up to be an editor!"
+      end
+      @project.save
+    end
   end
 
   def createProject

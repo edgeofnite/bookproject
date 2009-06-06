@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(:version => 20090605083306) do
     t.integer "status",           :default => 0
     t.string  "name"
     t.integer "owner_id",         :default => 1
+    t.boolean "private"
+    t.integer "max_writers"
   end
 
   create_table "sessions", :force => true do |t|

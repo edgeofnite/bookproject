@@ -10,6 +10,8 @@
 #  status           :integer         default(0)
 #  name             :string(255)
 #  owner_id         :integer         default(1)
+#  private          :boolean
+#  max_writers      :integer
 #
 
 project1:

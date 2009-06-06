@@ -8,7 +8,7 @@
 #
 
 class Group < ActiveRecord::Base
-  validates_numericality_of :user_id, :project_id, :only_integer
+  validates_numericality_of :user_id, :project_id
   belongs_to :user
   belongs_to :project
 end
