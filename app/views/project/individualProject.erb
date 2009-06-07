@@ -11,15 +11,30 @@
 <%unless @project.books.empty?%>
 <h3>Books</h3>
 <!- only editable if you are the project owner->
+<script>
+TableKit.options.editAjaxURI = '<%= url_for :controller => "project", :action => "updater"%>';
+TableKit.Editable.textInput('date', {}, function(string) {
+  var format = "yyyy-MM-dd";
+  var date = Date.parse(string);
+  if (date)
+  {
+    return date.toString(format);
+  }
+  return date;
+}, "today");
+TableKit.Editable.selectInput('editors', {}, [
+ <% for editor in @project.editors %>['<%= h(editor.username) %>',<%= editor.id %>],<% end %>
+		]);
+</script>
 <table class="editable"  border="1">
 <thead>
  <tr>
-   <th>Book Title</th>
-   <th id="editor">Editor</th>
-   <th>Current Chapter</th>
-   <th>Current Writer</th>
-   <th>Completed Chapters</th>
-   <th>Published</th>
+   <th class="noedit">Book Title</th>
+   <th id="editors">Editor<br/>click to change</th>
+   <th class="noedit">Current Chapter</th>
+   <th class="noedit">Current Writer</th>
+   <th class="noedit">Completed Chapters</th>
+   <th class="noedit">Published</th>
  </tr>
 </thead>
 <tbody>
@@ -36,6 +51,32 @@
 </tbody>
 </table>
 <%end%>
+<h3>Progress</h3>
+<table class="sortable editable"  border="1">
+<thead>
+ <tr>
+   <th class="noedit">Book</th>
+   <% for chapter in 1..@project.chapters %>
+     <th class="noedit"><%= chapter %></th>
+   <% end %>
+ </tr>
+</thead>
+<tbody>
+ <% for book in @project.books %>
+  <tr class="<%= cycle("odd", "even") %>" id="<%= book.id %>">
+   <td><%= h(book.title) %></td>
+   <% for chapter in 0..@project.chapters-1 %>
+      <% if ! book.chapters[chapter].nil? %>
+         <td><%= book.chapters[chapter].user.username %></td>
+      <% else %>
+         <td></td>
+      <% end %>
+   <% end %>
+  </tr>
+ <%end%>
+</tbody>
+</table>
+
 <h3>Registered Editors</h3>
 <ul>	
 <% for editor in @project.editors %>

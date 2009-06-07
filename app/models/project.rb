@@ -21,7 +21,7 @@ class Project < ActiveRecord::Base
   has_many :editors, :through => :ubers, :source => :user, :uniq => true
   has_many :ubers
   has_many :groups
-  has_many :books
+  has_many :books, :order => :id
 
   #### Constants for the :status field of a project.
   # Project State Transitions: (all transitions are one-way)  [ project.status ]

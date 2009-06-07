@@ -32,8 +32,6 @@ No finished projects!<br><br>
 <%end%>
 <h2>New Projects</h2><br>
 <%if ! @activeProjects.empty? %>
-<form action="projectSignUp"><input type="submit" value="Sign Up"></form><br>
-
 <table>
   <tr>
   <td>Project Name</td>
@@ -45,7 +43,6 @@ No finished projects!<br><br>
   </tr>
   <%= render(:partial => "project", :collection => @activeProjects) %>
 </table>
-</form>
 <%else%>
 No open projects!<br><br>
 <%end%>

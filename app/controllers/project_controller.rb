@@ -1,6 +1,7 @@
 class ProjectController < ApplicationController
   layout "default"
   before_filter :authorize
+  protect_from_forgery :except => :updater
 
   def newProject
   end
@@ -13,7 +14,7 @@ class ProjectController < ApplicationController
     @projects = @projects.uniq
 
     # this should be the current users active projects
-    @currentProjects = @projects.select {|p| p.status == Project::WRITING || p.status == Project::EDITING }
+    @currentProjects = @projects.select {|p| p.status == Project::NEW or p.status == Project.OPEN or p.status == Project::WRITING or p.status == Project::EDITING }
 
     # this should be the current users completed projects
     @oldProjects = @projects.select{|p| p.status >= Project::COMPLETE}
@@ -69,4 +70,24 @@ class ProjectController < ApplicationController
   def addUserToProject
     
   end
+
+  def updater
+    bookid = params[:row]
+    field = params[:field]
+    value = params[:value]
+    book = Book.find(bookid)
+    result = "failed"
+    case params[:field]
+    when "editors" 
+      user = User.find(params[:value])
+      book.editor = user
+      result = user.username
+      book.save
+    end
+    render :text => result
+    return
+    rescue:
+      render :text => "failed"
+  end
+
 end
