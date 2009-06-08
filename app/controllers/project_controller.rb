@@ -39,7 +39,7 @@ class ProjectController < ApplicationController
       old_status = @project.status
       new_status = params[:project][:status].to_i
       if old_status == Project::OPEN and new_status == Project::WRITING then
-        if @project.chapters < @project.writers.length then
+        if @project.chapters > @project.writers.length then
           flash[:notice] = "There are not enough writers for this project."
           return
         end

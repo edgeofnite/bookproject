@@ -8,7 +8,7 @@
  <h3>Chapters to Write</h3>
  <% for chapter in @chaptersToWrite %>
    <div class ="entry">
-      <p><%= link_to h("#{chapter.book.title}, Chapter #{chapter.number}"), :controller => "book", :action =>"reviewChapter", :id => chapter.book %></p>
+      <p><%= link_to h("#{chapter.book.title}, Chapter #{chapter.number}"), :controller => "book", :action =>"editBook", :id => chapter.book %></p>
    </div>
  <% end %>
 <% end %>
@@ -26,11 +26,17 @@
 
 <%unless @myProjects.empty? %>
 <h3>Projects I own</h3>
- <% for project in @myProjects %>
-	<div class ="entry">
-		<p><%= link_to h(project.name), :controller => "project", :action =>"individualProject", :id => project %></p>
-	</div>
- <%end%>
+<table class="sortable" border=1>
+  <tr>
+  <td>Project Name</td>
+  <td>Signing Date</td>
+  <td>Days Per Chapter</td>
+  <td>Number of Chapters</td>
+  <td>Status</td>
+  <td>Owner</td>
+  </tr>
+  <%= render(:partial => "project/project", :collection => @myProjects) %>
+</table>
 <% end %>
 
 <% unless @myCompletedBooks.empty? %>
@@ -39,6 +45,3 @@
    <p><%= link_to h(book), :controller => "book", :action =>"read", :id => book %></p>
  <% end %>
 <% end %>
-
-<%= link_to "Browse All Books", :controller => "book" %><br/><br/>
-

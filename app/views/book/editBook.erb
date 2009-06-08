@@ -1,6 +1,18 @@
 <b>TODO</b>: Check access permissions!!!
+<% if @book.cur_chapter == 1 %>
+<% form_for :book do |form| %>
+<%= form.label "Book Title" %>
+<%= form.text_field :title %><br/>
+<%= form.label "Keywords (comma separated)" %>
+<%= form.text_field :keywords %><br/>
+<%= submit_tag "Update Book" %>
+<% end %>
+<% else %>
+<h1><%= h(@book.title) %></h1>
+<p>Keywords: <%= h(@book.keywords) %></p>
+<% end %>
 <%unless @book.chapters.empty? %>
-<%= render(:partial => "chapter", :collection => (@book.chapters-[@chapter])) %>
+  <%= render(:partial => "chapter", :collection => (@book.chapters-[@chapter])) %>
 <% end %>
 <% form_for :chapter do |form| %>
 <%= form.label :title %>
@@ -14,5 +26,5 @@
 <%= form.label :comment %> <br/>
 <%= form.text_area :comment, :rows => 5, :cols => 60 %>
 <br/>
-<%= submit_tag %>
+<%= submit_tag "Done" %>
 <%end%>
