@@ -1,5 +1,8 @@
-<tr>
-   <td>
-		<%= chapter.contents%><br>End of chapter<br><br>
-	</td>
-</tr>
+<div><h2><% if chapter.title.nil? %>
+Chapter <%= chapter.number %>
+<% else %>
+<%= chapter.title %>
+<% end %>
+</h2>
+<%= chapter.contents%></div>
+<hline/>

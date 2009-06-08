@@ -83,7 +83,7 @@ b1c2:
  number: 2
  state: accepted
  contents: |
-  Fifi stood dumbstruck over Gustav's dead body. This was not the wayshe had imagined her path of vengeance to end.	</p><p>
+  <p>Fifi stood dumbstruck over Gustav's dead body. This was not the wayshe had imagined her path of vengeance to end.	</p><p>
   "You killed him." said a shaky voice from behind Fifi. She turned around to see Marie staring at her, white as sour cream icing. A week "no" was all Fifi could get out of her mouth.	</p><p>
   Marie spotted the pie server in Fifi's hand, and fled with a shriek of terror.	</p><p>
   Within minutes the police arrived and Fifi was arrested. After investigating the scene it was determined that the weapon was one of the kitchen's fine fillet knifes. Someone had slit Gustav's throat, but the police concluded that it wasn't Fifi. Fifi's weapon - the pie
@@ -97,7 +97,7 @@ b1c3:
  author_id: 3
  book_id: 1
  due_date: "2008-02-08"
- title: 
+ title: "Chapter 3"
  finished: false
  edited: false
  number: 3

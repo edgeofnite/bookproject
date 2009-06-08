@@ -29,7 +29,11 @@ class LoginController < ApplicationController
       session["person"] = @user
       session[:user_id] = session["person"].id
       @user = User.new
-      redirect_to(uri || { :controller => "main", :action => "personalPage" }) 
+      if defined? uri
+        redirect_to(uri || { :controller => "main", :action => "personalPage" }) 
+      else
+        redirect_to({ :controller => "main", :action => "personalPage" })
+      end
     end
   end
 

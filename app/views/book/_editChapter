@@ -1,0 +1,13 @@
+<% form_for :chapter, chapter do |form| %>
+<%= form.hidden_field :id %>
+<%= form.label :title %>
+<%= form.text_field :title %>
+<%= form.text_area :contents, :class=>"widgEditor", :id => "chapter_contents_#{chapter.number}" %>
+<%= form.label :finished %>
+<%= form.check_box :finished %>
+<%= form.label :edited %>
+<%= form.check_box :edited %><br/>
+<%= form.label :comment %> <br/>
+<%= form.text_area :comment, :rows => 5, :cols => 60 %><br/>
+<%= submit_tag "Submit Chapter #{chapter.number}" %>
+<%end%>

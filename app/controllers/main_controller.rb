@@ -15,5 +15,11 @@ class MainController < ApplicationController
     @chaptersToEdit = @me.chapters.select {|c| c.editing? == true}
     @myProjects = @me.owned_projects
     @myCompletedBooks = @me.chapters.map{|c| if c.book.published then c.book end }.compact
+    if request.post?
+      if ! params[:user].nil? then
+        @me.update_attributes(params[:user])
+        @me.save
+      end
+    end
   end
 end

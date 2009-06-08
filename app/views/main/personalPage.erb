@@ -1,5 +1,9 @@
 <h2>About Me</h2>
-<p><%= @me.aboutMe %></p>
+<% form_for :user, @me do |form| %>
+<%= form.text_area :aboutMe, :rows => 4, :cols => 60 %><br/>
+<%= submit_tag "Update" %>
+<% end %>
+
 <% if session["person"].username=="admin" %>
 	<%= link_to h("Create new project"), :controller => "project", :action =>"createProject" %>
 <% end %>

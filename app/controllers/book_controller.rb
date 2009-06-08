@@ -6,11 +6,6 @@ class BookController < ApplicationController
   def editBook
     @book = Book.find(params[:id])
     @page_title = "Reviewing and Editing Book "
-    @chapter = Chapter.find(:first, :conditions => { :book_id => @book.id, :number => @book.cur_chapter})
-    @value='';
-    unless @chapter.nil?
-      @value=@chapter.contents
-    end
     if request.post?
       if ! params[:book].nil? then
         @book.update_attributes(params[:book])
@@ -19,11 +14,8 @@ class BookController < ApplicationController
         end
       else 
         if ! params[:chapter].nil? then
-          @chapter.contents = params[:chapter][:contents]
-          @chapter.title = params[:chapter][:title]
-          @chapter.finished = (params[:chapter][:finished] == 'true')
-          @chapter.edited = (params[:chapter][:edited] == 'true')
-          @chapter.comment = params[:chapter][:comment]
+          @chapter = Chapter.find(params[:chapter][:id])
+          @chapter.update_attributes(params[:chapter])
           unless @chapter.save
             redirect_to :action => :read
           end
@@ -33,7 +25,7 @@ class BookController < ApplicationController
   end
 
   def index
-        @books = Book.find_books
+    @books = Book.find(:all, {:conditions => { :published => true }, :order => :title})
   end
 
   def read

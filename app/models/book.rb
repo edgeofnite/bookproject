@@ -17,10 +17,6 @@ class Book < ActiveRecord::Base
   belongs_to :editor, :class_name => "User", :foreign_key => "uber_id"
   validates_presence_of :uber_id, :project_id, :title  
   belongs_to :project
-  
-  def self.find_books
-    find(:all, :order => "title")
-  end
 
   # set up the next chapter for this book
   def next_chapter
