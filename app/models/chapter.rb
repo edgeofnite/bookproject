@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090605083306
+# Schema version: 20090608135958
 #
 # Table name: chapters
 #

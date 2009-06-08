@@ -9,14 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090605083306) do
+ActiveRecord::Schema.define(:version => 20090608135958) do
 
   create_table "books", :force => true do |t|
     t.string  "title",       :limit => 100,                    :null => false
     t.text    "keywords"
     t.boolean "published",                  :default => false, :null => false
     t.integer "cur_chapter",                :default => 1,     :null => false
-    t.integer "chapters",                   :default => 8,     :null => false
     t.integer "uber_id",                                       :null => false
     t.integer "project_id",                                    :null => false
   end
@@ -48,6 +47,9 @@ ActiveRecord::Schema.define(:version => 20090605083306) do
     t.integer "owner_id",         :default => 1
     t.boolean "private"
     t.integer "max_writers"
+    t.text    "description"
+    t.date    "start_date"
+    t.date    "next_due_date"
   end
 
   create_table "sessions", :force => true do |t|

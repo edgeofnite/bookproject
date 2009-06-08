@@ -21,7 +21,9 @@
 				<% else -%> 
 				<%= link_to "Home", :controller =>"main" %><br /> 
 				<% end -%> 
-				<%= link_to "Browse", :controller =>"Book"%><br /> 
+				<%= link_to "Browse Books", :controller =>"Book"%><br /> 
+				<%= link_to "Browse Projects",
+			  :controller =>"Project", :action => "projectPage" %><br /> 
 				<% if session["person"] -%> 
 				<%= link_to "Logout", :controller =>"login", :action => "logout" %><br /> 
 				<% end -%> 

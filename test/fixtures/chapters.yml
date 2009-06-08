@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090605083306
+# Schema version: 20090608135958
 #
 # Table name: chapters
 #
@@ -17,14 +17,14 @@
 #
 
 b1c1:
- id: 1
- author_id: 2
+ author_id: 9
  book_id: 1
  due_date: "2008-01-01"
  title: "Chapter 1"
  finished: true
  edited: true
  number: 1
+ state: accepted
  contents: |
   <p>She had never intended to become a murderer. But as his obsession with perfecting his craft grew, so did her own obsession—his death!	</p><p>
   Fifi LaGrande was young, beautiful and slim when she had first begun working in the kitchen at the Beaumatin Hotel. She had started out slicing vegetables, then making soups and sauces, then soufflés and entrees, until finally she had achieved her calling: Master Pastry Chef. How everyone loved her biscuits, her pies, her tarts and tartins, her puddings and puffs, and most of all her cakes! From Pierre the busboy to Jean-Paul the cook, everyone agreed that her creations were simply sublime.	</p><p>
@@ -74,14 +74,14 @@ b1c1:
   Someone had beaten her to it! But who?	</p>
 
 b1c2:
- id: 2
- author_id: 3
+ author_id: 2
  book_id: 1
  due_date: "2008-01-08"
  title: "Chapter 2"
  finished: true
- edited: false
+ edited: true
  number: 2
+ state: accepted
  contents: |
   Fifi stood dumbstruck over Gustav's dead body. This was not the wayshe had imagined her path of vengeance to end.	</p><p>
   "You killed him." said a shaky voice from behind Fifi. She turned around to see Marie staring at her, white as sour cream icing. A week "no" was all Fifi could get out of her mouth.	</p><p>
@@ -94,23 +94,244 @@ b1c2:
   Fifi was tired of all this. She wanted her life back, and that meant clearing her name. Depression was replaced with anger and determination. Fifi was back on the warpath. She would find the person who ruined her life, and show him just how dangerous huge, emotional women could be...	</p>
 
 b1c3:
- id: 3
- author_id: 4
+ author_id: 3
  book_id: 1
  due_date: "2008-02-08"
  title: 
  finished: false
  edited: false
  number: 3
+ state: writing
  contents:
 
 b2c1:
- id: 4
- author_id: 6
+ author_id: 2
+ book_id: 2
+ due_date: "2008-02-08"
+ title: 
+ finished: false
+ edited: true
+ number: 1
+ state: editing
+ contents:
+
+b2c2:
+ author_id: 3
+ book_id: 2
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: false
+ number: 2
+ state: editing
+ contents:
+
+b2c3:
+ author_id: 4
  book_id: 2
  due_date: "2008-02-08"
  title: 
  finished: false
  edited: false
- number: 1
+ number: 3
+ state: writing
  contents:
+
+b3c1:
+ author_id: 3
+ book_id: 3
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 1
+ state: accepted
+ contents:
+
+b3c2:
+ author_id: 4
+ book_id: 3
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 2
+ state: accepted
+ contents:
+
+b3c3:
+ author_id: 5
+ book_id: 3
+ due_date: "2008-02-08"
+ title: 
+ finished: false
+ edited: false
+ number: 3
+ state: writing
+ contents:
+
+b4c1:
+ author_id: 4
+ book_id: 4
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 1
+ state: accepted
+ contents:
+
+b4c2:
+ author_id: 5
+ book_id: 4
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 2
+ state: accepted
+ contents:
+
+b4c3:
+ author_id: 6
+ book_id: 4
+ due_date: "2008-02-08"
+ title: 
+ finished: false
+ edited: false
+ number: 3
+ state: writing
+ contents:
+
+b5c1:
+ author_id: 5
+ book_id: 5
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 1
+ state: accepted
+ contents:
+
+b5c2:
+ author_id: 6
+ book_id: 5
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 2
+ state: accepted
+ contents:
+
+b5c3:
+ author_id: 7
+ book_id: 5
+ due_date: "2008-02-08"
+ title: 
+ finished: false
+ edited: false
+ number: 3
+ state: writing
+ contents:
+
+b6c1:
+ author_id: 6
+ book_id: 6
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 1
+ state: accepted
+ contents:
+
+b6c2:
+ author_id: 7
+ book_id: 6
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 2
+ state: accepted
+ contents:
+
+b6c3:
+ author_id: 8
+ book_id: 6
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 3
+ state: accepted
+ contents:
+
+b7c1:
+ author_id: 7
+ book_id: 7
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 1
+ state: accepted
+ contents:
+
+b7c2:
+ author_id: 8
+ book_id: 7
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: false
+ number: 2
+ state: editing
+ contents:
+
+b7c3:
+ author_id: 9
+ book_id: 7
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: false
+ number: 3
+ state: editing
+ contents:
+
+b8c1:
+ author_id: 8
+ book_id: 8
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 1
+ state: accepted
+ contents:
+
+b8c2:
+ author_id: 9
+ book_id: 8
+ due_date: "2008-02-08"
+ title: 
+ finished: true
+ edited: true
+ number: 2
+ state: accepted
+ contents:
+
+b8c3:
+ author_id: 2
+ book_id: 8
+ due_date: "2008-02-08"
+ title: 
+ finished: false
+ edited: false
+ number: 3
+ state: writing
+ contents:
+

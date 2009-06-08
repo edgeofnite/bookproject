@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090605083306
+# Schema version: 20090608135958
 #
 # Table name: projects
 #
@@ -12,6 +12,9 @@
 #  owner_id         :integer         default(1)
 #  private          :boolean
 #  max_writers      :integer
+#  description      :text
+#  start_date       :date
+#  next_due_date    :date
 #
 
 project1:
@@ -21,7 +24,14 @@ project1:
  status: <%= Project::WRITING %>
  name: "Under 13 Books"
  owner_id: 2
- signing_date: '2009-08-12'
+ signing_date: '2008-08-30'
+ private: false
+ max_writers: 100
+ start_date: '2008-06-01'
+ next_due_date: '2008-08-24'
+ description: |
+  Summer 2008 Jaffe Family Book Project
+
 
 project2:
  id: 2
@@ -31,6 +41,13 @@ project2:
  name: "Over 13 Books"
  owner_id: 2
  signing_date: '2009-09-12'
+ private: false
+ max_writers: 100
+ start_date: '2009-07-01'
+ next_due_date: '2009-08-24'
+ description: |
+  Test Project 2
+
 
 project3:
  id: 3
@@ -40,3 +57,10 @@ project3:
  name: "Occult Books"
  owner_id: 3
  signing_date: '2009-09-01'
+ private: false
+ max_writers: 100
+ start_date: '2009-06-01'
+ next_due_date: '2009-07-24'
+ description: |
+  Test Project 3
+

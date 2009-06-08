@@ -15,7 +15,7 @@ class LoginController < ApplicationController
         session[:user_id] = session["person"].id
         uri = session[:original_uri] 
         session[:original_uri] = nil 
-        redirect_to(uri || { :action => "index" }) 
+        redirect_to(uri || { :controller => "main", :action => "personalPage" }) 
       else
         flash.now[:notice] = "Invalid user/password combination"
       end
@@ -27,10 +27,10 @@ class LoginController < ApplicationController
     if request.post? and @user.save
       flash.now[:notice] = "User #{@user.username} created"
       session["person"] = @user
-	  session[:user_id] = session["person"].id
-	  @user = User.new
-	  redirect_to(:action => "index")
-	end
+      session[:user_id] = session["person"].id
+      @user = User.new
+      redirect_to(uri || { :controller => "main", :action => "personalPage" }) 
+    end
   end
 
   def delete_user
@@ -54,7 +54,7 @@ class LoginController < ApplicationController
     session["person"] = nil
     session[:user_id] = nil
     flash[:notice] = "Logged out"
-    redirect_to(:action => "index")
+    redirect_to(:controller => "main")
   end
 
 end

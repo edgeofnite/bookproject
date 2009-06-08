@@ -9,12 +9,12 @@ class ProjectController < ApplicationController
   def projectPage
     @page_title = "Personal Project Page"
     #display projects
-    user = User.find(session[:user_id])
+    user = session["person"]
     @projects = user.projects + user.edited_books.map{|b| b.project }
     @projects = @projects.uniq
 
     # this should be the current users active projects
-    @currentProjects = @projects.select {|p| p.status == Project::NEW or p.status == Project.OPEN or p.status == Project::WRITING or p.status == Project::EDITING }
+    @currentProjects = @projects.select {|p| p.status == Project::NEW or p.status == Project::OPEN or p.status == Project::WRITING or p.status == Project::EDITING }
 
     # this should be the current users completed projects
     @oldProjects = @projects.select{|p| p.status >= Project::COMPLETE}
@@ -29,36 +29,70 @@ class ProjectController < ApplicationController
     #display books
     @project = Project.find(params[:id])
     @page_title = @project.name
+    if request.post?
+      if params[:commit] == "Delete Project" and session["person"].id == 1 then
+        flash[:notice] = "Project #{@project.name} was deleted"
+        @project.delete
+        redirect_to :controller => "project", :action => "projectPage"
+        return
+      end
+      old_status = @project.status
+      new_status = params[:project][:status].to_i
+      if old_status == Project::OPEN and new_status == Project::WRITING then
+        if @project.chapters < @project.writers.length then
+          flash[:notice] = "There are not enough writers for this project."
+          return
+        end
+      end
+      @project.update_attributes(params[:project])
+      if old_status == Project::OPEN and new_status == Project::WRITING then
+        for book in 0..@project.writers.length do
+          b = Book.new(:title => "Book #{book+1}", :published => false, :cur_chapter => 0, :project => @project, :editor => session["person"])
+          b.save
+        end
+        @project.begin_next_chapter
+      end
+    end
   end
 
-  def manageUbers
-    #display current ubers
+  def nextChapter
+    @project = Project.find(params[:id])
+    @project.begin_next_chapter
+    redirect_to :controller => "project", :action => "individualProject", :id => @project.id
   end
 
   def projectSignUp
     @project = Project.find(params[:id])
-	unless @project.status == Project::NEW
+	unless @project.status == Project::OPEN
 		redirect_to :controller => "main", :action => "personalPage"
 		flash[:notice] = "Cannot sign up to that project"
 	end
     if request.post?
       flash[:notice]=""
       if params[:signUp][:writer]=="1"
-        @project.writers.push(session["person"])
-        flash[:notice]+= "Successfully signed up to be a writer!<br/>"
+        if @project.writers.index(session["person"]) then
+          flash[:notice]+= "Already signed up to be a writer!<br/>"
+        else
+          @project.writers.push(session["person"])
+          flash[:notice]+= "Successfully signed up to be a writer!<br/>"
+        end
       end
       if params[:signUp][:editor]=="1"
-        @project.editors.push(session["person"])
-        flash[:notice]+= "Successfully signed up to be an editor!"
+        if @project.editors.index(session["person"]) then
+          flash[:notice]+= "Already signed up to be a editor!<br/>"
+        else
+          @project.editors.push(session["person"])
+          flash[:notice]+= "Successfully signed up to be an editor!"
+        end
       end
       @project.save
+      redirect_to :controller => "project", :action => "individualProject", :id => @project.id
     end
   end
 
   def createProject
 	if request.post?
 		@project= Project.new(params[:project])
-		@project.owner_id=session[:user_id]
 		if @project.save
 			flash[:notice] = "Project Created"
 			redirect_to(:action => "individualProject", :id => @project.id)
@@ -76,6 +110,11 @@ class ProjectController < ApplicationController
     field = params[:field]
     value = params[:value]
     book = Book.find(bookid)
+    if session["person"] != book.project.owner then
+      result = "permission denied"
+      render :text => "failed"
+    end
+
     result = "failed"
     case params[:field]
     when "editors" 
@@ -83,6 +122,12 @@ class ProjectController < ApplicationController
       book.editor = user
       result = user.username
       book.save
+    when "writers" 
+      user = User.find(params[:value])
+      chapter = book.chapters[book.cur_chapter-1]
+      chapter.user = user
+      chapter.save
+      result = user.username
     end
     render :text => result
     return

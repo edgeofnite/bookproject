@@ -225,3 +225,18 @@ h1 {
   font-size: 12px;
   list-style: square;
 }
+
+td#chapterComplete {
+    background-color: #33CC66;
+    color: #000000;
+}
+
+td#chapterWriting {
+    background-color: #0099CC;
+    color: #000000;
+}
+
+td#chapterEditing {
+    background-color: #FFFF00;
+    color: #000000;
+}

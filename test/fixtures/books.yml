@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090605083306
+# Schema version: 20090608135958
 #
 # Table name: books
 #
@@ -8,7 +8,6 @@
 #  keywords    :text
 #  published   :boolean         not null
 #  cur_chapter :integer         default(1), not null
-#  chapters    :integer         default(8), not null
 #  uber_id     :integer         not null
 #  project_id  :integer         not null
 #
@@ -19,7 +18,6 @@ book1:
  keywords: "murder,mystery"
  published: false
  cur_chapter: 3
- chapters: 8
  uber_id: 10
  project_id: 1
 
@@ -28,27 +26,60 @@ book2:
  title: "Book 2"
  keywords: "children,school"
  published: false
- cur_chapter: 1
- chapters: 8
+ cur_chapter: 3
  uber_id: 11
  project_id: 1
 
-book3:
+p1book3:
  id: 3
  title: "Book 3"
- keywords: "teen,vampire"
+ keywords: "children,school"
  published: false
- cur_chapter: 1
- chapters: 4
- uber_id: 2
- project_id: 2
+ cur_chapter: 3
+ uber_id: 10
+ project_id: 1
 
-book4:
+p1book4:
  id: 4
  title: "Book 4"
- keywords: "adult,cthulu"
+ keywords: "children,school"
  published: false
- cur_chapter: 1
- chapters: 10
- uber_id: 3
- project_id: 3
+ cur_chapter: 3
+ uber_id: 11
+ project_id: 1
+
+p1book5:
+ id: 5
+ title: "Book 5"
+ keywords: "children,school"
+ published: false
+ cur_chapter: 3
+ uber_id: 10
+ project_id: 1
+
+p1book6:
+ id: 6
+ title: "Book 6"
+ keywords: "children,school"
+ published: false
+ cur_chapter: 3
+ uber_id: 11
+ project_id: 1
+
+p1book7:
+ id: 7
+ title: "Book 7"
+ keywords: "children,school"
+ published: false
+ cur_chapter: 3
+ uber_id: 10
+ project_id: 1
+
+p1book8:
+ id: 8
+ title: "Book 8"
+ keywords: "children,school"
+ published: false
+ cur_chapter: 3
+ uber_id: 10
+ project_id: 1

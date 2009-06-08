@@ -2,6 +2,8 @@
 <% form_for :project do |form| %>
 <%= form.label "Project Name" %>
 <%= form.text_field :name %><br>
+<%= form.label "Owner" %>
+<%= select("project", "owner_id", User.find(:all).collect {|u| [ u.username, u.id ] }) %><br/>
 <%= form.label "Chapters Per Book" %>
 <%= form.text_field :chapters %><br>
 <%= form.label "Days Per Chapter" %>
@@ -10,5 +12,11 @@
 <%= form.text_field :max_writers %><br>
 <%= form.label "Make Private?" %>
 <%= form.check_box :private %><br/>
+<%= form.label "Start Date" %>
+<%= form.date_select :start_date %><br/>
+<%= form.label "First Due Date" %>
+<%= form.date_select :next_due_date %><br/>
+<%= form.label "Description" %>
+<%= form.text_field :description %><br/>
 <%= submit_tag %>
 <%end%>

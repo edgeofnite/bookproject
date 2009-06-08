@@ -1,6 +1,6 @@
-<h2>My Current Projects:</h2>
 <%if ! @currentProjects.empty? %>
-<table>
+<h2>Projects in which I currently participate</h2>
+<table class="sortable" border=1>
   <tr>
   <td>Project Name</td>
   <td>Signing Date</td>
@@ -11,12 +11,10 @@
   </tr>
   <%= render(:partial => "project", :collection => @currentProjects) %>
 </table>
-<%else%>
-No current projects!<br><br>
 <%end%>
-<h2>My Finished Projects</h2><br>
 <%if ! @oldProjects.empty? %>
-<table>
+<h2>Project that I worked on</h2>
+<table class="sortable" border=1>
   <tr>
   <td>Project Name</td>
   <td>Signing Date</td>
@@ -27,12 +25,10 @@ No current projects!<br><br>
   </tr>
   <%= render(:partial => "project", :collection => @oldProjects) %>
 </table>
-<%else%>
-No finished projects!<br><br>
 <%end%>
-<h2>New Projects</h2><br>
 <%if ! @activeProjects.empty? %>
-<table>
+<h2>Projects that I can join</h2>
+<table class="sortable" border="1">
   <tr>
   <td>Project Name</td>
   <td>Signing Date</td>
@@ -43,11 +39,9 @@ No finished projects!<br><br>
   </tr>
   <%= render(:partial => "project", :collection => @activeProjects) %>
 </table>
-<%else%>
-No open projects!<br><br>
 <%end%>
-<h2>Other Completed Projects</h2><br>
 <%if ! @completeProjects.empty? %>
+<h2>Completed Projects that might be fun to look at</h2>
 <table>
   <tr>
   <td>Project Name</td>
@@ -59,8 +53,18 @@ No open projects!<br><br>
   </tr>
   <%= render(:partial => "project", :collection => @completeProjects) %>
 </table>
-<%else%>
-No complete projects!<br><br>
 <%end%>
-<h2> Create New Project</h2><br><br>
-<a href ="/project/setProjectDetails">Create New Project</a> 
+<% if session["person"].id == 1 %>
+<h2>All Projects</h2>
+<table class="sortable" border=1>
+  <tr>
+  <td>Project Name</td>
+  <td>Signing Date</td>
+  <td>Days Per Chapter</td>
+  <td>Number of Chapters</td>
+  <td>Status</td>
+  <td>Owner</td>
+  </tr>
+  <%= render(:partial => "project", :collection => Project.find(:all)) %>
+</table>
+<% end %>

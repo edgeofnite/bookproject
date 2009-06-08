@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090605083306
+# Schema version: 20090608135958
 #
 # Table name: projects
 #
@@ -12,6 +12,9 @@
 #  owner_id         :integer         default(1)
 #  private          :boolean
 #  max_writers      :integer
+#  description      :text
+#  start_date       :date
+#  next_due_date    :date
 #
 
 class Project < ActiveRecord::Base
@@ -67,16 +70,21 @@ class Project < ActiveRecord::Base
     end
   end
 
-
   def phase
     return case status
            when Project::NEW then "new"
            when Project::OPEN then "open for participants"
-           when Project::WRITING then "being writen"
+           when Project::WRITING then "being written"
            when Project::EDITING then "being edited"
            when Project::COMPLETE then "complete"
            when Project::PUBLISHED then "published"
     end
+  end
+
+  def begin_next_chapter
+        for book in self.books do
+          book.next_chapter
+        end
   end
 
 end
