@@ -34,4 +34,13 @@ class Notifier < ActionMailer::Base
     @chapter = chapter
   end
 
+  def new_chapter_to_write(chapter, sent_at = Time.now)
+    recipients  chapter.user.email
+    subject    "Chapter #{chapter.number} of book #{chapter.book.title}"
+    from       "bookproject@jaffestrategies.com"
+    sent_on    sent_at
+    content_type = "text/plain"
+    @chapter = chapter
+  end
+
 end

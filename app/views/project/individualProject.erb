@@ -116,8 +116,20 @@ TableKit.Editable.selectInput('writers', {}, [
  <%end%>
 </tbody>
 </table>
-<p>Click here to start the next chapter: <%= link_to "BEGIN NEXT CHAPTER", :controller => "project", :action =>"nextChapter", :id => @project %>
+<p>
+<% if @project.books[0].chapters[@project.books[0].cur_chapter-1].state == "new" %>
+<% form_tag :controller => :project, :action =>:startNextChapter, :id => @project.id do %>
+Click here to notify writers of the new chapter
+<%= submit_tag "Send our chapter notices" %>
+<% end %>
+<% else %>
+<% form_tag :controller => :project, :action =>:nextChapter, :id => @project.id do %>
+Click here to start the next chapter:
+<%= submit_tag "Begin next chapter" %>
+<% end %>
+<% end %>
 </p>
+
 
 <% end %>
 

@@ -55,10 +55,22 @@ class ProjectController < ApplicationController
     end
   end
 
+  # setup the next chapter, but don't tell anyone yet!
   def nextChapter
     @project = Project.find(params[:id])
     @project.begin_next_chapter
-    redirect_to :controller => "project", :action => "individualProject", :id => @project.id
+    @page_title = @project.name
+
+    render :action => "individualProject"
+  end
+
+  # finish setting up the most recent chapter and tell everyone!
+  def startNextChapter
+    @project = Project.find(params[:id])
+    @project.start_next_chapter
+    @page_title = @project.name
+
+    render :action => "individualProject"
   end
 
   def projectSignUp
@@ -86,7 +98,8 @@ class ProjectController < ApplicationController
         end
       end
       @project.save
-      redirect_to :controller => "project", :action => "individualProject", :id => @project.id
+      @page_title = @project.name
+      render :action => "individualProject"
     end
   end
 
@@ -95,14 +108,12 @@ class ProjectController < ApplicationController
 		@project= Project.new(params[:project])
 		if @project.save
 			flash[:notice] = "Project Created"
-			redirect_to(:action => "individualProject", :id => @project.id)
+                        @page_title = @project.name
+                        render :action => "individualProject"
 		else
 			flash[:notice] = "Project Creation Failed"
 		end
 	end
-  end
-  def addUserToProject
-    
   end
 
   def updater

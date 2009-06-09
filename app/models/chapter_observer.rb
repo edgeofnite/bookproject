@@ -1,4 +1,8 @@
 class ChapterObserver < ActiveRecord::Observer
+  def after_transition_state_from_new_to_writing(chapter, transition)
+    puts "Received transition for #{chapter}"
+    Notifier.deliver_new_chapter_to_write(chapter)
+  end
   def after_transition_state_from_writing_to_editing(chapter, transition)
     puts "Received transition for #{chapter}"
     Notifier.deliver_chapter_writing_complete(chapter)

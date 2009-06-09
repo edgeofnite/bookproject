@@ -15,6 +15,7 @@
 admin:
  id: 1
  username: admin
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("adminadmin" + "wibble" + "ABCDEFG") %>
  age: 29
  salt: "ABCDEFG"
@@ -24,6 +25,7 @@ admin:
 fred:
  id: 2
  username: fred
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("fred123" + "wibble" + "ABCDEFG") %>
  age: 29
  salt: "ABCDEFG"
@@ -34,6 +36,7 @@ fred:
 barney:
  id: 3
  username: barney
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("barney123" + "wibble" + "HIJKLMNO") %>
  age: 28
  salt: "HIJKLMNO"
@@ -44,6 +47,7 @@ barney:
 wilma:
  id: 4
  username: wilma
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("wilma123" + "wibble" + "ABCDEFG") %>
  age: 28
  salt: "ABCDEFG"
@@ -54,6 +58,7 @@ wilma:
 betty:
  id: 5
  username: betty
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("betty123" + "wibble" + "HIJKLMNO") %>
  age: 30
  salt: "HIJKLMNO"
@@ -64,6 +69,7 @@ betty:
 dino:
  id: 6
  username: dino
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("dino123" + "wibble" + "ABCDEFG") %>
  age: 3
  salt: "ABCDEFG"
@@ -74,6 +80,7 @@ dino:
 bambam:
  id: 7
  username: bambam
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("bambam123" + "wibble" + "HIJKLMNO") %>
  age: 11
  salt: "HIJKLMNO"
@@ -84,6 +91,7 @@ bambam:
 pebbles:
  id: 8
  username: pebbles
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("pebbles123" + "wibble" + "ABCDEFG") %>
  age: 11
  salt: "ABCDEFG"
@@ -94,6 +102,7 @@ pebbles:
 boss:
  id: 9
  username: boss
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("boss123" + "wibble" + "HIJKLMNO") %>
  age: 45
  salt: "HIJKLMNO"
@@ -104,6 +113,7 @@ boss:
 friend1:
  id: 10
  username: friend1
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("friend1123" + "wibble" + "HIJKLMNO") %>
  age: 25
  salt: "HIJKLMNO"
@@ -114,6 +124,7 @@ friend1:
 friend2:
  id: 11
  username: friend2
+ email: elliot.jaffe@gmail.com
  hashed_password: <%= Digest::SHA1.hexdigest("friend2123" + "wibble" + "HIJKLMNO") %>
  age: 34
  salt: "HIJKLMNO"

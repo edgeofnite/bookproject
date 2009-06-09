@@ -81,9 +81,17 @@ class Project < ActiveRecord::Base
     end
   end
 
+  # setup the next chapter, but don't tell anyone
   def begin_next_chapter
         for book in self.books do
-          book.next_chapter
+          book.begin_next_chapter
+        end
+  end
+
+  # finish setting up the the next chapter
+  def start_next_chapter
+        for book in self.books do
+          book.start_next_chapter
         end
   end
 
