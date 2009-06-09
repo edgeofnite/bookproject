@@ -108,11 +108,13 @@ class ProjectController < ApplicationController
   def updater
     bookid = params[:row]
     field = params[:field]
+    chapterNum = params[:cell].to_i
     value = params[:value]
     book = Book.find(bookid)
-    if session["person"] != book.project.owner then
+    unless session["person"] == book.project.owner or session["person"].username == "admin" then
       result = "permission denied"
-      render :text => "failed"
+      render :text => result
+      return
     end
 
     result = "failed"
@@ -124,7 +126,7 @@ class ProjectController < ApplicationController
       book.save
     when "writers" 
       user = User.find(params[:value])
-      chapter = book.chapters[book.cur_chapter-1]
+      chapter = book.chapters[chapterNum-2]
       chapter.user = user
       chapter.save
       result = user.username

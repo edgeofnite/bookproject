@@ -13,6 +13,9 @@
 	<body id="home">
 		<div id="banner">
 			<%= @page_title || "Book Project" %>
+		  <% unless session["person"].nil? %>
+		  <p>User: <%= session["person"].username %></p>
+		  <% end %>
 		</div>
 		 <div id="columns"> 
 			<div id="side"> 

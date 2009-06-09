@@ -54,7 +54,7 @@ wilma:
 betty:
  id: 5
  username: betty
- hashed_password: <%= Digest::SHA1.hexdigest("betty123" + "wibble" + "HIJKLMO") %>
+ hashed_password: <%= Digest::SHA1.hexdigest("betty123" + "wibble" + "HIJKLMNO") %>
  age: 30
  salt: "HIJKLMNO"
  aboutMe: >
@@ -74,7 +74,7 @@ dino:
 bambam:
  id: 7
  username: bambam
- hashed_password: <%= Digest::SHA1.hexdigest("bambam123" + "wibble" + "HIJKLMO") %>
+ hashed_password: <%= Digest::SHA1.hexdigest("bambam123" + "wibble" + "HIJKLMNO") %>
  age: 11
  salt: "HIJKLMNO"
  aboutMe: >
@@ -94,7 +94,7 @@ pebbles:
 boss:
  id: 9
  username: boss
- hashed_password: <%= Digest::SHA1.hexdigest("boss123" + "wibble" + "HIJKLMO") %>
+ hashed_password: <%= Digest::SHA1.hexdigest("boss123" + "wibble" + "HIJKLMNO") %>
  age: 45
  salt: "HIJKLMNO"
  aboutMe: >
@@ -104,7 +104,7 @@ boss:
 friend1:
  id: 10
  username: friend1
- hashed_password: <%= Digest::SHA1.hexdigest("friend1123" + "wibble" + "HIJKLMO") %>
+ hashed_password: <%= Digest::SHA1.hexdigest("friend1123" + "wibble" + "HIJKLMNO") %>
  age: 25
  salt: "HIJKLMNO"
  aboutMe: >
@@ -114,7 +114,7 @@ friend1:
 friend2:
  id: 11
  username: friend2
- hashed_password: <%= Digest::SHA1.hexdigest("friend2123" + "wibble" + "HIJKLMO") %>
+ hashed_password: <%= Digest::SHA1.hexdigest("friend2123" + "wibble" + "HIJKLMNO") %>
  age: 34
  salt: "HIJKLMNO"
  aboutMe: >

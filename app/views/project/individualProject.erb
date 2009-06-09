@@ -1,7 +1,4 @@
 <h3>Statistics</h3>
-<p>About this project:<br/>
-   <%= @project.description %>
-</p>
 <p>The project is now <b><%= @project.phase %></b>.</p>
 <p>Each book in this project has <%= @project.chapters %> chapters.</p>
 <p>Each chapter should be written in  <%= @project.days_per_chapter %> days.</p>
@@ -10,7 +7,7 @@
 <p><%= link_to "Sign me up!", :action => "projectSignUp", :id => @project %>: I would like to be a writer or editor in this project!<p/>
 <% end %>
 
-<% if @project.owner == session["person"]  or session["person"].id == 1 %>
+<% if @project.owner == session["person"]  or session["person"].username == "admin" %>
 <% form_for :project, @project, :url => { :action => "individualProject" } do |form| %>
 <%= form.label "Status: " %>
 <%= select :project, :status, {"NEW" => 0, "OPEN" => 1, "WRITING" => 2, "EDITING" => 3, "COMPLETE" => 4, "PUBLISHED" => 5} %><br/>
@@ -21,15 +18,19 @@
 <%= form.label "Signing Date" %>
 <%= form.date_select :signing_date %><br/>
 <%= form.label "Description" %>
-<%= form.text_field :description %><br/>
+<%= form.text_area :description, :class=>"widgEditor" %><br/>
 <%= submit_tag "Update Project" %>
 <%= if session["person"].username == "admin" then submit_tag "Delete Project" end %>
 <% end %>
+<% else %>
+<p>About this project:<br/>
+   <%= @project.description %>
+</p>
 <% end %>
 
 <% unless @project.books.empty?%>
 <h3>Books</h3>
-<% if @project.owner == session["person"] %>
+<% if @project.owner == session["person"] or session["person"].username == "admin" %>
 <script>
 TableKit.options.editAjaxURI = '<%= url_for :controller => "project", :action => "updater"%>';
 TableKit.Editable.textInput('date', {}, function(string) {
@@ -78,7 +79,7 @@ TableKit.Editable.selectInput('writers', {}, [
 <%end%>
 <% if ! @project.books.empty? %>
 <h3>Progress</h3>
-<% if @project.owner == session["person"] %>
+<% if @project.owner == session["person"] or session["person"].username == "admin" %>
 <table class="sortable editable"  border="1">
 <% else %>
 <table class="sortable"  border="1">
@@ -87,7 +88,7 @@ TableKit.Editable.selectInput('writers', {}, [
  <tr>
    <th class="noedit">Book</th>
    <% for chapter in 1..@project.books[0].cur_chapter %>
-     <% if @project.books[0].cur_chapter == chapter %>
+     <% if @project.books[0].cur_chapter == chapter or session["person"].username == "admin" %>
           <th id="writers"><%= chapter %></th>
      <% else %>
           <th class="noedit"><%= chapter %></th>
@@ -98,10 +99,10 @@ TableKit.Editable.selectInput('writers', {}, [
 <tbody>
  <% for book in @project.books %>
   <tr class="<%= cycle("odd", "even") %>" id="<%= book.id %>">
-   <td><%= h(book.title) %></td>
+   <td><%= link_to h(book.title), :controller => "book", :action =>"editBook", :id => book %></td>
    <% for chapter in 0..@project.books[0].cur_chapter-1 %>
       <% if ! book.chapters[chapter].nil? %>
-         <td id="<%= case book.chapters[chapter].state 
+        <td class="<%= case book.chapters[chapter].state 
 		    when "writing" then "chapterWriting" 
 		    when "editing" then "chapterEditing" 
 		    when "accepted" then "chapterComplete" 
