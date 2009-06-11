@@ -13,7 +13,7 @@
 <% end %>
 <% for chapter in @book.chapters %>
  <div class="chapter<%= chapter.number %>">
- <% if chapter.user == session["person"] or chapter.book.editor == session["person"] or session["person"].id == 1 %>
+ <% if chapter.user_can_write(session["person"]) or chapter.user_can_edit(session["person"]) %>
   <%= render(:partial => "editChapter", :locals => { :chapter => chapter }) %>
  <% else %>
   <%= render(:partial => "chapter", :locals => { :chapter => chapter }) %>

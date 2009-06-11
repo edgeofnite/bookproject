@@ -1,13 +1,15 @@
 <% form_for :chapter, chapter do |form| %>
-<%= form.hidden_field :id %>
+<%= hidden_field_tag 'chapter_id', chapter.id %>
 <%= form.label :title %>
 <%= form.text_field :title %>
 <%= form.text_area :contents, :class=>"widgEditor", :id => "chapter_contents_#{chapter.number}" %>
-<%= form.label :finished %>
-<%= form.check_box :finished %>
-<%= form.label :edited %>
-<%= form.check_box :edited %><br/>
+<% if not chapter.finished %>
+<%= submit_tag "Save Chapter, but continue writing" %>
+<%= submit_tag "Save Chapter and send to the editor", :confirm => "Are you finished writing?  You will not be able to make any more changes." %>
+<% else %>
 <%= form.label :comment %> <br/>
 <%= form.text_area :comment, :rows => 5, :cols => 60 %><br/>
-<%= submit_tag "Submit Chapter #{chapter.number}" %>
-<%end%>
+<%= submit_tag "Send this chapter back to the writer",  :confirm => "If you continue, the writer will be sent your comments and asked to resubmit this chapter." %>
+<%= submit_tag "Finish Editing Chapter #{chapter.number}",  :confirm => "Is this chapter acceptable?" %>
+<% end %>
+<% end %>

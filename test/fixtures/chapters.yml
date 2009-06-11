@@ -109,7 +109,7 @@ b2c1:
  book_id: 2
  due_date: "2008-02-08"
  title: 
- finished: false
+ finished: true
  edited: true
  number: 1
  state: editing
