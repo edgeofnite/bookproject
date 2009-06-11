@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20090608135958) do
 
   create_table "users", :force => true do |t|
     t.string  "username",        :limit => 20, :null => false
-    t.string  "hashed_password", :limit => 30, :null => false
+    t.string  "hashed_password", :limit => 50, :null => false
     t.integer "age"
     t.string  "aboutMe"
     t.string  "salt"

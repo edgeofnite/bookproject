@@ -4,7 +4,7 @@ class Notifier < ActionMailer::Base
   def chapter_writing_complete(chapter, sent_at = Time.now)
     # This will read the file views/notifier/chapter_writing_complete.erb
     subject    "Chapter #{chapter.number} of book #{chapter.book.title} is read for editing"
-    recipients "#{chapter.book.editor.username} <#{chapter.book.editor.email}>"
+    recipients chapter.book.editor.email
     from       "bookproject@jaffestrategies.com"
     sent_on    sent_at
     content_type = "text/plain"
@@ -18,6 +18,7 @@ class Notifier < ActionMailer::Base
 
   def chapter_ready_to_write(chapter, sent_at = Time.now)
     subject    "Chapter #{chapter.number} of book #{chapter.book.title}"
+    recipients chapter.book.editor.email
     recipients "#{chapter.book.editor.username} <#{chapter.book.editor.email}>"
     from       "bookproject@jaffestrategies.com"
     sent_on    sent_at
@@ -27,7 +28,7 @@ class Notifier < ActionMailer::Base
 
   def chapter_rewrite(chapter, sent_at = Time.now)
     subject    "Chapter #{chapter.number} of book #{chapter.book.title}"
-    recipients "#{chapter.book.editor.username} <#{chapter.book.editor.email}>"
+    recipients chapter.book.editor.email
     from       "bookproject@jaffestrategies.com"
     sent_on    sent_at
     content_type = "text/plain"
