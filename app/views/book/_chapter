@@ -1,5 +1,6 @@
 <tr>
    <td>
-		<%= chapter.contents%><br>End of chapter<br><br>
+		<h2><%= chapter.title %> <br></h2>
+		<%= chapter.contents%><br><br>
 	</td>
 </tr>

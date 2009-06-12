@@ -52,3 +52,53 @@ book4:
  chapters: 10
  uber_id: 3
  project_id: 3
+ 
+bookD1:
+ id: 5
+ title: "First Working Book"
+ keywords: "I, work, at, least, in, theory"
+ published: false
+ cur_chapter: 3
+ chapters: 5
+ uber_id: 1
+ project_id: 4
+
+bookD2:
+ id: 6
+ title: "Second Working Book"
+ keywords: "I, work, at, least, in, theory"
+ published: false
+ cur_chapter: 3
+ chapters: 5
+ uber_id: 1
+ project_id: 4
+   
+bookD3:
+ id: 7
+ title: "Third Working Book"
+ keywords: "I, work, at, least, in, theory"
+ published: false
+ cur_chapter: 3
+ chapters: 5
+ uber_id: 1
+ project_id: 4
+   
+bookD4:
+ id: 8
+ title: "Fourth Working Book"
+ keywords: "I, work, at, least, in, theory"
+ published: false
+ cur_chapter: 3
+ chapters: 5
+ uber_id: 1
+ project_id: 4
+  
+bookD5:
+ id: 9
+ title: "Fifth Working Book"
+ keywords: "I, work, at, least, in, theory"
+ published: false
+ cur_chapter: 3
+ chapters: 5
+ uber_id: 1
+ project_id: 4

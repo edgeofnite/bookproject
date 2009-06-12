@@ -114,3 +114,183 @@ b2c1:
  edited: false
  number: 1
  contents:
+
+bD1c1:
+ id: 5
+ author_id: 2
+ book_id: 5
+ due_date: "2009-07-08"
+ title: "Book 1 Chapter 1"
+ finished: true
+ edited: true
+ number: 1
+ contents: |
+   I am chapter 1
+  
+bD1c2:
+ id: 6
+ author_id: 3
+ book_id: 5
+ due_date: "2009-07-15"
+ title: "Book 1 Chapter 2"
+ finished: true
+ edited: true
+ number: 2
+ contents: |
+   I am chapter 2
+   
+bD1c3:
+ id: 7
+ author_id: 4
+ book_id: 5
+ due_date: "2009-07-22"
+ title: "Book 1 Chapter 3"
+ finished: true
+ edited: true
+ number: 3
+ contents: |
+   I am chapter 3
+   
+bD2c1:
+ id: 8
+ author_id: 3
+ book_id: 6
+ due_date: "2009-07-08"
+ title: "Book 2 Chapter 1"
+ finished: true
+ edited: true
+ number: 1
+ contents: |
+   I am chapter 1
+  
+bD2c2:
+ id: 9
+ author_id: 4
+ book_id: 6
+ due_date: "2009-07-15"
+ title: "Book 2 Chapter 2"
+ finished: true
+ edited: true
+ number: 2
+ contents: |
+   I am chapter 2
+   
+bD2c3:
+ id: 10
+ author_id: 5
+ book_id: 6
+ due_date: "2009-07-22"
+ title: "Book 2 Chapter 3"
+ finished: true
+ edited: true
+ number: 3
+ contents: |
+   I am chapter 3
+   
+bD3c1:
+ id: 11
+ author_id: 4
+ book_id: 7
+ due_date: "2009-07-08"
+ title: "Book 3 Chapter 1"
+ finished: true
+ edited: true
+ number: 1
+ contents: |
+   I am chapter 1
+  
+bD3c2:
+ id: 12
+ author_id: 5
+ book_id: 7
+ due_date: "2009-07-15"
+ title: "Book 3 Chapter 2"
+ finished: true
+ edited: true
+ number: 2
+ contents: |
+   I am chapter 2
+   
+bD3c3:
+ id: 13
+ author_id: 6
+ book_id: 7
+ due_date: "2009-07-22"
+ title: "Book 3 Chapter 3"
+ finished: true
+ edited: true
+ number: 3
+ contents: |
+   I am chapter 3
+   
+bD4c1:
+ id: 14
+ author_id: 5
+ book_id: 8
+ due_date: "2009-07-08"
+ title: "Book 4 Chapter 1"
+ finished: true
+ edited: true
+ number: 1
+ contents: |
+   I am chapter 1
+  
+bD4c2:
+ id: 15
+ author_id: 6
+ book_id: 8
+ due_date: "2009-07-15"
+ title: "Book 4 Chapter 2"
+ finished: true
+ edited: true
+ number: 2
+ contents: |
+   I am chapter 2
+   
+bD4c3:
+ id: 16
+ author_id: 2
+ book_id: 8
+ due_date: "2009-07-22"
+ title: "Book 4 Chapter 3"
+ finished: true
+ edited: true
+ number: 3
+ contents: |
+   I am chapter 3
+   
+bD5c1:
+ id: 17
+ author_id: 6
+ book_id: 9
+ due_date: "2009-07-08"
+ title: "Book 5 Chapter 1"
+ finished: true
+ edited: true
+ number: 1
+ contents: |
+   I am chapter 1
+  
+bD5c2:
+ id: 18
+ author_id: 2
+ book_id: 9
+ due_date: "2009-07-15"
+ title: "Book 5 Chapter 2"
+ finished: true
+ edited: true
+ number: 2
+ contents: |
+   I am chapter 2
+   
+bD5c3:
+ id: 19
+ author_id: 3
+ book_id: 9
+ due_date: "2009-07-22"
+ title: "Book 5 Chapter 3"
+ finished: true
+ edited: true
+ number: 3
+ contents: |
+   I am chapter 3

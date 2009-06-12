@@ -1,7 +1,14 @@
-<b>TODO</b>: Check access permissions!!!
 <%unless @book.chapters.empty? %>
-<%= render(:partial => "chapter", :collection => (@book.chapters-[@chapter])) %>
+<h1><%= h(@book.title) %></h1>
+<%= render(:partial => "chapter", :collection => @book.chapters[0, @max_chapter])%>
 <% end %>
+<%if @book.cur_chapter==1%>
+<% form_for :book do |form| %>
+<%= form.label :BookTitle%>
+<%= form.text_field :title %>
+<%end%>
+<%end%>
+<% if @chapter.user == session["person"] || @book.editor == session["person"] %>
 <% form_for :chapter do |form| %>
 <%= form.label :title %>
 <%= form.text_field :title %>
@@ -15,4 +22,5 @@
 <%= form.text_area :comment, :rows => 5, :cols => 60 %>
 <br/>
 <%= submit_tag %>
+<%end%>
 <%end%>

@@ -15,6 +15,7 @@
 #
 
 class Project < ActiveRecord::Base
+#NOTE -- BOOK DOES NOT NEED CUR_CHAPTER, ONLY PROJECT
   validates_numericality_of :chapters, :days_per_chapter, :status
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
   has_many :writers, :through => :groups, :source => :user, :uniq => true
@@ -77,6 +78,26 @@ class Project < ActiveRecord::Base
            when Project::COMPLETE then "complete"
            when Project::PUBLISHED then "published"
     end
+  end
+  def getNextChapter(index, books)
+		pbooks = books-writers[index].written_books
+		if pbooks.nil?
+			return false
+		end
+		if writers.length-1 == index
+			pbooks[0].chapter[books[0].cur_chapter-1].author_id=writers[index].id
+			pbooks[0].chapter.save
+			return true
+		end
+		for i in (index+1)...(writers.length)
+			pbooks[i].chapter[books[0].cur_chapter-1].author_id=writers[index].id
+			if(getNextChapter(index+1, books-[pbooks[i]], cur_chapter))
+				pbooks[i].chapter.save
+				return true
+			end
+			pbooks[i].chapter[books[0].cur_chapter-1].author_id=nil
+		end
+		return false
   end
 
 end

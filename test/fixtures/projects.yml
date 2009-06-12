@@ -40,3 +40,12 @@ project3:
  name: "Occult Books"
  owner_id: 3
  signing_date: '2009-09-01'
+
+project4:
+ id: 4
+ days_per_chapter: 7
+ chapters: 5
+ status: <%= Project::WRITING %>
+ name: "Real Working Project - 5 Books, 5 Authors, Week 3 Complete, Transitioning to Week 4"
+ owner_id: 4
+ signing_date: '2009-09-09'
