@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090605083306
+# Schema version: 20090608135958
 #
 # Table name: users
 #
@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
   has_many :editing_projects, :through => :ubers, :source => :user, :uniq => true
   has_many :edited_books, :class_name => "Book", :foreign_key => "uber_id", :uniq => true
   has_many :written_books, :through => :chapters, :source => :book, :uniq => true
-  has_many :chapters, :foreign_key => "author_id"
-  has_many :owned_projects, :class_name => "Project", :foreign_key => "owner_id"
+  has_many :chapters, :foreign_key => "author_id", :order => :book_id
+  has_many :owned_projects, :class_name => "Project", :foreign_key => :owner_id
 
   validates_presence_of :password, :username
   validates_uniqueness_of :username

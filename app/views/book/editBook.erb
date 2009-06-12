@@ -1,26 +1,23 @@
-<%unless @book.chapters.empty? %>
-<h1><%= h(@book.title) %></h1>
-<%= render(:partial => "chapter", :collection => @book.chapters[0, @max_chapter])%>
-<% end %>
-<%if @book.cur_chapter==1%>
+<% if @book.cur_chapter == 1 %>
 <% form_for :book do |form| %>
-<%= form.label :BookTitle%>
-<%= form.text_field :title %>
-<%end%>
-<%end%>
-<% if @chapter.user == session["person"] || @book.editor == session["person"] %>
-<% form_for :chapter do |form| %>
-<%= form.label :title %>
-<%= form.text_field :title %>
-<%= form.text_area :contents, :class=>"widgEditor" %>
-<%= form.label :finished %>
-<%= form.check_box :finished %>
-<%= form.label :edited %>
-<%= form.check_box :edited %>
-<br/>
-<%= form.label :comment %> <br/>
-<%= form.text_area :comment, :rows => 5, :cols => 60 %>
-<br/>
-<%= submit_tag %>
-<%end%>
-<%end%>
+<%= form.label "Book Title" %>
+<%= form.text_field :title %><br/>
+<%= form.label "Keywords (comma separated)" %>
+<%= form.text_field :keywords %><br/>
+<%= submit_tag "Update Book" %>
+<% end %>
+<% else %>
+<h1><%= h(@book.title) %></h1>
+<p>Keywords: <%= h(@book.keywords) %></p>
+<% end %>
+<% for chapter in @book.chapters[0,@max_chapter] %>
+ <div class="chapter<%= chapter.number %>">
+ <% if chapter.user_can_write(session["person"]) or chapter.user_can_edit(session["person"]) %>
+  <%= render(:partial => "editChapter", :locals => { :chapter => chapter }) %>
+ <% else %>
+  <%= render(:partial => "chapter", :locals => { :chapter => chapter }) %>
+ <% end %>
+ <hr/>
+ </div>
+<% end %>
+

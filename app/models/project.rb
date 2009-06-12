@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090605083306
+# Schema version: 20090608135958
 #
 # Table name: projects
 #
@@ -12,6 +12,9 @@
 #  owner_id         :integer         default(1)
 #  private          :boolean
 #  max_writers      :integer
+#  description      :text
+#  start_date       :date
+#  next_due_date    :date
 #
 
 class Project < ActiveRecord::Base
@@ -22,7 +25,7 @@ class Project < ActiveRecord::Base
   has_many :editors, :through => :ubers, :source => :user, :uniq => true
   has_many :ubers
   has_many :groups
-  has_many :books
+  has_many :books, :order => :id
 
   #### Constants for the :status field of a project.
   # Project State Transitions: (all transitions are one-way)  [ project.status ]
@@ -68,12 +71,11 @@ class Project < ActiveRecord::Base
     end
   end
 
-
   def phase
     return case status
            when Project::NEW then "new"
            when Project::OPEN then "open for participants"
-           when Project::WRITING then "being writen"
+           when Project::WRITING then "being written"
            when Project::EDITING then "being edited"
            when Project::COMPLETE then "complete"
            when Project::PUBLISHED then "published"
@@ -98,6 +100,20 @@ class Project < ActiveRecord::Base
 			pbooks[i].chapter[books[0].cur_chapter-1].author_id=nil
 		end
 		return false
+  end
+
+  # setup the next chapter, but don't tell anyone
+  def begin_next_chapter
+        for book in self.books do
+          book.begin_next_chapter
+        end
+  end
+
+  # finish setting up the the next chapter
+  def start_next_chapter
+        for book in self.books do
+          book.start_next_chapter
+        end
   end
 
 end

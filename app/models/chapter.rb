@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090605083306
+# Schema version: 20090608135958
 #
 # Table name: chapters
 #
@@ -41,5 +41,28 @@ class Chapter < ActiveRecord::Base
       transition :editing => :accepted
     end
   end
+
+  def editor
+    return self.book.editor
+  end
+
+  # Return true if this user can write this chapter
+  def user_can_write(user)
+    if self.writing? and (self.user == user or user.id == 1) then
+      return true
+    else
+      return false
+    end
+  end
+
+  # Return true if this user can edit this chapter
+  def user_can_edit(user)
+    if self.editing? and (self.editor == user or user.id == 1) then
+      return true
+    else
+      return false
+    end
+  end
+
 
 end

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090605083306
+# Schema version: 20090608135958
 #
 # Table name: users
 #
@@ -15,7 +15,8 @@
 admin:
  id: 1
  username: admin
- hashed_password: <%= Digest::SHA1.hexdigest("adminadmin" + "wibble" + "ABCDEFG") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("adminadmin" , "ABCDEFG") %>
  age: 29
  salt: "ABCDEFG"
  aboutMe: >
@@ -24,7 +25,8 @@ admin:
 fred:
  id: 2
  username: fred
- hashed_password: <%= Digest::SHA1.hexdigest("fred123" + "wibble" + "ABCDEFG") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("fred123" , "ABCDEFG") %>
  age: 29
  salt: "ABCDEFG"
  aboutMe: >
@@ -34,7 +36,8 @@ fred:
 barney:
  id: 3
  username: barney
- hashed_password: <%= Digest::SHA1.hexdigest("barney123" + "wibble" + "HIJKLMNO") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("barney123" , "HIJKLMNO") %>
  age: 28
  salt: "HIJKLMNO"
  aboutMe: >
@@ -44,7 +47,8 @@ barney:
 wilma:
  id: 4
  username: wilma
- hashed_password: <%= Digest::SHA1.hexdigest("wilma123" + "wibble" + "ABCDEFG") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("wilma123" , "ABCDEFG") %>
  age: 28
  salt: "ABCDEFG"
  aboutMe: >
@@ -54,7 +58,8 @@ wilma:
 betty:
  id: 5
  username: betty
- hashed_password: <%= Digest::SHA1.hexdigest("betty123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("betty123" , "HIJKLMNO") %>
  age: 30
  salt: "HIJKLMNO"
  aboutMe: >
@@ -64,7 +69,8 @@ betty:
 dino:
  id: 6
  username: dino
- hashed_password: <%= Digest::SHA1.hexdigest("dino123" + "wibble" + "ABCDEFG") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("dino123" , "ABCDEFG") %>
  age: 3
  salt: "ABCDEFG"
  aboutMe: >
@@ -74,7 +80,8 @@ dino:
 bambam:
  id: 7
  username: bambam
- hashed_password: <%= Digest::SHA1.hexdigest("bambam123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("bambam123" , "HIJKLMNO") %>
  age: 11
  salt: "HIJKLMNO"
  aboutMe: >
@@ -84,7 +91,8 @@ bambam:
 pebbles:
  id: 8
  username: pebbles
- hashed_password: <%= Digest::SHA1.hexdigest("pebbles123" + "wibble" + "ABCDEFG") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("pebbles123" , "ABCDEFG") %>
  age: 11
  salt: "ABCDEFG"
  aboutMe: >
@@ -94,7 +102,8 @@ pebbles:
 boss:
  id: 9
  username: boss
- hashed_password: <%= Digest::SHA1.hexdigest("boss123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("boss123" , "HIJKLMNO") %>
  age: 45
  salt: "HIJKLMNO"
  aboutMe: >
@@ -104,7 +113,8 @@ boss:
 friend1:
  id: 10
  username: friend1
- hashed_password: <%= Digest::SHA1.hexdigest("friend1123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("friend1123" , "HIJKLMNO") %>
  age: 25
  salt: "HIJKLMNO"
  aboutMe: >
@@ -114,7 +124,8 @@ friend1:
 friend2:
  id: 11
  username: friend2
- hashed_password: <%= Digest::SHA1.hexdigest("friend2123" + "wibble" + "HIJKLMO") %>
+ email: elliot.jaffe@gmail.com
+ hashed_password: <%= User.encrpyted_password("friend2123" , "HIJKLMNO") %>
  age: 34
  salt: "HIJKLMNO"
  aboutMe: >

@@ -1,6 +1,9 @@
-<tr>
-   <td>
-		<h2><%= chapter.title %> <br></h2>
-		<%= chapter.contents%><br><br>
-	</td>
-</tr>
+<div><h2><% if chapter.title.nil? %>
+Chapter <%= chapter.number %>
+<% else %>
+<%= chapter.title %>
+<% end %>
+</h2>
+<%= chapter.contents%></div>
+<hline/>
+

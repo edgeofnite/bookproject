@@ -1,40 +1,51 @@
 <h2>About Me</h2>
-<p><%= @me.aboutMe %></p>
-<h3>Chapters to Write</h3>
-<%if @chaptersToWrite.empty? %>
- <% for chapter in @chaptersToWrite %>
-	<div class ="entry">
-		<p><%= link_to h(chapter.book.title + "Chapter " + chapter.number), :controller => "book", :action =>"reviewChapter", :id => chapter.book %></p>
-	</div>
- <%end%>
-<% else %>
-<p> You have no chapters to write </p>
+<% form_for :user, @me do |form| %>
+<%= form.text_area :aboutMe, :rows => 4, :cols => 60 %><br/>
+<%= submit_tag "Update" %>
 <% end %>
 
-<h3>Chapters to Edit</h3>
-<%unless @chaptersToEdit.empty? %>
+<% if session["person"].username=="admin" %>
+	<%= link_to h("Create new project"), :controller => "project", :action =>"createProject" %>
+<% end %>
+
+<% unless @chaptersToWrite.empty? %>
+ <h3>Chapters to Write</h3>
+ <% for chapter in @chaptersToWrite %>
+   <div class ="entry">
+      <p><%= link_to h("#{chapter.book.title}, Chapter #{chapter.number}"), :controller => "book", :action =>"editBook", :id => chapter.book %></p>
+   </div>
+ <% end %>
+<% end %>
+
+
+<% unless @chaptersToEdit.empty? %>
+ <h3>Chapters to Edit</h3>
  <% for chapter in @chaptersToEdit %>
 	<div class ="entry">
-		<p><%= link_to h(chapter.book.title + "Chapter " + chapter.number), :controller => "book", :action =>"editBook", :id => chapter.book %></p>
+		<p><%= link_to h("#{chapter.book.title}, Chapter #{chapter.number}"), :controller => "book", :action =>"editBook", :id => chapter.book %></p>
 	</div>
  <%end%>
-<% else %>
-<p> You have no chapters to edit </p>
 <% end %>
 
 
 <%unless @myProjects.empty? %>
 <h3>Projects I own</h3>
-<% for project in @myProjects %>
-	<div class ="entry">
-		<p><%= link_to h(project.name), :controller => "project", :action =>"individualProject", :id => project %></p>
-	</div>
- <%end%>
+<table class="sortable" border=1>
+  <tr>
+  <td>Project Name</td>
+  <td>Signing Date</td>
+  <td>Days Per Chapter</td>
+  <td>Number of Chapters</td>
+  <td>Status</td>
+  <td>Owner</td>
+  </tr>
+  <%= render(:partial => "project/project", :collection => @myProjects) %>
+</table>
 <% end %>
-<% if session["person"].username=="admin" %>
-	<%= link_to h("Create new project"), :controller => "project", :action =>"createProject" %>
 
-<%= link_to "Browse All Books", :controller => "book" %><br/><br/>
-<%= link_to "Go to project page", :controller => "project", :action =>"projectPage" %><br/><br/>
-<%end%>
-my completed books
+<% unless @myCompletedBooks.empty? %>
+ <h3> My Completed Books</h3>
+ <% for book in @myCompletedBooks %>
+   <p><%= link_to h(book), :controller => "book", :action =>"read", :id => book %></p>
+ <% end %>
+<% end %>

@@ -55,6 +55,12 @@
   float: left;
 }
 
+#banner p {
+  font-size: medium;
+  float: right;
+  margin-right: 1em;
+}
+
 #columns {
   background: #141;
 }
@@ -77,7 +83,7 @@
 
 #side a {
   color: #bfb;
-  font-size: small;
+  font-size: medium;
 }
 
 h1 {
@@ -224,4 +230,19 @@ h1 {
 #errorExplanation ul li {
   font-size: 12px;
   list-style: square;
+}
+
+td.chapterComplete {
+    background-color: #33CC66;
+    color: #000000;
+}
+
+td.chapterWriting {
+    background-color: #0099CC;
+    color: #000000;
+}
+
+td.chapterEditing {
+    background-color: #FFFF00;
+    color: #000000;
 }
