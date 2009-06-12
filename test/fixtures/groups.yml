@@ -110,23 +110,3 @@ groupC8:
 groupC8:
   user_id: 11
   project_id: 3
-
-groupD1:
-  user_id: 2
-  project_id: 4
-
-groupD2:
-  user_id: 3
-  project_id: 4
-
-groupD3:
-  user_id: 4
-  project_id: 4
-
-groupD4:
-  user_id: 5
-  project_id: 4
-
-groupD5:
-  user_id: 6
-  project_id: 4

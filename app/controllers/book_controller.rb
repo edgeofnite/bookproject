@@ -4,19 +4,8 @@ class BookController < ApplicationController
   before_filter :authorize, :except => [:index, :read]
 
   def editBook
-    @page_title = "Reviewing and Editing Book "
     @book = Book.find(params[:id])
-    if session["person"] == @book.editor or session["person"].id == 1
-      @max_chapter = @book.chapters.length-1
-    elsif session["person"].written_books.include?(@book)
-      # THIS SHOULD BE THE MAX VALUE (TODO)
-      @max_chapter = @book.chapters.select {|v| v.user == session["person"]}[0].number #WARNING single user writing multiple chapters in special circumstances?
-    end
-    if @max_chapter.nil?
-      flash[:notice] = "You do not have permission to edit that book"
-      redirect_to :controller => "main", :action => "personalPage"
-    end
-    @chapter = Chapter.find(:first, :conditions => { :book_id => @book.id, :number => @book.cur_chapter})
+    @page_title = "Reviewing and Editing Book "
     if request.post?
       if ! params[:book].nil? then
         @book.update_attributes(params[:book])

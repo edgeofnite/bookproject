@@ -102,11 +102,11 @@ var widgToolbarItems = new Array();
 
 widgToolbarItems.push("bold");
 widgToolbarItems.push("italic");
-//widgToolbarItems.push("hyperlink");
+widgToolbarItems.push("hyperlink");
 widgToolbarItems.push("unorderedlist");
 widgToolbarItems.push("orderedlist");
-//widgToolbarItems.push("image");
-//widgToolbarItems.push("htmlsource");
+widgToolbarItems.push("image");
+widgToolbarItems.push("htmlsource");
 widgToolbarItems.push("blockformat");
 
 /* Options on block format select element. Consists of string pairs (option value, option label) */

@@ -13,7 +13,7 @@
 #
 
 class Book < ActiveRecord::Base
-  has_many :chapters, :order => "number" #WARNING!!! BOOKS has both chapters as array and as database entry for number of chapters. Delete number of chapters and use chapters.length
+  has_many :chapters, :order => "number"
   belongs_to :editor, :class_name => "User", :foreign_key => "uber_id"
   validates_presence_of :uber_id, :project_id, :title  
   belongs_to :project

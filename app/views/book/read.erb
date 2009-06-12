@@ -1,8 +1,6 @@
 <table>
-<%if @book.project.status == Project::PUBLISHED%>
+<%unless @book.chapters.empty? %>
  <%= render(:partial => "chapter", :collection => @book.chapters) %>
-<%else%>
-<h1>Book is not yet published!!!</h1>
-<%end%>
+<% end %>
 </table>
 <%= link_to "Back to personal page", :action => "personalPage", :controller => "main" %>

@@ -6,4 +6,3 @@ Chapter <%= chapter.number %>
 </h2>
 <%= chapter.contents%></div>
 <hline/>
-
