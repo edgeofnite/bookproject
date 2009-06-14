@@ -39,13 +39,16 @@ class LoginController < ApplicationController
 
   def delete_user
     if request.post?
-      user = User.find(params[:id])
-      begin
-        user.destroy
-        flash[:notice] = "User #{user.name} deleted"
-      rescue Exception => e
-        flash[:notice] = e.message
-      end
+      if session["person"].id == 1 
+        user = User.find(params[:id])
+        begin
+          user.safe_delete
+          flash[:notice] = "User #{user.username} deleted"
+        rescue Exception => e
+          flash[:notice] = e.message
+        end
+      else
+        flash[:notice] = "Only the administrator can remove users"
     end
     redirect_to(:action => :list_users)
   end

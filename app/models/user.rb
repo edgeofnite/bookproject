@@ -52,7 +52,6 @@ class User < ActiveRecord::Base
   end
   
   def password=(pwd)
-    debugger
     @password = pwd
     create_new_salt
     self.hashed_password = User.encrypted_password(@password, self.salt)
