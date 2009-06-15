@@ -24,6 +24,9 @@
 				<% else -%> 
 				<%= link_to "Home", :controller =>"main" %><br /> 
 				<% end -%> 
+				<%= link_to "Rules", :controller =>"main", :action => "rules" %><br /> 
+				<%= link_to "About Us", :controller =>"main", :action => "about" %><br /> 
+				<%= link_to "Contact", :controller =>"main", :action => "contact" %><br /> 
 				<%= link_to "Browse Books", :controller =>"Book"%><br /> 
 				<% if session["person"] -%> 
 				<%= link_to "Browse Projects", :controller =>"Project", :action => "projectPage" %><br /> 

@@ -44,10 +44,10 @@ TableKit.Editable.textInput('date', {}, function(string) {
 }, "today");
 TableKit.Editable.selectInput('editors', {}, [
  <% for editor in @project.editors %>['<%= h(editor.username) %>',<%= editor.id %>],<% end %>
-		]);
+                ]);
 TableKit.Editable.selectInput('writers', {}, [
  <% for writer in @project.writers %>['<%= h(writer.username) %>',<%= writer.id %>],<% end %>
-		]);
+                ]);
 </script>
 <table class="editable sortable"  border="1">
 <% else %>
@@ -56,7 +56,9 @@ TableKit.Editable.selectInput('writers', {}, [
 <thead>
  <tr>
    <th class="noedit">Book Title</th>
-   <th id="editors">Editor<br/>click to change</th>
+   <th id="editors">Editor <% if @project.owner == session["person"] or session["person"].username == "admin" %>
+<br/><i>click to change</i><% end %>
+   </th>
    <th class="noedit">Current Chapter</th>
    <th class="noedit">Current Writer</th>
    <th class="noedit">Completed Chapters</th>
@@ -85,38 +87,39 @@ TableKit.Editable.selectInput('writers', {}, [
 <table class="sortable"  border="1">
 <% end %>
 <thead>
- <tr>
-   <th class="noedit">Book</th>
-   <% for chapter in 1..@project.books[0].cur_chapter %>
-     <% if @project.books[0].cur_chapter == chapter or session["person"].username == "admin" %>
-          <th id="writers"><%= chapter %></th>
-     <% else %>
-          <th class="noedit"><%= chapter %></th>
-     <% end %>
-   <% end %>
- </tr>
+<tr>
+<th class="noedit">Book</th>
+<% for chapter in 1..@project.books[0].cur_chapter %>
+<% if @project.books[0].cur_chapter == chapter and (@project.owner == session["person"] or session["person"].username == "admin") %>
+<th id="writers"><%= chapter %><br/><i>click to change</i></th>
+<% else %>
+<th class="noedit"><%= chapter %></th>
+<% end %>
+<% end %>
+</tr>
 </thead>
 <tbody>
- <% for book in @project.books %>
+<% for book in @project.books %>
   <tr class="<%= cycle("odd", "even") %>" id="<%= book.id %>">
    <td><%= link_to h(book.title), :controller => "book", :action =>"editBook", :id => book %></td>
    <% for chapter in 0..@project.books[0].cur_chapter-1 %>
       <% if ! book.chapters[chapter].nil? %>
-        <td class="<%= case book.chapters[chapter].state 
-		    when "writing" then "chapterWriting" 
-		    when "editing" then "chapterEditing" 
-		    when "accepted" then "chapterComplete" 
-		   end %>">
-	   <%= book.chapters[chapter].user.username %></td>
+        <td class="<%= case book.chapters[chapter].state
+                    when "writing" then "chapterWriting"
+                    when "editing" then "chapterEditing"
+                    when "accepted" then "chapterComplete"
+                   end %>">
+           <%= book.chapters[chapter].user.username %></td>
       <% else %>
          <td></td>
       <% end %>
    <% end %>
   </tr>
- <%end%>
+<% end %>
 </tbody>
 </table>
 <p>
+<% if @project.owner == session["person"] or session["person"].username == "admin" %>
 <% if @project.books[0].chapters[@project.books[0].cur_chapter-1].state == "new" %>
 <% form_tag :controller => :project, :action =>:startNextChapter, :id => @project.id do %>
 Click here to notify writers of the new chapter
@@ -128,20 +131,19 @@ Click here to start the next chapter:
 <%= submit_tag "Begin next chapter" %>
 <% end %>
 <% end %>
+<% end %>
 </p>
-
-
 <% end %>
 
 <h3>Registered Editors</h3>
-<ul>	
+<ul>
 <% for editor in @project.editors %>
 <li><%= h(editor.username) %></li>
 <%end%>
 </ul>
 
 <h3>Registered Writers</h3>
-<ul>	
+<ul>
 <% for writer in @project.writers %>
 <li><%= h(writer.username) %></li>
 <%end%>

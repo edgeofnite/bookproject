@@ -5,7 +5,7 @@
 <% end %>
 
 <% if session["person"].username=="admin" %>
-	<%= link_to h("Create new project"), :controller => "project", :action =>"createProject" %>
+        <%= link_to h("Create new project"), :controller => "project", :action =>"createProject" %>
 <% end %>
 
 <% unless @chaptersToWrite.empty? %>
@@ -21,15 +21,29 @@
 <% unless @chaptersToEdit.empty? %>
  <h3>Chapters to Edit</h3>
  <% for chapter in @chaptersToEdit %>
-	<div class ="entry">
-		<p><%= link_to h("#{chapter.book.title}, Chapter #{chapter.number}"), :controller => "book", :action =>"editBook", :id => chapter.book %></p>
-	</div>
+        <div class ="entry">
+                <p><%= link_to h("#{chapter.book.title}, Chapter #{chapter.number}"), :controller => "book", :action =>"editBook", :id => chapter.book %></p>
+        </div>
  <%end%>
 <% end %>
 
+<%unless @currentProjects.empty? %>
+<h3>Projects in which I am participating</h3>
+<table class="sortable" border=1>
+  <tr>
+  <td>Project Name</td>
+  <td>Signing Date</td>
+  <td>Days Per Chapter</td>
+  <td>Number of Chapters</td>
+  <td>Status</td>
+  <td>Owner</td>
+  </tr>
+  <%= render(:partial => "project/project", :collection => @currentProjects) %>
+</table>
+<% end %>
 
 <%unless @myProjects.empty? %>
-<h3>Projects I own</h3>
+<h3>Projects that I manage</h3>
 <table class="sortable" border=1>
   <tr>
   <td>Project Name</td>

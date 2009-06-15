@@ -37,8 +37,9 @@ class Chapter < ActiveRecord::Base
       transition :writing => :editing
     end
 
+    # the accepted to accepted link is if someone re-edits a completed chapter
     event :done_editing do
-      transition :editing => :accepted
+      transition :editing => :accepted, :accepted => :accepted
     end
   end
 
@@ -48,7 +49,7 @@ class Chapter < ActiveRecord::Base
 
   # Return true if this user can write this chapter
   def user_can_write(user)
-    if self.writing? and (self.user == user or user.id == 1) then
+    if self.writing? and (self.user == user or self.book.project.owner == user or user.id == 1) then
       return true
     else
       return false
@@ -57,7 +58,7 @@ class Chapter < ActiveRecord::Base
 
   # Return true if this user can edit this chapter
   def user_can_edit(user)
-    if self.editing? and (self.editor == user or user.id == 1) then
+    if (self.editing? and self.editor == user) or self.book.project.owner == user or user.id == 1 then
       return true
     else
       return false

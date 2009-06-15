@@ -1,4 +1,5 @@
-<b>TODO</b>: Check access permissions!!!
+<% unless @book.nil? %>
+
 <% if @book.cur_chapter == 1 %>
 <% form_for :book do |form| %>
 <%= form.label "Book Title" %>
@@ -12,12 +13,16 @@
 <p>Keywords: <%= h(@book.keywords) %></p>
 <% end %>
 <% for chapter in @book.chapters %>
- <div class="chapter<%= chapter.number %>">
- <% if chapter.user_can_write(session["person"]) or chapter.user_can_edit(session["person"]) %>
-  <%= render(:partial => "editChapter", :locals => { :chapter => chapter }) %>
- <% else %>
-  <%= render(:partial => "chapter", :locals => { :chapter => chapter }) %>
+ <% if chapter.user_can_edit(session["person"]) or (chapter.number <= @lastChapterThisBook and chapter.number <= @lastVisibleChapter) %>
+  <div class="chapter<%= chapter.number %>">
+   <% if chapter.user_can_write(session["person"]) or chapter.user_can_edit(session["person"]) %>
+     <%= render(:partial => "editChapter", :locals => { :chapter => chapter }) %>
+   <% else %>
+     <%= render(:partial => "chapter", :locals => { :chapter => chapter }) %>
+   <% end %>
+   <hr/>
+  </div>
  <% end %>
- <hr/>
- </div>
+<% end %>
+
 <% end %>
