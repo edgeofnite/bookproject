@@ -31,14 +31,20 @@ class BookController < ApplicationController
     @page_title = "Reviewing and Editing Book "
     if request.post?
       if ! params[:book].nil? then
-        @book.update_attributes(params[:book])
-        unless @book.save
-          redirect_to :action => :read
+        unless @book.update_attributes(params[:book])
+          errmsg = ""
+          @book.errors.each_full { |msg| errmsg = errmsg + msg + ": "}
+          flash[:notice] = errmsg
+          return
         end
       else
         if ! params[:chapter].nil? then
           @chapter = Chapter.find(params[:chapter_id])
-          @chapter.update_attributes(params[:chapter])
+          unless @chapter.update_attributes(params[:chapter])
+            errmsg = ""
+            @chapter.errors.each_full { |msg| errmsg = errmsg + msg + ": "}
+            flash[:notice] = errmsg
+          end
           if params[:commit] == "Save Chapter and send to the editor" then
             @chapter.finished = true
             @chapter.edited = false

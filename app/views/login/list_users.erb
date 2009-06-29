@@ -11,7 +11,7 @@
                              :confirm => "Really delete #{user.username}?"
                            } %>
       <% end %>
-        <b><%= h(user.username) %></b>: <%= h(user.aboutMe) %>
+        <b><%= h(user.username) %></b>(<%= h(user.email) %>): <%= h(user.aboutMe) %>
     </li>
   <% end %>
 </ul>

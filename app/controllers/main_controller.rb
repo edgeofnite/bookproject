@@ -19,8 +19,14 @@ b| b.published}
     @currentProjects = @me.projects.select {|p| p.status == Project::NEW or p.status == Project::OPEN or p.status == Project::WRITING or p.status == Project::EDITING }
     if request.post?
       if ! params[:user].nil? then
-        @me.update_attributes(params[:user])
-        @me.save
+        @me = User.find(session["person"].id)
+        unless @me.update_attribute(:aboutMe, params[:user][:aboutMe])
+          errmsg = ""
+          @me.errors.each_full { |msg| errmsg = errmsg + msg + ": "}
+          flash[:notice] = errmsg
+        else
+          flash[:notice] = "Your About Me text has been updated."
+        end
       end
     end
   end

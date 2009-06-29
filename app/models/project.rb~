@@ -1,6 +1,0 @@
-class Project < ActiveRecord::Base
-  validates_numericality_of :chapter, :days_per_chapter
-  has_many :writers, :through => :groups, :source => :user
-  has_many :groups
-  has_many :books
-end

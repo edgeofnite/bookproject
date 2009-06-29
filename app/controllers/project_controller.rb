@@ -44,7 +44,12 @@ class ProjectController < ApplicationController
           return
         end
       end
-      @project.update_attributes(params[:project])
+      unless @project.update_attributes(params[:project])
+          errmsg = ""
+          @project.errors.each_full { |msg| errmsg = errmsg + msg + ": "}
+          flash[:notice] = errmsg
+          return        
+      end
       if old_status == Project::OPEN and new_status == Project::WRITING then
         for book in 0..@project.writers.length do
           b = Book.new(:title => "Book #{book+1}", :published => false, :cur_chapter => 0, :project => @project, :editor => session["person"])
@@ -117,12 +122,12 @@ class ProjectController < ApplicationController
   end
 
   def updater
-    bookid = params[:row]
+    bookid = params[:id]
     field = params[:field]
     chapterNum = params[:cell].to_i
     value = params[:value]
     book = Book.find(bookid)
-    unless session["person"] == book.project.owner or session["person"].username == "admin" then
+    unless session["person"].id == book.project.owner.id or session["person"].username == "admin" then
       result = "permission denied"
       render :text => result
       return

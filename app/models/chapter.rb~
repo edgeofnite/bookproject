@@ -1,3 +1,0 @@
-class Chapter < ActiveRecord::Base
-  validates_numericality_of :author_id, :number, :book_id, :only_integer => true
-end
