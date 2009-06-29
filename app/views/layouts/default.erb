@@ -30,6 +30,9 @@
 				<%= link_to "Browse Books", :controller =>"Book"%><br /> 
 				<% if session["person"] -%> 
 				<%= link_to "Browse Projects", :controller =>"Project", :action => "projectPage" %><br /> 
+				<% if session["person"].id == 1 -%> 
+				<%= link_to "List Users", :controller =>"login", :action => "list_users" %><br /> 
+			        <% end -%>
 				<%= link_to "Logout", :controller =>"login", :action => "logout" %><br /> 
 				<% end -%> 
 

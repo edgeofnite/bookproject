@@ -1,0 +1,9 @@
+#AddHandler fcgid-script .fcgi
+#AddHandler cgi-script .cgi
+Options +FollowSymLinks +ExecCGI 
+RewriteEngine On
+RewriteBase /
+RewriteRule ^$ index.html [QSA]
+RewriteRule ^([^.]+)$ $1.html [QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ dispatch.fcgi [QSA,L]
