@@ -18,8 +18,7 @@ class Notifier < ActionMailer::Base
 
   def chapter_ready_to_write(chapter, sent_at = Time.now)
     subject    "Chapter #{chapter.number} of book #{chapter.book.title}"
-    recipients chapter.book.editor.email
-    recipients "#{chapter.book.editor.username} <#{chapter.book.editor.email}>"
+    recipients chapter.user.email
     from       "bookproject@jaffestrategies.com"
     sent_on    sent_at
     content_type = "text/plain"
@@ -28,7 +27,7 @@ class Notifier < ActionMailer::Base
 
   def chapter_rewrite(chapter, sent_at = Time.now)
     subject    "Chapter #{chapter.number} of book #{chapter.book.title}"
-    recipients chapter.book.editor.email
+    recipients chapter.user.email
     from       "bookproject@jaffestrategies.com"
     sent_on    sent_at
     content_type = "text/plain"

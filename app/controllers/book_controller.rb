@@ -6,7 +6,7 @@ class BookController < ApplicationController
   def editBook
     @book = Book.find(params[:id])
     @project = @book.project
-    if session["person"].id == 1
+    if session["person"].id == 1  or session["person"].id == @book.editor.id
       @lastChapterThisBook = @book.cur_chapter
       @lastVisibleChapter = @book.cur_chapter
     else
