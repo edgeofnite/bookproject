@@ -37,32 +37,31 @@ class BookController < ApplicationController
           flash[:notice] = errmsg
           return
         end
-      else
-        if ! params[:chapter].nil? then
-          @chapter = Chapter.find(params[:chapter_id])
-          unless @chapter.update_attributes(params[:chapter])
-            errmsg = ""
-            @chapter.errors.each_full { |msg| errmsg = errmsg + msg + ": "}
-            flash[:notice] = errmsg
-          end
-          if params[:commit] == "Save Chapter and send to the editor" then
-            @chapter.finished = true
-            @chapter.edited = false
-            @chapter.begin_editing
-          end
-          if params[:commit] == "Send this chapter back to the writer" then
-            @chapter.finished = false
-            @chapter.edited = false
-            @chapter.begin_writing
-          end
-          if params[:commit] == "Finish Editing Chapter #{@chapter.number}" then
-            @chapter.finished = true
-            @chapter.edited = true
-            @chapter.done_editing
-          end
-          unless @chapter.save
-            redirect_to :action => :read
-          end
+      end
+      if ! params[:chapter].nil? then
+        @chapter = Chapter.find(params[:chapter_id])
+        unless @chapter.update_attributes(params[:chapter])
+          errmsg = ""
+          @chapter.errors.each_full { |msg| errmsg = errmsg + msg + ": "}
+          flash[:notice] = errmsg
+        end
+        if params[:commit] == "Save Chapter and send to the editor" then
+          @chapter.finished = true
+          @chapter.edited = false
+          @chapter.begin_editing
+        end
+        if params[:commit] == "Send this chapter back to the writer" then
+          @chapter.finished = false
+          @chapter.edited = false
+          @chapter.begin_writing
+        end
+        if params[:commit] == "Finish Editing Chapter #{@chapter.number}" then
+          @chapter.finished = true
+          @chapter.edited = true
+          @chapter.done_editing
+        end
+        unless @chapter.save
+          render :action => :read
         end
       end
     end

@@ -1,17 +1,5 @@
 <% unless @book.nil? %>
 
-<% if @book.cur_chapter == 1 %>
-<% form_for :book do |form| %>
-<%= form.label "Book Title" %>
-<%= form.text_field :title %><br/>
-<%= form.label "Keywords (comma separated)" %>
-<%= form.text_field :keywords %><br/>
-<%= submit_tag "Update Book" %>
-<% end %>
-<% else %>
-<h1><%= h(@book.title) %></h1>
-<p>Keywords: <%= h(@book.keywords) %></p>
-<% end %>
 <% for chapter in @book.chapters %>
  <% if chapter.user_can_edit(session["person"]) or (chapter.number <= @lastChapterThisBook and chapter.number <= @lastVisibleChapter) %>
   <div class="chapter<%= chapter.number %>">
