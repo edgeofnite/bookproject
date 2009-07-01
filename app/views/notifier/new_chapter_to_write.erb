@@ -1,7 +1,7 @@
 Dear <%= @chapter.user.username %>
   You have been asked to write chapter <%= @chapter.number %> of "<%= @chapter.book.title %>".
 
-<% if @chapter.book.chapters[@chapter.number-2].state == "accepted" %>
+<% if @chapter.number == 1 or @chapter.book.chapters[@chapter.number-2].state == "accepted" %>
 Please log into our site to start writing.  When you are done writing,
 select the "Finished" button.  We will sent the chapter to your editor
 for review.
