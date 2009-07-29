@@ -25,7 +25,6 @@ class Project < ActiveRecord::Base
   has_many :ubers
   has_many :groups
   has_many :books, :order => :id
-
   #### Constants for the :status field of a project.
   # Project State Transitions: (all transitions are one-way)  [ project.status ]
   #  Initial: New     - the project is not yet open for participants.
@@ -83,16 +82,21 @@ class Project < ActiveRecord::Base
 
   # setup the next chapter, but don't tell anyone
   def begin_next_chapter
+    if books[0].cur_chapter<chapters
         for book in self.books do
           book.begin_next_chapter
-        end
+      end
   end
+ end
 
   # finish setting up the the next chapter
   def start_next_chapter
         for book in self.books do
           book.start_next_chapter
         end
+  end
+  def start?
+    return books[0].chapters[books[0].cur_chapter-1].new? 
   end
 
 end

@@ -20,12 +20,16 @@ class Book < ActiveRecord::Base
 
   # set up the next chapter for this book
   def begin_next_chapter
-    self.cur_chapter += 1
-    c = Chapter.new(:user => self.editor, :book => self, :due_date => self.project.next_due_date, :title => "Chapter #{self.cur_chapter}", :finished => false, :edited => false, :number => self.cur_chapter, :state => "new")
-    if c.save then
-      self.save
-    else 
-      flash[:notice] = "Failed to save new chapter in book #{self}"
+    unless self.chapters[cur_chapter-1].new?
+      self.cur_chapter += 1
+      c = Chapter.new(:user => self.editor, :book => self, :due_date => self.project.next_due_date, :title => "Chapter #{self.cur_chapter}", :finished => false, :edited => false, :number => self.cur_chapter, :state => "new")
+      if c.save then
+        self.save
+      else 
+        flash[:notice] = "Failed to save new chapter in book #{self}"
+    end
+       else 
+        flash[:notice] = "Failed to save new chapter in book #{self}"
     end
   end
 

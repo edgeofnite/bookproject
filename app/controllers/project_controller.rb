@@ -63,19 +63,26 @@ class ProjectController < ApplicationController
   # setup the next chapter, but don't tell anyone yet!
   def nextChapter
     @project = Project.find(params[:id])
-    @project.begin_next_chapter
-    @page_title = @project.name
+    if session["person"].id == 1 or session["person"]==@project.owner
+      @project.begin_next_chapter
+      @page_title = @project.name
+    else
+      flash[:notice]="Error. You do not have the power to do that."
+    end
 
-    render :action => "individualProject"
+    redirect_to :action => "individualProject", :id => params[:id]
   end
 
   # finish setting up the most recent chapter and tell everyone!
   def startNextChapter
     @project = Project.find(params[:id])
+    if (session["person"].id == 1 or session["person"]==@project.owner) and (@project.start?)
     @project.start_next_chapter
     @page_title = @project.name
-
-    render :action => "individualProject"
+  else
+    flash[:notice]="Error. You do not have the power to do that."
+  end
+    redirect_to :action => "individualProject", :id => @project.id
   end
 
   def projectSignUp
@@ -104,7 +111,7 @@ class ProjectController < ApplicationController
       end
       @project.save
       @page_title = @project.name
-      render :action => "individualProject"
+      redirect_to :action => "individualProject", :id => @project.id
     end
   end
 

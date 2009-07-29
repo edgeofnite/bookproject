@@ -58,7 +58,7 @@ class Chapter < ActiveRecord::Base
 
   # Return true if this user can edit this chapter
   def user_can_edit(user)
-    if (self.editing? and self.editor == user) or self.book.project.owner == user or user.id == 1 then
+    if (self.editor == user) or self.book.project.owner == user or user.id == 1 then
       return true
     else
       return false
