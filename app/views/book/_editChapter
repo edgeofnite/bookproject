@@ -12,11 +12,17 @@
 <% if not chapter.finished %>
 <%= submit_tag "Save Chapter, but continue writing" %>
 <%= submit_tag "Save Chapter and send to the editor", :confirm => "Are you finished writing?  You will not be able to make any more changes." %>
+<% if chapter.user_can_write(session["person"]) and chapter.comment %>
+<br/><h3>Editor's Comment</h3>
+<p><%= chapter.comment %></p>
+<% end %>
 <% else %>
 <%= form.label :comment %> <br/>
 <%= form.text_area :comment, :rows => 5, :cols => 60 %><br/>
 <%= submit_tag "Save and continue editing" %>
+<% unless chapter.edited %>
 <%= submit_tag "Send this chapter back to the writer",  :confirm => "If you continue, the writer will be sent your comments and asked to resubmit this chapter." %>
 <%= submit_tag "Finish Editing Chapter #{chapter.number}",  :confirm => "Is this chapter acceptable?" %>
+<% end %>
 <% end %>
 <% end %>
