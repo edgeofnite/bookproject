@@ -1,5 +1,5 @@
-#AddHandler fcgid-script .fcgi
-#AddHandler cgi-script .cgi
+AddHandler fastcgi-script .fcgi
+AddHandler cgi-script .cgi
 Options +FollowSymLinks +ExecCGI 
 RewriteEngine On
 RewriteBase /

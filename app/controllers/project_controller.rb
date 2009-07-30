@@ -131,7 +131,7 @@ class ProjectController < ApplicationController
   def updater
     bookid = params[:id]
     field = params[:field]
-    chapterNum = params[:cell].to_i
+    chapterNum = params[:cell].to_i-3   # chapter is offset by two in the table and then by one because its one based and not zero based.
     value = params[:value]
     book = Book.find(bookid)
     unless session["person"].id == book.project.owner.id or session["person"].username == "admin" then
@@ -142,22 +142,27 @@ class ProjectController < ApplicationController
 
     result = "failed"
     case params[:field]
-    when "editors" 
+    when "editors"
       user = User.find(params[:value])
       book.editor = user
       result = user.username
       book.save
-    when "writers" 
+    when "writers"
       user = User.find(params[:value])
-      chapter = book.chapters[chapterNum-2]
+      chapter = book.chapters[chapterNum]
       chapter.user = user
-      chapter.save
-      result = user.username
+      unless chapter.save
+          errmsg = ""
+          chapter.errors.each_full { |msg| errmsg = errmsg + msg + ": "}
+          result = errmsg
+      else
+          result = user.username
+      end
     end
     render :text => result
     return
-    rescue:
-      render :text => "failed"
+    rescue Exception => exc:
+      render :text => "failed: #{exc.message}"
   end
 
 end
