@@ -78,7 +78,7 @@ Rails::Initializer.run do |config|
   # config.action_mailer.raise_delivery_errors = false
   # This is the default, other options are :sendmail and :test
   # config.action_mailer.delivery_method = :smtp
-  config.action_mailer.delivery_method = :test
+  # config.action_mailer.delivery_method = :test
   config.action_mailer.smtp_settings = {
     :tls => true,
     :address => "smtp.gmail.com",

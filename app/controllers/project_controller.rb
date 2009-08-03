@@ -51,13 +51,6 @@ class ProjectController < ApplicationController
           flash[:notice] = errmsg
           return        
       end
-      if old_status == Project::OPEN and new_status == Project::WRITING then
-        for book in 0..@project.writers.length-1 do
-          b = Book.new(:title => "Book #{book+1}", :published => false, :cur_chapter => 0, :project => @project, :editor => @project.owner)
-          b.save
-        end
-        @project.begin_next_chapter
-      end
       redirect_to :controller => "project", :action => "individualProject", :id => @project.id
     end
   end
