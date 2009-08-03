@@ -20,16 +20,16 @@ class Book < ActiveRecord::Base
 
   # set up the next chapter for this book
   def begin_next_chapter
-    unless self.chapters[cur_chapter-1].new?
+    unless self.cur_chapter > 0 and self.chapters[cur_chapter-1].new?
       self.cur_chapter += 1
       c = Chapter.new(:user => self.editor, :book => self, :due_date => self.project.next_due_date, :title => "Chapter #{self.cur_chapter}", :finished => false, :edited => false, :number => self.cur_chapter, :state => "new")
       if c.save then
         self.save
       else 
         flash[:notice] = "Failed to save new chapter in book #{self}"
-    end
-       else 
-        flash[:notice] = "Failed to save new chapter in book #{self}"
+      end
+    else 
+      flash[:notice] = "Failed to save new chapter in book #{self}"
     end
   end
 
@@ -44,5 +44,19 @@ class Book < ActiveRecord::Base
     end
   end
 
+  # attempt to assign this writer to the current chapter
+  # return false if this writer has already written in this book
+  def assign(writer)
+    current = self.chapters[self.cur_chapter-1]
+    prev_chapters = self.chapters - [current]
+    old_chapters = prev_chapters.select{|c| c.user.id == writer.id}
+    if not old_chapters.empty? then
+      return false
+    else
+      current.user = writer
+      current.save
+      return true
+    end
+  end
 
 end

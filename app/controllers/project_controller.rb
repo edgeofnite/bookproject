@@ -28,6 +28,7 @@ class ProjectController < ApplicationController
   def individualProject
     #display books
     @project = Project.find(params[:id])
+    @next_state = @project.compute_next_state()
     @page_title = @project.name
     if request.post?
       if params[:commit] == "Delete Project" and session["person"].id == 1 then
@@ -52,12 +53,35 @@ class ProjectController < ApplicationController
       end
       if old_status == Project::OPEN and new_status == Project::WRITING then
         for book in 0..@project.writers.length-1 do
-          b = Book.new(:title => "Book #{book+1}", :published => false, :cur_chapter => 0, :project => @project, :editor => session["person"])
+          b = Book.new(:title => "Book #{book+1}", :published => false, :cur_chapter => 0, :project => @project, :editor => @project.owner)
           b.save
         end
         @project.begin_next_chapter
       end
+      redirect_to :controller => "project", :action => "individualProject", :id => @project.id
     end
+  end
+
+  def advanceProject
+    @project = Project.find(params[:id])
+    @next_state = params[:next_state]
+    if (not @next_state.nil? and @next_state == @project.compute_next_state()) 
+      case @next_state
+      when "open"
+        @project.begin_project!
+      when "writing"
+        @project.begin_writing!
+      when "editing"
+        @project.done_writing!
+      when "complete"
+        @project.done_editing!
+      when "publish"
+        @project.publish!
+      end
+    end
+    redirect_to :controller => "project", :action => "individualProject", :id => @project.id
+    rescue Exception => exc
+      render :text => "failed: #{exc.message}"
   end
 
   # setup the next chapter, but don't tell anyone yet!
@@ -121,7 +145,7 @@ class ProjectController < ApplicationController
 		if @project.save
 			flash[:notice] = "Project Created"
                         @page_title = @project.name
-                        render :action => "individualProject"
+                        redirect_to :action => "individualProject", :id => @project.id
 		else
 			flash[:notice] = "Project Creation Failed"
 		end

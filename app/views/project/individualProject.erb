@@ -29,7 +29,7 @@ TableKit.Editable.selectInput('writers', {}, [
 <th id="editors">Editor <% if @project.owner == session["person"] or session["person"].username == "admin" %>
 <br/><i>click to change</i><% end %>
 <% for chapter in 1..@project.books[0].cur_chapter %>
-<% if @project.books[0].cur_chapter == chapter and (@project.owner == session["person"] or session["person"].username == "admin") %>
+<% if (@project.books[0].cur_chapter == chapter and @project.owner == session["person"]) or session["person"].username == "admin" %>
 <th id="writers"><%= chapter %><br/><i>click to change</i></th>
 <% else %>
 <th class="noedit"><%= chapter %></th>
@@ -59,16 +59,18 @@ TableKit.Editable.selectInput('writers', {}, [
 </tbody>
 </table>
 <p>
-<% if (@project.owner == session["person"] or session["person"].username == "admin") and @project.books[0].cur_chapter< @project.chapters %>
+<% if (@project.owner == session["person"] or session["person"].username == "admin") and @project.books[0].cur_chapter<= @project.chapters %>
 <% if @project.books[0].chapters[@project.books[0].cur_chapter-1].state == "new" %>
 <% form_tag :controller => :project, :action =>:startNextChapter, :id => @project.id do %>
 Click here to notify writers of the new chapter
 <%= submit_tag "Send out chapter notices" %>
 <% end %>
 <% else %>
+<% if @project.books[0].cur_chapter< @project.chapters %>
 <% form_tag :controller => :project, :action =>:nextChapter, :id => @project.id do %>
 Click here to start the next chapter:
 <%= submit_tag "Begin next chapter" %>
+<% end %>
 <% end %>
 <% end %>
 <% end %>
@@ -98,10 +100,18 @@ Click here to start the next chapter:
 <%end%>
 </ul>
 
+<% unless @next_state.nil? %>
+<h3>Update Project Status</h3>
+<% form_for :project, @project, :url => { :action => "advanceProject", :id => @project.id } do |form| %>
+<%= hidden_field_tag 'next_state', @next_state %>
+<%= submit_tag "Set Project to #{@next_state}"%>
+<% end %>
+<% end %>
+
+<h3>Project Details</h3>
 <% if @project.owner == session["person"]  or session["person"].username == "admin" %>
 <% form_for :project, @project, :url => { :action => "individualProject" } do |form| %>
-<%= form.label "Status: " %>
-<%= select :project, :status, {"NEW" => 0, "OPEN" => 1, "WRITING" => 2, "EDITING" => 3, "COMPLETE" => 4, "PUBLISHED" => 5} %><br/>
+<%= form.label "Status: " %>  <%= @project.phase %><br/>
 <%= form.label "Start Date" %>
 <%= form.date_select :start_date %><br/>
 <%= form.label "First Due Date" %>
@@ -116,7 +126,10 @@ Click here to start the next chapter:
 <%= if session["person"].username == "admin" then submit_tag "Delete Project" end %>
 <% end %>
 <% else %>
-<p>About this project:<br/>
-   <%= @project.description %>
+<p>Project Owner: <%= @project.owner.username %><br/>
+<% unless @project.description.empty? %>
+   Description: <br/>
+   <blockquote><%= @project.description %></blockquote>
+<% end %>
 </p>
 <% end %>

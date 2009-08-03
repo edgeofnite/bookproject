@@ -63,6 +63,6 @@
 <% unless @myCompletedBooks.empty? %>
  <h3> My Completed Books</h3>
  <% for book in @myCompletedBooks %>
-   <p><%= link_to h(book), :controller => "book", :action =>"read", :id => book %></p>
+   <p><%= link_to h(book.title), :controller => "book", :action =>"read", :id => book %></p>
  <% end %>
 <% end %>
