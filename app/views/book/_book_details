@@ -1,0 +1,18 @@
+<div>
+<h1><%= h(book.title) %></h1>
+<h3>Project: <%= h(book.project.name) %></h3>
+<h4>Completed on: <%= book.project.signing_date %></h4>
+<% unless book.keywords.nil? or book.keywords == "" %>
+<h4>Keywords: <%= h(book.keywords) %></h4>
+<% end %>
+<h4>Edited by: <%= h(book.editor.username) %></h4>
+<h4>Writers:</h4>
+<ul>
+<% for chapter in book.chapters %>
+<li>Chapter <%= h(chapter.number) %>: <%= h(chapter.user.username) %></li>
+<% end %>
+</ul>
+</p>
+</div>
+
+
