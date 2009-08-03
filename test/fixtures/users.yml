@@ -55,11 +55,11 @@ wilma:
    I am a small ferret, hiding in your bed
    and nibbling on your toes
 
-bety:
+betty:
  id: 5
- username: bety
+ username: betty
  email: elliot.jaffe@gmail.com
- hashed_password: <%= User.encrypted_password("bety123" , "HIJKLMNO") %>
+ hashed_password: <%= User.encrypted_password("betty123" , "HIJKLMNO") %>
  age: 30
  salt: "HIJKLMNO"
  aboutMe: >
