@@ -74,5 +74,8 @@ class BookController < ApplicationController
   def read
     @book = Book.find(params[:id])
     @page_title = @book.title
+    if ! @book.published then
+      flash[:notice] = "This book has not been published yet."
+    end
   end
 end

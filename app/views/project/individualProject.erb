@@ -100,11 +100,13 @@ Click here to start the next chapter:
 <%end%>
 </ul>
 
+<% if @project.owner == session["person"]  or session["person"].username == "admin" %>
 <% unless @next_state.nil? %>
 <h3>Update Project Status</h3>
 <% form_for :project, @project, :url => { :action => "advanceProject", :id => @project.id } do |form| %>
 <%= hidden_field_tag 'next_state', @next_state %>
 <%= submit_tag "Set Project to #{@next_state}"%>
+<% end %>
 <% end %>
 <% end %>
 
