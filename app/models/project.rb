@@ -150,7 +150,7 @@ class Project < ActiveRecord::Base
     # test to make sure the every chapter is written or edited
     for book in self.books do
       for chapter in book.chapters do
-        if chapter.new? or chapter.writing? then
+        if chapter.new? or chapter.writing? or chapter.rejected? then
           return false
         end
       end
