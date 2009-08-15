@@ -7,9 +7,13 @@ class ChapterObserver < ActiveRecord::Observer
     #puts "Received transition for #{chapter}"
     Notifier.deliver_chapter_writing_complete(chapter)
   end
-  def after_transition_state_from_editing_to_writing(chapter, transition)
+  def after_transition_state_from_editing_to_rejected(chapter, transition)
     #puts "Received transition for #{chapter}"
     Notifier.deliver_chapter_rewrite(chapter)
+  end
+  def after_transition_state_from_rejected_to_editing(chapter, transition)
+    #puts "Received transition for #{chapter}"
+    Notifier.deliver_chapter_writing_complete(chapter)
   end
   def after_transition_state_from_editing_to_accepted(chapter, transition)
     #puts "Received transition for #{chapter}"

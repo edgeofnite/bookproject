@@ -134,7 +134,7 @@ var widgInsertParagraphs = true;
 ** prompted as to whether they wish to clean the content.
 */
 
-var widgAutoClean = false;
+var widgAutoClean = true;
 
 /******************************************************************************
 **    END CONFIGURATION
@@ -591,7 +591,7 @@ widgEditor.prototype.detectPaste = function(e)
 		theEvent = event;
 	}
 	
-	if (theEvent.ctrlKey && theEvent.keyCode == 86 && this.wysiwyg)
+	if ((theEvent.ctrlKey || theEvent.metaKey) && theEvent.keyCode == 86 && this.wysiwyg)
 	{
 		var self = this;
 		

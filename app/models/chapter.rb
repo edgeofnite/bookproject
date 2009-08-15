@@ -27,14 +27,15 @@ class Chapter < ActiveRecord::Base
   #  Writing: - The "owner" is writing this chapter
   #  Editing: - The "owner" has finished writing and the editor now owns this chapter
   #  Accepted: - The editor accepts this chapter and passes the book on to the next chapter writer
+  #	 Rejected: - The editor rejects this chapter and returns the book to the previous writer.
 
   state_machine :state, :initial => :new do
     event :begin_writing do
-      transition :new => :writing, :editing => :writing
+      transition :new => :writing, :editing => :rejected
     end
 
     event :begin_editing do
-      transition :writing => :editing
+      transition :writing => :editing, :rejected => :editing
     end
 
     # the accepted to accepted link is if someone re-edits a completed chapter

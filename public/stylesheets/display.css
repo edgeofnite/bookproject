@@ -246,3 +246,8 @@ td.chapterEditing {
     background-color: #FFFF00;
     color: #000000;
 }
+
+td.chapterRejected {
+    background-color: #CC0000;
+    color: #000000;
+}
