@@ -50,7 +50,7 @@ class Chapter < ActiveRecord::Base
 
   # Return true if this user can write this chapter
   def user_can_write(user)
-    if self.writing? and (self.user == user or self.book.project.owner == user or user.id == 1) then
+    if (self.writing? or self.rejected?) and (self.user == user or self.book.project.owner == user or user.id == 1) then
       return true
     else
       return false
