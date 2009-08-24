@@ -47,7 +47,10 @@ class Book < ActiveRecord::Base
   # attempt to assign this writer to the current chapter
   # return false if this writer has already written in this book
   def assign(writer)
-    current = self.chapters[self.cur_chapter-1]
+    if ((self.editor == writer) and self.cur_chapter != 1)  then
+		return false
+	end
+	current = self.chapters[self.cur_chapter-1]
     prev_chapters = self.chapters - [current]
     old_chapters = prev_chapters.select{|c| c.user.id == writer.id}
     if not old_chapters.empty? then

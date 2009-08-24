@@ -131,6 +131,7 @@ class Project < ActiveRecord::Base
     end
     # if we get here, it means that we failed to assign all the users
     return false
+    flash[:notice] = "An error has occured in assignment of books."
   end
 
   def start?

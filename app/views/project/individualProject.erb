@@ -50,7 +50,7 @@ TableKit.Editable.selectInput('writers', {}, [
                     when "accepted" then "chapterComplete"
 		    when "rejected" then "chapterRejected"
                    end %>">
-           <%= book.chapters[chapter].user.username %></td>
+           <%= link_to h(book.chapters[chapter].user.username), :controller => "users", :action => "profile", :id =>book.chapters[chapter].user.id %></td>
       <% else %>
          <td></td>
       <% end %>
