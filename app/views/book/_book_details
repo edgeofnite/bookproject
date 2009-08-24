@@ -5,11 +5,11 @@
 <% unless book.keywords.nil? or book.keywords == "" %>
 <h4>Keywords: <%= h(book.keywords) %></h4>
 <% end %>
-<h4>Edited by: <%= h(book.editor.username) %></h4>
+<h4>Edited by: <%= link_to h(book.editor.username), :controller => "users", :action => "profile", :id =>book.editor.id %></h4>
 <h4>Writers:</h4>
 <ul>
 <% for chapter in book.chapters %>
-<li>Chapter <%= h(chapter.number) %>: <%= h(chapter.user.username) %></li>
+<li>Chapter <%= h(chapter.number) %>: <%= link_to h(chapter.user.username), :controller => "users", :action => "profile", :id =>chapter.user.id %></li>
 <% end %>
 </ul>
 </p>

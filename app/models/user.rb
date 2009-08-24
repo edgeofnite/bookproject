@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
   validates_length_of :username, :minimum => 4
   validates_length_of :password, :minimum => 5, :message => "should be at least 5 characters long"
+  validates_format_of :email, :with => /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/i,
+                      :message => "must be a valid address"
 
   attr_accessor :password_confirmation
   validates_confirmation_of :password
@@ -66,7 +68,7 @@ class User < ActiveRecord::Base
       end
     end
   end
-  
+
   private
   def create_new_salt
     self.salt = [Array.new(6){rand(256).chr}.join].pack("m").chomp

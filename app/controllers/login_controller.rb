@@ -1,6 +1,6 @@
 class LoginController < ApplicationController
   layout 'default'
-  before_filter :authorize, :except => [:login, :add_user]
+  before_filter :authorize, :except => [:login, :add_user, :recovery, :resetPassword]
 
   def index
   end
@@ -65,4 +65,34 @@ class LoginController < ApplicationController
     redirect_to(:controller => "main")
   end
 
+  def resetPassword
+    @me = User.find(session[:user_id])
+    if request.post?
+      unless params[:me][:password].nil?
+        unless @me.update_attribute(:password, params[:me][:password])
+          errmsg = ""
+          @me.errors.each_full { |msg| errmsg = errmsg + msg + ": "}
+          flash[:notice] = "Error: #{errmsg}"
+        else
+          session["person"] = @me
+          session[:user_id] = session[:person].id
+          flash[:notice] = "Your password has been changed."
+          redirect_to(:controller => "main", :action => "personalPage")
+        end
+      end
+    end
+  end
+
+  def recovery
+    begin
+      key = Crypto.decrypt(params[:key]).split(/:/)
+      session["person"] = User.find(key[0], :conditions => {:salt => key[1]})
+      session[:user_id] = session[:person].id
+      flash[:notice] = "Please change your password"
+      redirect_to(:action => :resetPassword)
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = "The recovery link given is not valid"
+      redirect_to(root_url)
+    end
+  end
 end

@@ -43,4 +43,12 @@ class Notifier < ActionMailer::Base
     @chapter = chapter
   end
 
+  def recover_password(options)
+    from "bookproject@jaffestrategies.com"
+    recipients options[:email]
+    subject "BookProject Password Recovery"
+    content_type 'text/html'
+ 
+    body :key => options[:key], :domain => options[:domain]
+  end
 end

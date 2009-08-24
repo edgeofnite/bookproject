@@ -41,7 +41,13 @@ TableKit.Editable.selectInput('writers', {}, [
 <% for book in @project.books %>
   <tr class="<%= cycle("odd", "even") %>" id="<%= book.id %>">
    <td><%= link_to h(book.title), :controller => "book", :action =>"editBook", :id => book %></td>
-   <td><%= book.editor.username %></td>
+   <td>
+   <% if (@project.books[0].cur_chapter == chapter and @project.owner == session["person"]) or session["person"].username == "admin" %>
+      <%= h(book.editor.username) %>
+   <% else %>
+      <%= link_to h(book.editor.username), :controller => "users", :action => "profile", :id =>book.editor.id %></td>
+   <% end %>
+   </td>
    <% for chapter in 0..@project.books[0].cur_chapter-1 %>
       <% if ! book.chapters[chapter].nil? %>
         <td class="<%= case book.chapters[chapter].state
@@ -50,7 +56,11 @@ TableKit.Editable.selectInput('writers', {}, [
                     when "accepted" then "chapterComplete"
 		    when "rejected" then "chapterRejected"
                    end %>">
-           <%= link_to h(book.chapters[chapter].user.username), :controller => "users", :action => "profile", :id =>book.chapters[chapter].user.id %></td>
+	   <% if (@project.books[0].cur_chapter == chapter and @project.owner == session["person"]) or session["person"].username == "admin" %>
+	      <%= h(book.chapters[chapter].user.username) %>
+	   <% else %>
+	      <%= link_to h(book.chapters[chapter].user.username), :controller => "users", :action => "profile", :id =>book.chapters[chapter].user.id %></td>
+	   <% end %>
       <% else %>
          <td></td>
       <% end %>
@@ -90,14 +100,14 @@ Click here to start the next chapter:
 <h3>Registered Editors</h3>
 <ul>
 <% for editor in @project.editors %>
-<li><%= h(editor.username) %></li>
+<li><%= link_to h(editor.username), :controller => "users", :action => "profile", :id =>editor.id %></li>
 <%end%>
 </ul>
 
 <h3>Registered Writers</h3>
 <ul>
 <% for writer in @project.writers %>
-<li><%= h(writer.username) %></li>
+<li><%= link_to h(writer.username), :controller => "users", :action => "profile", :id =>writer.id %></li>
 <%end%>
 </ul>
 
@@ -129,10 +139,12 @@ Click here to start the next chapter:
 <%= if session["person"].username == "admin" then submit_tag "Delete Project" end %>
 <% end %>
 <% else %>
-<p>Project Owner: <%= @project.owner.username %><br/>
+<p><b>Project Owner:</b> <%= @project.owner.username %><br/>
 <% unless @project.description.empty? %>
-   Description: <br/>
+   <b>Signing Date:</b> <%= @project.signing_date %><br/>
+   <b>Description:</b> <br/>
    <blockquote><%= @project.description %></blockquote>
+
 <% end %>
 </p>
 <% end %>
