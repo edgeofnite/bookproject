@@ -13,10 +13,10 @@ TableKit.Editable.textInput('date', {}, function(string) {
   return date;
 }, "today");
 TableKit.Editable.selectInput('editors', {}, [
- <% for editor in @project.editors %>['<%= h(editor.username) %>',<%= editor.id %>],<% end %>
+ <% for editor in @project.editors.sort {|a,b| a.username.downcase <=> b.username.downcase} %>['<%= h(editor.username) %>',<%= editor.id %>],<% end %>
                 ]);
 TableKit.Editable.selectInput('writers', {}, [
- <% for writer in @project.writers %>['<%= h(writer.username) %>',<%= writer.id %>],<% end %>
+ <% for writer in @project.writers.sort {|a,b| a.username.downcase <=> b.username.downcase} %>['<%= h(writer.username) %>',<%= writer.id %>],<% end %>
                 ]);
 </script>
 <table class="sortable editable"  border="1">
@@ -42,7 +42,7 @@ TableKit.Editable.selectInput('writers', {}, [
   <tr class="<%= cycle("odd", "even") %>" id="<%= book.id %>">
    <td><%= link_to h(book.title), :controller => "book", :action =>"editBook", :id => book %></td>
    <td>
-   <% if (@project.owner == session["person"] or session["person"].username == "admin" %>
+   <% if @project.owner == session["person"] or session["person"].username == "admin" %>
       <%= h(book.editor.username) %>
    <% else %>
       <%= link_to h(book.editor.username), :controller => "users", :action => "profile", :id =>book.editor.id %></td>
