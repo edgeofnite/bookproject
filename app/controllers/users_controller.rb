@@ -20,10 +20,10 @@ class UsersController < ApplicationController
                               :email => user.email,
                               :domain => request.env['HTTP_HOST'])
       flash[:notice] = "Please check your email for further instructions"
-      redirect_to(root_url)
+      redirect_to(:controller => "main", :action => "personalPage")
     else
       flash[:notice] = "Your account could not be found"
-      redirect_to(controller => "users", :action => "help")
+      redirect_to(:controller => "users", :action => "help")
     end
   end
   

@@ -75,7 +75,7 @@ class LoginController < ApplicationController
           flash[:notice] = "Error: #{errmsg}"
         else
           session["person"] = @me
-          session[:user_id] = session[:person].id
+          session[:user_id] = session["person"].id
           flash[:notice] = "Your password has been changed."
           redirect_to(:controller => "main", :action => "personalPage")
         end
@@ -87,7 +87,7 @@ class LoginController < ApplicationController
     begin
       key = Crypto.decrypt(params[:key]).split(/:/)
       session["person"] = User.find(key[0], :conditions => {:salt => key[1]})
-      session[:user_id] = session[:person].id
+      session[:user_id] = session["person"].id
       flash[:notice] = "Please change your password"
       redirect_to(:action => :resetPassword)
     rescue ActiveRecord::RecordNotFound
