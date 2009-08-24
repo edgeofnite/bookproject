@@ -7,7 +7,7 @@ class BookController < ApplicationController
     @book = Book.find(params[:id])
     @page_title = @book.title
     @project = @book.project
-    if @project.status == Project::COMPLETE or @project.status == Project::PUBLISHED
+    if (@project.status == Project::COMPLETE or @project.status == Project::PUBLISHED) and session["person"].id != 1 and session["person"] != @project.owner
       render :action => :read
     end
     if session["person"].id == 1  or session["person"].id == @book.editor.id
