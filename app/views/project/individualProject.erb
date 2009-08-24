@@ -42,7 +42,7 @@ TableKit.Editable.selectInput('writers', {}, [
   <tr class="<%= cycle("odd", "even") %>" id="<%= book.id %>">
    <td><%= link_to h(book.title), :controller => "book", :action =>"editBook", :id => book %></td>
    <td>
-   <% if (@project.books[0].cur_chapter == chapter and @project.owner == session["person"]) or session["person"].username == "admin" %>
+   <% if (@project.owner == session["person"] or session["person"].username == "admin" %>
       <%= h(book.editor.username) %>
    <% else %>
       <%= link_to h(book.editor.username), :controller => "users", :action => "profile", :id =>book.editor.id %></td>
@@ -56,7 +56,7 @@ TableKit.Editable.selectInput('writers', {}, [
                     when "accepted" then "chapterComplete"
 		    when "rejected" then "chapterRejected"
                    end %>">
-	   <% if (@project.books[0].cur_chapter == chapter and @project.owner == session["person"]) or session["person"].username == "admin" %>
+	   <% if @project.owner == session["person"] or session["person"].username == "admin" %>
 	      <%= h(book.chapters[chapter].user.username) %>
 	   <% else %>
 	      <%= link_to h(book.chapters[chapter].user.username), :controller => "users", :action => "profile", :id =>book.chapters[chapter].user.id %></td>
