@@ -5,7 +5,11 @@ class BookController < ApplicationController
 
   def editBook
     @book = Book.find(params[:id])
+    @page_title = @book.title
     @project = @book.project
+    if @project.status == Project::COMPLETE or @project.status == Project::PUBLISHED
+      render :action => :read
+    end
     if session["person"].id == 1  or session["person"].id == @book.editor.id
       @lastChapterThisBook = @book.cur_chapter
       @lastVisibleChapter = @book.cur_chapter
