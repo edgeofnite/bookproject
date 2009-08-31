@@ -78,9 +78,11 @@ class BookController < ApplicationController
   def read
     @book = Book.find(params[:id])
     @page_title = @book.title
-    if ! @book.published then
+    unless @book.published or session["person"].id == 1 or session["person"] == @book.project.owner or session["person"] == @book.editor then
       @book = nil
       flash[:notice] = "This book has not been published yet."
     end
+    @title = @book.title
+    render :layout => "print"
   end
 end

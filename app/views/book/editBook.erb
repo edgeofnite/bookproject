@@ -1,5 +1,7 @@
 <% unless @book.nil? %>
-
+<% if @book.published or session["person"].id == 1 or session["person"] == @project.owner or session["person"] == @book.editor %>
+<p align="right"><%= link_to "Printable Version", :controller => "book", :action =>"read", :id => @book.id %></p>
+<% end %>
 <% for chapter in @book.chapters %>
  <% if chapter.user_can_edit(session["person"]) or (chapter.number <= @lastChapterThisBook and chapter.number <= @lastVisibleChapter) %>
   <div class="chapter<%= chapter.number %>">
