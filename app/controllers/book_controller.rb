@@ -9,6 +9,7 @@ class BookController < ApplicationController
     @project = @book.project
     if (@project.status == Project::COMPLETE or @project.status == Project::PUBLISHED) and session["person"].id != 1 and session["person"] != @project.owner
       render :action => :read
+      return
     end
     if session["person"].id == 1  or session["person"].id == @book.editor.id
       @lastChapterThisBook = @book.cur_chapter
