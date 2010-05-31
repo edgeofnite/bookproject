@@ -65,7 +65,7 @@ class BookController < ApplicationController
           @chapter.edited = true
           @chapter.done_editing
         end
-	@chapter.contents=Sanitize.clean(@chapter.contents, Sanitize::Config::BASIC) 
+	@chapter.clean_up_contents
         unless @chapter.save
           render :action => :read
         end

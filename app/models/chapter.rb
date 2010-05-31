@@ -66,5 +66,58 @@ class Chapter < ActiveRecord::Base
     end
   end
 
+  # Taken from http://gist.github.com/139987
+  # This function takes messy Word HTML pasted into a WYSIWYG and cleans it up
+  # It leaves the tags and attributes specified in the params
+  # Copyright (c) 2009, Radio New Zealand
+  # Released under the MIT license
+
+  def clean_up_contents()
+    # very minimal
+    # elements = ['p', 'b', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'], attributes={})
+
+    if self.contents?
+      html = self.contents
+      email_regex = /<p>Email:\s+((\w|\-|\_|\.)+\@((\w|\-|\_)+\.)+[a-zA-Z]{2,})/i
+
+      html.gsub! /\[endif\]--/  , ''
+      html.gsub! /[\n|\r]/    , ' '
+      html.gsub! /&nbsp;/     , ' '
+
+      # this will convert UNICODE into ASCII.  
+      #It will also strip any possiblity of using a foreign language!
+      #converter = Iconv.new('ASCII//IGNORE//TRANSLIT', 'UTF-8') 
+      #html = converter.iconv(html).unpack('U*').select{ |cp| cp < 127 }.pack('U*')
+      # keep only the things we want.
+      html = Sanitize.clean( html, Sanitize::Config::RELAXED)
+
+      # butt up any tags
+      html.gsub! />\s+</                  , '><'
+
+      #remove email address lines
+      html.gsub! email_regex              , '<p>'
+
+      # post sanitize cleanup of empty blocks
+      # the order of removal is import - this is the way word stacks these elements
+      html.gsub! /<i><\/i>/               , ''
+      html.gsub! /<b><\/b>/               , ''
+      html.gsub! /<\/b><b>/               , ''
+      html.gsub! /<p><\/p>/               , ''
+      html.gsub! /<p><b><\/b><\/p>/       , ''
+
+      # misc - fix butted times
+      html.gsub! /(\d)am /          , '\1 am '
+      html.gsub! /(\d)pm /          , '\1 pm '
+      # misc - remove multiple space that may cause doc specific regexs to fail (in dates for example)
+      html.gsub! /\s+/                  , ' '
+
+      # add new lines at the end of lines
+      html.gsub! /<\/(p|h\d|dt|dd|dl)>/, '</\1>' + "\n"
+      html.gsub! /<dl>/             , '<dl>' + "\n"
+
+      self.contents = html
+    end
+  end
+
 
 end
