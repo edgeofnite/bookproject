@@ -7,6 +7,8 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 # if the second argument is unspecified or is not "true", then this 
 # operation makes no changes to the database.
 
+# this project has never been run.  Use at your own risk
+
 p = Project.find_by_name(ARGV[0])
 print "Project: ", p.name, ", id: ", p.id, "\n"
 b = Book.find(:all, :conditions => { :project_id => p.id })
