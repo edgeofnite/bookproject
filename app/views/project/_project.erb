@@ -3,6 +3,8 @@
   <td><%= project.signing_date %></td>
   <td><%= project.days_per_chapter %></td>
   <td><%= project.chapters %></td>
+  <td><%= project.writers.length() %></td>
+  <td><%= project.editors.length() %></td>
   <td>
 	<%if project.status == Project::NEW %> NEW <% end %>
 	<%if project.status == Project::OPEN %> OPEN <% end  %>
