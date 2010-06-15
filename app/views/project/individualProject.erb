@@ -1,6 +1,6 @@
 <% unless @project.books.empty? %>
 <h3>Progress</h3>
-<% if @project.owner == session["person"] or session["person"].username == "admin" %>
+<% if @project.owner == @currentUser or @currentUser.username == "admin" %>
 <script>
 TableKit.options.editAjaxURI = '<%= url_for :controller => "project", :action => "updater"%>';
 TableKit.Editable.textInput('date', {}, function(string) {
@@ -26,10 +26,10 @@ TableKit.Editable.selectInput('writers', {}, [
 <thead>
 <tr>
 <th class="noedit">Book</th>
-<th id="editors">Editor <% if @project.owner == session["person"] or session["person"].username == "admin" %>
+<th id="editors">Editor <% if @project.owner == @currentUser or @currentUser.username == "admin" %>
 <br/><i>click to change</i><% end %>
 <% for chapter in 1..@project.books[0].cur_chapter %>
-<% if (@project.books[0].cur_chapter == chapter and @project.owner == session["person"]) or session["person"].username == "admin" %>
+<% if (@project.books[0].cur_chapter == chapter and @project.owner == @currentUser) or @currentUser.username == "admin" %>
 <th id="writers"><%= chapter %><br/><i>click to change</i></th>
 <% else %>
 <th class="noedit"><%= chapter %></th>
@@ -42,7 +42,7 @@ TableKit.Editable.selectInput('writers', {}, [
   <tr class="<%= cycle("odd", "even") %>" id="<%= book.id %>">
    <td><%= link_to h(book.title), :controller => "book", :action =>"editBook", :id => book %></td>
    <td>
-   <% if @project.owner == session["person"] or session["person"].username == "admin" %>
+   <% if @project.owner == @currentUser or @currentUser.username == "admin" %>
       <%= h(book.editor.username) %>
    <% else %>
       <%= link_to h(book.editor.username), :controller => "users", :action => "profile", :id =>book.editor.id %></td>
@@ -56,7 +56,7 @@ TableKit.Editable.selectInput('writers', {}, [
                     when "accepted" then "chapterComplete"
 		    when "rejected" then "chapterRejected"
                    end %>">
-	   <% if @project.owner == session["person"] or session["person"].username == "admin" %>
+	   <% if @project.owner == @currentUser or @currentUser.username == "admin" %>
 	      <%= h(book.chapters[chapter].user.username) %>
 	   <% else %>
 	      <%= link_to h(book.chapters[chapter].user.username), :controller => "users", :action => "profile", :id =>book.chapters[chapter].user.id %></td>
@@ -70,7 +70,7 @@ TableKit.Editable.selectInput('writers', {}, [
 </tbody>
 </table>
 <p>
-<% if (@project.owner == session["person"] or session["person"].username == "admin") and @project.books[0].cur_chapter<= @project.chapters %>
+<% if (@project.owner == @currentUser or @currentUser.username == "admin") and @project.books[0].cur_chapter<= @project.chapters %>
 <% if @project.books[0].chapters[@project.books[0].cur_chapter-1].state == "new" %>
 <% form_tag :controller => :project, :action =>:startNextChapter, :id => @project.id do %>
 Click here to notify writers of the new chapter
@@ -111,7 +111,7 @@ Click here to start the next chapter:
 <%end%>
 </ul>
 
-<% if @project.owner == session["person"]  or session["person"].username == "admin" %>
+<% if @project.owner == @currentUser  or @currentUser.username == "admin" %>
 <% unless @next_state.nil? %>
 <h3>Update Project Status</h3>
 <% form_for :project, @project, :url => { :action => "advanceProject", :id => @project.id } do |form| %>
@@ -122,7 +122,7 @@ Click here to start the next chapter:
 <% end %>
 
 <h3>Project Details</h3>
-<% if @project.owner == session["person"]  or session["person"].username == "admin" %>
+<% if @project.owner == @currentUser  or @currentUser.username == "admin" %>
 <% form_for :project, @project, :url => { :action => "individualProject" } do |form| %>
 <%= form.label "Status: " %>  <%= @project.phase %><br/>
 <%= form.label "Start Date" %>
@@ -136,7 +136,7 @@ Click here to start the next chapter:
 <%= form.label "Description" %>
 <%= form.text_area :description, :class=>"widgEditor" %><br/>
 <%= submit_tag "Update Project" %>
-<%= if session["person"].username == "admin" then submit_tag "Delete Project" end %>
+<%= if @currentUser.username == "admin" then submit_tag "Delete Project" end %>
 <% end %>
 <% else %>
 <p><b>Project Owner:</b> <%= @project.owner.username %><br/>

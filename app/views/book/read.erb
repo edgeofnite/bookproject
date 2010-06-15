@@ -1,4 +1,4 @@
 <%unless @book.nil? or @book.chapters.empty? %>
- <%= render(:partial => "book_details", :locals => { :book => @book }) %>
- <%= render(:partial => "chapter", :collection => @book.chapters) %>
+ <%= render 'book/book', :book => @book %>
+ <%= render :partial => 'book/chapter', :collection => @book.chapters %>
 <% end %>

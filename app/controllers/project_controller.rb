@@ -9,7 +9,7 @@ class ProjectController < ApplicationController
   def projectPage
     @page_title = "Personal Project Page"
     #display projects
-    user = session["person"]
+    user = @currentUser
     @projects = user.projects + user.edited_books.map{|b| b.project }
     @projects = @projects.uniq
 
@@ -31,7 +31,7 @@ class ProjectController < ApplicationController
     @next_state = @project.compute_next_state()
     @page_title = @project.name
     if request.post?
-      if params[:commit] == "Delete Project" and session["person"].id == 1 then
+      if params[:commit] == "Delete Project" and @currentUser.id == 1 then
         flash[:notice] = "Project #{@project.name} was deleted"
         @project.delete
         redirect_to :controller => "project", :action => "projectPage"
@@ -80,7 +80,7 @@ class ProjectController < ApplicationController
   # setup the next chapter, but don't tell anyone yet!
   def nextChapter
     @project = Project.find(params[:id])
-    if session["person"].id == 1 or session["person"]==@project.owner
+    if @currentUser.id == 1 or @currentUser==@project.owner
       @project.begin_next_chapter
       @page_title = @project.name
     else
@@ -93,7 +93,7 @@ class ProjectController < ApplicationController
   # finish setting up the most recent chapter and tell everyone!
   def startNextChapter
     @project = Project.find(params[:id])
-    if (session["person"].id == 1 or session["person"]==@project.owner) and (@project.start?)
+    if (@currentUser.id == 1 or @currentUser==@project.owner) and (@project.start?)
     @project.start_next_chapter
     @page_title = @project.name
   else
@@ -111,18 +111,18 @@ class ProjectController < ApplicationController
     if request.post?
       flash[:notice]=""
       if params[:signUp][:writer]=="1"
-        if @project.writers.index(session["person"]) then
+        if @project.writers.index(@currentUser) then
           flash[:notice]+= "Already signed up to be a writer!<br/>"
         else
-          @project.writers.push(session["person"])
+          @project.writers.push(@currentUser)
           flash[:notice]+= "Successfully signed up to be a writer!<br/>"
         end
       end
       if params[:signUp][:editor]=="1"
-        if @project.editors.index(session["person"]) then
+        if @project.editors.index(@currentUser) then
           flash[:notice]+= "Already signed up to be a editor!<br/>"
         else
-          @project.editors.push(session["person"])
+          @project.editors.push(@currentUser)
           flash[:notice]+= "Successfully signed up to be an editor!"
         end
       end
@@ -151,7 +151,7 @@ class ProjectController < ApplicationController
     chapterNum = params[:cell].to_i-3   # chapter is offset by two in the table and then by one because its one based and not zero based.
     value = params[:value]
     book = Book.find(bookid)
-    unless session["person"].id == book.project.owner.id or session["person"].username == "admin" then
+    unless @currentUser.id == book.project.owner.id or @currentUser.username == "admin" then
       result = "permission denied"
       render :text => result
       return

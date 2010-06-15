@@ -12,7 +12,7 @@
 <%= link_to "Reset Password", :controller => "login", :action =>"resetPassword" %>
 </p>
 
-<% if session["person"].username=="admin" %>
+<% if @me.username=="admin" %>
         <%= link_to h("Create new project"), :controller => "project", :action =>"createProject" %>
 <% end %>
 

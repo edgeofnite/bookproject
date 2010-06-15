@@ -62,7 +62,7 @@
   <%= render(:partial => "project", :collection => @completeProjects) %>
 </table>
 <%end%>
-<% if session["person"].id == 1 %>
+<% if @currentUser.id == 1 %>
 <h2>All Projects</h2>
 <table class="sortable" border=1>
   <tr>

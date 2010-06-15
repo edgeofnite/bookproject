@@ -7,15 +7,15 @@ class BookController < ApplicationController
     @book = Book.find(params[:id])
     @page_title = @book.title
     @project = @book.project
-    if (@project.status == Project::COMPLETE or @project.status == Project::PUBLISHED) and session["person"].id != 1 and session["person"] != @project.owner
+    if (@project.status == Project::COMPLETE or @project.status == Project::PUBLISHED) and @currentUser.id != 1 and @currentUser.id != @project.owner.id
       render :action => :read
       return
     end
-    if session["person"].id == 1  or session["person"].id == @book.editor.id
+    if @currentUser.id == 1  or @currentUser.id == @book.editor.id
       @lastChapterThisBook = @book.cur_chapter
       @lastVisibleChapter = @book.cur_chapter
     else
-      @lastChapterThisBook = session["person"].chapters.select{|c| c.book == @book}.max{|a,b| a.number <=> b.number}
+      @lastChapterThisBook = @currentUser.chapters.select{|c| c.book == @book}.max{|a,b| a.number <=> b.number}
       # The admin can see all!
       if @lastChapterThisBook.nil?
         flash[:notice] = "You cannot see this book yet!"
@@ -26,7 +26,7 @@ class BookController < ApplicationController
         @lastChapterThisBook = @lastChapterThisBook.number
       end
       # the lowest chapter yet to be written by this user in this project
-      @lastVisibleChapter = session["person"].chapters.select{|c| c.writing? and c.book.project == @project}.min{|a,b| a.number <=> b.number}
+      @lastVisibleChapter = @currentUser.chapters.select{|c| c.writing? and c.book.project == @project}.min{|a,b| a.number <=> b.number}
       if @lastVisibleChapter.nil?
         @lastVisibleChapter = @book.cur_chapter
       else
@@ -80,7 +80,7 @@ class BookController < ApplicationController
   def read
     @book = Book.find(params[:id])
     @page_title = @book.title
-    unless @book.published or session["person"].id == 1 or session["person"] == @book.project.owner or session["person"] == @book.editor then
+    unless @book.published or @currentUser.id == 1 or @currentUser.id == @book.project.owner.id or @currentUser.id == @book.editor.id then
       @book = nil
       flash[:notice] = "This book has not been published yet."
     end

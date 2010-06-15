@@ -1,6 +1,6 @@
 class MainController < ApplicationController
   layout 'default'
-  before_filter :authorize, :except => :index
+  before_filter :authorize, :only => :personalPage
 
   def index
   end
@@ -10,7 +10,7 @@ class MainController < ApplicationController
     # calculate any tasks that this person needs to do.
     # All book chapters assigned but not done
     # All books for which we are an editor and there are completed chapters
-    @me = session["person"]
+    @me = @currentUser
     @chaptersToWrite = @me.chapters.select {|c| c.user == @me and (c.writing? or c.rejected?)}
     @chaptersToEdit = @me.edited_books.collect{|b| b.chapters.select{|c| c.editing?}}.flatten
     @myProjects = @me.owned_projects
@@ -19,7 +19,7 @@ class MainController < ApplicationController
     @currentProjects = @me.projects.select {|p| p.status == Project::NEW or p.status == Project::OPEN or p.status == Project::WRITING or p.status == Project::EDITING }
     if request.post?
       if ! params[:user].nil? then
-        @me = User.find(session["person"].id)
+        @me = @currentUser
         unless @me.update_attribute(:aboutMe, params[:user][:aboutMe])
           errmsg = ""
           @me.errors.each_full { |msg| errmsg = errmsg + msg + ": "}

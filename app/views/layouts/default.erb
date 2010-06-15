@@ -13,13 +13,13 @@
 	<body id="home">
 		<div id="banner">
 			<%= @page_title || "Book Project" %>
-		  <% unless session["person"].nil? %>
-		  <p>User: <%= session["person"].username %></p>
+		  <% unless @currentUser.nil? %>
+		  <p>User: <%= @currentUser.username %></p>
 		  <% end %>
 		</div>
 		 <div id="columns"> 
 			<div id="side"> 
-				<% if session["person"] -%> 
+				<% if @currentUser -%> 
 				<%= link_to "Home", :controller => "main", :action => "personalPage" %><br />
 				<% else -%> 
 				<%= link_to "Home", :controller =>"main" %><br /> 
@@ -28,9 +28,9 @@
 				<%= link_to "About Us", :controller =>"main", :action => "about" %><br /> 
 				<%= link_to "Contact", :controller =>"main", :action => "contact" %><br /> 
 				<%= link_to "Browse Books", :controller =>"Book"%><br /> 
-				<% if session["person"] -%> 
+				<% if @currentUser -%> 
 				<%= link_to "Browse Projects", :controller =>"Project", :action => "projectPage" %><br /> 
-				<% if session["person"].id == 1 -%> 
+				<% if @currentUser.id == 1 -%> 
 				<%= link_to "List Users", :controller =>"login", :action => "list_users" %><br /> 
 			        <% end -%>
 				<%= link_to "Logout", :controller =>"login", :action => "logout" %><br /> 

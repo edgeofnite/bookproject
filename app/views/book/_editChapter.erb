@@ -12,7 +12,7 @@
 <% if not chapter.finished %>
 <%= submit_tag "Save Chapter, but continue writing" %>
 <%= submit_tag "Save Chapter and send to the editor", :confirm => "Are you finished writing?  You will not be able to make any more changes." %>
-<% if chapter.user_can_write(session["person"]) and chapter.comment %>
+<% if chapter.user_can_write(@currentUser) and chapter.comment %>
 <br/><h3>Editor's Comment</h3>
 <p><%= chapter.comment %></p>
 <% end %>

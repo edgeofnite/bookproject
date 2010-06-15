@@ -11,8 +11,8 @@ class LoginController < ApplicationController
   def login
     session[:user_id] = nil
     if request.post?
-      if session["person"] = User.authenticate(params[:name], params[:password])
-        session[:user_id] = session["person"].id
+      if @currentUser = User.authenticate(params[:name], params[:password])
+        session[:user_id] = @currentUser.id
         uri = session[:original_uri]
         session[:original_uri] = nil
         redirect_to(uri || { :controller => "main", :action => "personalPage" })
@@ -26,8 +26,8 @@ class LoginController < ApplicationController
     @user = User.new(params[:user])
     if request.post? and @user.save
       flash.now[:notice] = "User #{@user.username} created"
-      session["person"] = @user
-      session[:user_id] = session["person"].id
+      @currentUser = @user
+      session[:user_id] = @currentUser.id
       @user = User.new
       if defined? uri
         redirect_to(uri || { :controller => "main", :action => "personalPage" })
@@ -39,7 +39,7 @@ class LoginController < ApplicationController
 
   def delete_user
     if request.post?
-      if session["person"].id == 1
+      if @currentUser.id == 1
         user = User.find(params[:id])
         begin
           user.safe_delete
@@ -59,7 +59,7 @@ class LoginController < ApplicationController
   end
 
   def logout
-    session["person"] = nil
+    @currentUser = nil
     session[:user_id] = nil
     flash[:notice] = "Logged out"
     redirect_to(:controller => "main")
@@ -74,8 +74,8 @@ class LoginController < ApplicationController
           @me.errors.each_full { |msg| errmsg = errmsg + msg + ": "}
           flash[:notice] = "Error: #{errmsg}"
         else
-          session["person"] = @me
-          session[:user_id] = session["person"].id
+          @currentUser = @me
+          session[:user_id] = @currentUser.id
           flash[:notice] = "Your password has been changed."
           redirect_to(:controller => "main", :action => "personalPage")
         end
@@ -86,8 +86,8 @@ class LoginController < ApplicationController
   def recovery
     begin
       key = Crypto.decrypt(params[:key]).split(/:/)
-      session["person"] = User.find(key[0], :conditions => {:salt => key[1]})
-      session[:user_id] = session["person"].id
+      @currentUser = User.find(key[0], :conditions => {:salt => key[1]})
+      session[:user_id] = @currentUser.id
       flash[:notice] = "Please change your password"
       redirect_to(:action => :resetPassword)
     rescue ActiveRecord::RecordNotFound

@@ -1,7 +1,7 @@
 <ul>
   <% for user in @all_users %>
      <li>
-     <% if session["person"].id == 1 %>
+     <% if @currentUser.id == 1 %>
        <%= link_to "[X]", { # link_to options
                              :controller => 'login', 
                              :action => 'delete_user',
