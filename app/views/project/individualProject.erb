@@ -99,14 +99,14 @@ Click here to start the next chapter:
 
 <h3>Registered Editors</h3>
 <ul>
-<% for editor in @project.editors %>
+<% for editor in @project.editors.sort {|a,b| a.username.downcase <=> b.username.downcase} %>
 <li><%= link_to h(editor.username), :controller => "users", :action => "profile", :id =>editor.id %></li>
 <%end%>
 </ul>
 
 <h3>Registered Writers</h3>
 <ul>
-<% for writer in @project.writers %>
+<% for writer in @project.writers.sort {|a,b| a.username.downcase <=> b.username.downcase} %>
 <li><%= link_to h(writer.username), :controller => "users", :action => "profile", :id =>writer.id %></li>
 <%end%>
 </ul>
