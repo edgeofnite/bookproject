@@ -1,6 +1,6 @@
 require 'active_record'
 #require 'ruby-debug'
-Debugger.start
+#Debugger.start
 
 #require File.join(File.dirname(__FILE__), '../task_util')
 #include TaskUtil
