@@ -211,7 +211,7 @@ function widgEditor(replacedTextareaID)
 	this.theContainer = document.createElement("div");
 	this.theIframe = document.createElement("iframe");
 	this.theInput = document.createElement("input");
-	this.theExtraInput = document.createElement("input");
+	//this.theExtraInput = document.createElement("input");
 	this.IE = false;
 	this.locked = true;
 	this.pasteCache = "";
@@ -255,7 +255,7 @@ function widgEditor(replacedTextareaID)
 	this.theContainer.appendChild(this.theToolbar.theList);
 	this.theContainer.appendChild(this.theIframe);
 	this.theContainer.appendChild(this.theInput);
-	this.theContainer.appendChild(this.theExtraInput);
+	//this.theContainer.appendChild(this.theExtraInput);
 	this.theContainer.style.visibility = "hidden";
 
 	this.theInput.widgEditorObject = this;

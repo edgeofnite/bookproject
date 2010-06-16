@@ -45,7 +45,7 @@ TableKit.Editable.selectInput('writers', {}, [
    <% if @project.owner == @currentUser or @currentUser.username == "admin" %>
       <%= h(book.editor.username) %>
    <% else %>
-      <%= link_to h(book.editor.username), :controller => "users", :action => "profile", :id =>book.editor.id %></td>
+      <%= link_to h(book.editor.username), :controller => "users", :action => "profile", :id =>book.editor.id %>
    <% end %>
    </td>
    <% for chapter in 0..@project.books[0].cur_chapter-1 %>
