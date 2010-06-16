@@ -15,6 +15,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  cachable_model	# caches only ID lookups
   has_many :groups
   has_many :ubers
   has_many :projects, :through => :groups, :uniq => true

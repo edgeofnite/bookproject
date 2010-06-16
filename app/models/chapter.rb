@@ -17,6 +17,7 @@
 #
 
 class Chapter < ActiveRecord::Base
+  cachable_model
   validates_numericality_of :author_id, :number, :book_id, :only_integer => true
   validates_presence_of :due_date
   belongs_to :user, :foreign_key => :author_id

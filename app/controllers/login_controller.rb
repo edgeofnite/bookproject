@@ -62,6 +62,7 @@ class LoginController < ApplicationController
   def logout
     @currentUser = nil
     session[:user_id] = nil
+    session[:url] = nil
     flash[:notice] = "Logged out"
     redirect_to(:controller => "main")
   end
