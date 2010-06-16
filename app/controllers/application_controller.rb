@@ -36,6 +36,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def adminonly
+    unless @currentUser && @currentUser.id == 1
+      session[:original_uri] = request.request_uri 
+      flash[:notice] = "Please log in"
+      redirect_to(:controller => "login", :action => "login")
+      return false;
+    end
+  end
+
   module SavageBeast::AuthenticationSystem
     protected
     def update_last_seen_at
@@ -53,7 +62,7 @@ class ApplicationController < ActionController::Base
     
   def authorized?() 
 	true 
-	# in your code, redirect to an appropriate page if not an admin
+        redirect_to(:controller => "login", :action => "login")
   end
 
   def current_user

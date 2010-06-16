@@ -1,6 +1,7 @@
 class LoginController < ApplicationController
   layout 'default'
   before_filter :authorize, :except => [:login, :add_user, :recovery, :resetPassword]
+  before_filter :adminonly, :only => [:list_users]
 
   def index
   end
