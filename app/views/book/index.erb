@@ -1,7 +1,6 @@
 <h1>Book Listing</h1>
 <% for book in @books%>
 	<div class ="entry">
-		<h3><%= link_to h(book.title), :controller => "book", :action =>"read", :id => book %></h3>
-		<%= book.keywords %>
+		<h2><%= link_to h(book.title), :controller => "book", :action =>"read", :id => book %></h2>
 	</div>
 <%end%>

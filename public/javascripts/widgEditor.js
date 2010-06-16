@@ -244,10 +244,10 @@ function widgEditor(replacedTextareaID)
 	this.theToolbar = new widgToolbar(this);
 	
 	/* An extra input to determine if the submitted data is from the normal textarea or from the widgEditor */
-	this.theExtraInput.type = "hidden";	
-	this.theExtraInput.id = this.theTextarea.id + "WidgEditor";
-	this.theExtraInput.name = this.theTextarea.name + "WidgEditor";
-	this.theExtraInput.value = "true";
+	//this.theExtraInput.type = "hidden";	
+	//this.theExtraInput.id = this.theTextarea.id + "WidgEditor";
+	//this.theExtraInput.name = this.theTextarea.name + "WidgEditor";
+	//this.theExtraInput.value = "true";
 	
 	this.theTextarea.id += "WidgTextarea";
 	this.theTextarea.name += "WidgTextarea";

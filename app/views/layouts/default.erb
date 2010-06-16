@@ -1,48 +1,30 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Book Project Online Website</title>
-<%= stylesheet_link_tag "display", :media => "all" %> 
-<%= javascript_include_tag :defaults, "fastinit" %>
-<%= javascript_include_tag :defaults, "tablekit" %>
-<%= javascript_include_tag :defaults, "date-en-US" %>
-<%= stylesheet_link_tag 'widgEditor', :media => "all"%>
-<%= javascript_include_tag :defaults, "widgEditor" %>
-</head>
-	<body id="home">
-		<div id="banner">
-			<%= @page_title || "Book Project" %>
-		  <% unless @currentUser.nil? %>
-		  <p>User: <%= @currentUser.username %></p>
-		  <% end %>
-		</div>
-		 <div id="columns"> 
-			<div id="side"> 
-				<% if @currentUser -%> 
-				<%= link_to "Home", :controller => "main", :action => "personalPage" %><br />
-				<% else -%> 
-				<%= link_to "Home", :controller =>"main" %><br /> 
-				<% end -%> 
-				<%= link_to "Rules", :controller =>"main", :action => "rules" %><br /> 
-				<%= link_to "About Us", :controller =>"main", :action => "about" %><br /> 
-				<%= link_to "Contact", :controller =>"main", :action => "contact" %><br /> 
-				<%= link_to "Browse Books", :controller =>"Book"%><br /> 
-				<% if @currentUser -%> 
-				<%= link_to "Browse Projects", :controller =>"Project", :action => "projectPage" %><br /> 
-				<% if @currentUser.id == 1 -%> 
-				<%= link_to "List Users", :controller =>"login", :action => "list_users" %><br /> 
-			        <% end -%>
-				<%= link_to "Logout", :controller =>"login", :action => "logout" %><br /> 
-				<% end -%> 
+<%= render :partial => "layouts/head" %>
 
-			</div>
-				<div id="main">
-					<% if flash[:notice] -%> 
-					<div id="notice"><%= flash[:notice] %></div> 
-					<% end -%> 
-					<%= yield :layout %> 
-				</div> 
-		</div> 
-	</body>
+
+<div id="container">
+
+<div id="content">
+  
+<%= content_tag 'p', h(flash[:notice]), :class => 'notice' if flash[:notice] %>
+<%= content_tag 'p', h(flash[:error]), :class => 'notice error' if flash[:error] %>
+  
+<%= yield %>
+</div>
+
+<div id="right">
+  <%= yield :right %>
+</div>
+
+<br style="clear:both;" />
+
+</div>
+
+<div id="footer">
+<p class="disclaim">
+<strong>
+  </strong>
+</p>
+<br style="clear:both;" />
+</div>
+</body>
 </html>

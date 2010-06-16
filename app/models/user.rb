@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :password_confirmation
   validates_confirmation_of :password
+  include SavageBeast::UserInit
 
   # Passwords must be at least 6 characters long
 
@@ -67,6 +68,21 @@ class User < ActiveRecord::Base
         raise "Cant delete last user"
       end
     end
+  end
+
+  # For SavageBeast  
+  def display_name
+     username
+  end
+
+  # For SavageBeast  
+  def admin?
+     id == 1
+  end
+	 
+  # For SavageBeast  
+  def currently_online
+     false
   end
 
   private

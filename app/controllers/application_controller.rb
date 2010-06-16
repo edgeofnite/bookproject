@@ -6,6 +6,8 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
+
+
   before_filter :log_session_id
 
   # avoid writing certain fields into the log
@@ -14,8 +16,6 @@ class ApplicationController < ActionController::Base
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => 'a09942e565fcaea0c33f8bba97e1903b'
-  
-  private
 
   def authorize
     unless @currentUser 
@@ -30,10 +30,43 @@ class ApplicationController < ActionController::Base
     # This is needed because of lazy sessions in the new rails.  non-authorized
     # pages loose the session cookie!
     session[:session_id]
-    logger.info "Session ID: " + request.session_options[:id]
+    #logger.info "Session ID: " + request.session_options[:id]
     unless session[:user_id].nil?
        @currentUser = User.find_by_id(session[:user_id])
     end
   end
 
+  module SavageBeast::AuthenticationSystem
+    protected
+    def update_last_seen_at
+      #return unless logged_in?
+      #User.update_all ['last_seen_at = ?', Time.now.utc], ['id = ?', current_user.id] 
+      #current_user.last_seen_at = Time.now.utc
+    end
+    
+  def login_required
+     unless @currentUser
+        redirect_to(:controller => "login", :action => "login")
+	return false
+     end
+  end
+    
+  def authorized?() 
+	true 
+	# in your code, redirect to an appropriate page if not an admin
+  end
+
+  def current_user
+      #logger.info "Returning Current User #{@currentUser}"
+      @currentUser
+  end
+    
+  def logged_in?
+     current_user ? true : false #current_user != 0
+  end
+    
+  def admin?
+     logged_in? && current_user.admin?
+  end
+ end
 end
