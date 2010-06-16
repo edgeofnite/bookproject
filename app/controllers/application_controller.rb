@@ -38,9 +38,8 @@ class ApplicationController < ActionController::Base
 
   def adminonly
     unless @currentUser && @currentUser.id == 1
-      session[:original_uri] = request.request_uri 
-      flash[:notice] = "Please log in"
-      redirect_to(:controller => "login", :action => "login")
+      flash[:notice] = "That page was for admin access only"
+      redirect_to(:controller => "main")
       return false;
     end
   end
