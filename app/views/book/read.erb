@@ -1,4 +1,8 @@
 <%unless @book.nil? or @book.chapters.empty? %>
- <%= render 'book/book', :book => @book %>
- <%= render :partial => 'book/chapter', :collection => @book.chapters %>
+<% content_for :right do -%>
+<%= link_to "Print Version", :action => :print, :id => @book.id %>
+<% end # right content -%>
+
+<%= render 'book/book', :book => @book %>
+<%= render :partial => 'book/chapter', :collection => @book.chapters %>
 <% end %>

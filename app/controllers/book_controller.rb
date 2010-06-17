@@ -1,7 +1,7 @@
 
 class BookController < ApplicationController
   layout "default"
-  before_filter :authorize, :except => [:index, :read]
+  before_filter :authorize, :except => [:index, :read, :print]
 
   def editBook
     @book = Book.find(params[:id])
@@ -78,6 +78,16 @@ class BookController < ApplicationController
   end
 
   def read
+    @book = Book.find(params[:id])
+    @page_title = @book.title
+    unless @book.published or @currentUser.id == 1 or @currentUser.id == @book.project.owner.id or @currentUser.id == @book.editor.id then
+      @book = nil
+      flash[:notice] = "This book has not been published yet."
+    end
+    @title = @book.title
+  end
+
+  def print
     @book = Book.find(params[:id])
     @page_title = @book.title
     unless @book.published or @currentUser.id == 1 or @currentUser.id == @book.project.owner.id or @currentUser.id == @book.editor.id then
