@@ -27,7 +27,7 @@ class ProjectController < ApplicationController
 
   def individualProject
     #display books
-    @project = Project.find(params[:id])
+    @project = Project.find(params[:id], :include => {:books => :chapters})
     @next_state = @project.compute_next_state()
     @page_title = @project.name
     if request.post?
