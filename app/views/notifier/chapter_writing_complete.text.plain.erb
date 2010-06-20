@@ -3,6 +3,7 @@
 Please log into our site to review this chapter.  On the editing page,
 you can mark the chapter as finished to complete this chapter.
 
+<%= url_for :controller => "book", :action =>"editBook", :id => @chapter.book, :only_path => false  %>
 
 Thank you for helping on this project,
 <%= @chapter.book.project.owner.username %> and The Book Project Team

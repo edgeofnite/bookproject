@@ -1,0 +1,14 @@
+<p>
+<%= @chapter.user.username %> has finished writing chapter <%= @chapter.number %> of "<%= @chapter.book.title %>".
+</p>
+<p>
+Please log into our site to review this chapter.  On the editing page,
+you can mark the chapter as finished to complete this chapter.
+</p>
+<p>
+<%= link_to "Use this link to review this chapter.",  :controller => "book", :action =>"editBook", :id => @chapter.book, :only_path => false %>
+</p>
+<p>
+Thank you for helping on this project,<br/>
+<%= @chapter.book.project.owner.username %> and The Book Project Team
+</p>

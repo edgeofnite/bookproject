@@ -34,6 +34,15 @@ content_type = "text/plain"
 @chapter = chapter
 end
 
+def chapter_ok(chapter, sent_at = Time.now)
+subject    "Chapter #{chapter.number} of book #{chapter.book.title}"
+recipients email_addresses(chapter.user.email)
+from       "bookproject@jaffestrategies.com"
+sent_on    sent_at
+content_type = "text/plain"
+@chapter = chapter
+end
+
 def new_chapter_to_write(chapter, sent_at = Time.now)
 recipients  email_addresses(chapter.user.email)
 subject    "Chapter #{chapter.number} of book #{chapter.book.title}"

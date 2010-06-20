@@ -1,0 +1,10 @@
+The editor <%= @chapter.book.editor.username %> has accepted
+chapter <%= @chapter.number %> of "<%= @chapter.book.title %>".
+
+<% if ! @chapter.comment.nil? && @chapter.comment != "" %>
+Your editor has written the following comments:
+<%= @chapter.comment %>
+<% end %>
+
+Thank you,
+<%= @chapter.book.project.owner.username %> and The Book Project Team

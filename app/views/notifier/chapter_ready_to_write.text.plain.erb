@@ -4,5 +4,9 @@ Please log into our site to start writing.  When you are done writing,
 select the "Finished" button.  We will send the chapter to your editor
 for review.
 
+Use this link to edit your chapter:
+<%= url_for :controller => "book", :action =>"editBook", :id => @chapter.book, :only_path => false  %>
+
+
 Have a great time writing,
 <%= @chapter.book.project.owner.username %> and The Book Project Team

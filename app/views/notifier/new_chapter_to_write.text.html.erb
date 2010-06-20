@@ -1,13 +1,20 @@
-Dear <%= @chapter.user.username %>
+<p>Dear <%= @chapter.user.username %><br/>
   You have been asked to write chapter <%= @chapter.number %> of "<%= @chapter.book.title %>".
-
+</p>
 <% if @chapter.number == 1 or @chapter.book.chapters[@chapter.number-2].state == "accepted" %>
+<p>
 Please log into our site to start writing.  When you are done writing,
 select the "Finished" button.  We will sent the chapter to your editor
 for review.
+</p><p>
+<%= link_to "Click here to write your chapter.",  :controller => "book", :action =>"editBook", :id => @chapter.book, :only_path => false  %>
+</p>
 <% else %>
-The previous chapters are not yet complete.  You will receive a new email
+<p>The previous chapters are not yet complete.  You will receive a new email
 message when the book is ready for you to write.
+</p>
 <% end %>
-Have a great time writing,
+<p>
+Have a great time writing,</br>
 <%= @chapter.book.project.owner.username %> and The Book Project Team
+</p>

@@ -16,6 +16,8 @@ class ChapterObserver < ActiveRecord::Observer
     Notifier.deliver_chapter_writing_complete(chapter)
   end
   def after_transition_state_from_editing_to_accepted(chapter, transition)
+    # tell the writer that the chapter is ok.
+    Notifier.deliver_chapter_ok(chapter)
     #puts "Received transition for #{chapter}"
     # If the next chapter exists and this chapter was overdue, then notify the writer that they can begin
     # Race Condition: What if the next chapter does not have the writer set yet!!!!

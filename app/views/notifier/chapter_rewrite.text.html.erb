@@ -1,0 +1,21 @@
+<p>The editor <%= @chapter.book.editor.username %> has asked you to edit
+and resubmit chapter <%= @chapter.number %> of "<%= @chapter.book.title %>".
+</p>
+<p>
+<%= link_to "Click here to edit your chapter.",  :controller => "book", :action =>"editBook", :id => @chapter.book, :only_path => false  %>
+</p>
+<p>
+<% if ! @chapter.comment.nil? && @chapter.comment != "" %>
+Your editor has written the following comments:<br/>
+<%= @chapter.comment %>
+<% end %>
+</p>
+<p>
+Please log into our site to edit this chapter.  When you are done writing,
+select the "Finished" button.  We will sent the chapter to your editor
+for review.
+</p>
+<p>
+Have a great time writing,<br/>
+<%= @chapter.book.project.owner.username %> and The Book Project Team
+</p>
