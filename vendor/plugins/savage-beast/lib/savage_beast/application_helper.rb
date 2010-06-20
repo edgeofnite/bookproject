@@ -15,7 +15,7 @@ module SavageBeast
 =end
 
 		def ajax_spinner_for(id, spinner="spinner.gif")
-			"<img src='/plugin_assets/savage_beast/images/#{spinner}' style='display:none; vertical-align:middle;' id='#{id.to_s}_spinner'> "
+			"<img src='/public/images/savage_beast/#{spinner}' style='display:none; vertical-align:middle;' id='#{id.to_s}_spinner'> "
 		end
 
 		def avatar_for(user, size=32)
