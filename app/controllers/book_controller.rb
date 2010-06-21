@@ -20,7 +20,7 @@ class BookController < ApplicationController
       if @lastChapterThisBook.nil?
         flash[:notice] = "You cannot see this book yet!"
         @book = nil
-        render :action => "editBook"
+        render :action => :editBook
         return
       else
         @lastChapterThisBook = @lastChapterThisBook.number
@@ -43,6 +43,8 @@ class BookController < ApplicationController
           return
         end
       end
+      nextController = :book
+      nextAction = :editBook
       if ! params[:chapter].nil? then
         @chapter = Chapter.find(params[:chapter_id])
         unless @chapter.update_attributes(params[:chapter])
@@ -54,20 +56,31 @@ class BookController < ApplicationController
           @chapter.finished = true
           @chapter.edited = false
           @chapter.begin_editing
+          flash[:notice] = "Chapter has been sent to the editor."
+          nextController = :main
+          nextAction = :personalPage
         end
         if params[:commit] == "Send this chapter back to the writer" then
           @chapter.finished = false
           @chapter.edited = false
           @chapter.begin_writing
+          flash[:notice] = "Chapter has been sent back to the writer."
+          nextController = :main
+          nextAction = :personalPage
         end
         if params[:commit] == "Finish Editing Chapter #{@chapter.number}" then
           @chapter.finished = true
           @chapter.edited = true
           @chapter.done_editing
+          flash[:notice] = "Chapter has been accepted."
+          nextController = :main
+          nextAction = :personalPage
         end
 	@chapter.clean_up_contents
         unless @chapter.save
-          render :action => :read
+          render :controller => :book, :action => :editBook
+        else
+          redirect_to :controller => nextController, :action => nextAction
         end
       end
     end
