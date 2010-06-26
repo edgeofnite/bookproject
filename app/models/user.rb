@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :ubers
   has_many :projects, :through => :groups, :uniq => true
   has_many :editing_projects, :through => :ubers, :source => :user, :uniq => true
-  has_many :edited_books, :class_name => "Book", :foreign_key => "uber_id", :uniq => true
+  has_many :edited_books, :class_name => "Book", :foreign_key => "uber_id", :uniq => true, :include => :chapters
   has_many :written_books, :through => :chapters, :source => :book, :uniq => true
   has_many :chapters, :foreign_key => "author_id", :order => :book_id
   has_many :owned_projects, :class_name => "Project", :foreign_key => :owner_id
