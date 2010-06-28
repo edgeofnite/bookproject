@@ -90,7 +90,10 @@ class Chapter < ActiveRecord::Base
       #converter = Iconv.new('ASCII//IGNORE//TRANSLIT', 'UTF-8') 
       #html = converter.iconv(html).unpack('U*').select{ |cp| cp < 127 }.pack('U*')
       # keep only the things we want.
-      Sanitize::Config::RELAXED[:attributes]["table"]<<"align"
+      unless (Sanitize::Config::RELAXED[:attributes]["table"].include?("align"))
+        Sanitize::Config::RELAXED[:attributes]["table"] << "align"
+      end
+
       html = Sanitize.clean( html, Sanitize::Config::RELAXED)
 
       # butt up any tags
