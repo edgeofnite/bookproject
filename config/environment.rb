@@ -40,7 +40,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "sanitize"
   config.gem "RedCloth"
-  config.gem "memcached"
+  config.gem "memcached-northscale"
   require "memcached"
 
   # Only load the plugins named here, in the order given. By default, all plugins 
