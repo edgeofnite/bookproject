@@ -8,6 +8,7 @@
 <%= hidden_field_tag 'chapter_id', chapter.id %>
 <%= form.label "Chapter Title" %>
 <%= form.text_field :title %>
+<%= form.label "Author: " + chapter.user.username %>
 <%= form.text_area :contents, :class=>"widgEditor", :id => "chapter_contents_#{chapter.number}" %>
 <% if not chapter.finished %>
 <%= submit_tag "Save Chapter, but continue writing" %>

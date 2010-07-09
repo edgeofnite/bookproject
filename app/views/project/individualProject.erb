@@ -1,5 +1,14 @@
 <% unless @project.books.empty? %>
 <h3>Progress</h3>
+<table border="1">
+<tr>
+<td>Legend: Chapter status</td><td class="chapterWriting">Writing</td>
+<td class="chapterEditing">Editing</td>
+<td class="chapterComplete">Accepted</td>
+<td class="chapterRejected">Rejected</td>
+</tr>
+</table>
+<br/>
 <% if @project.owner == @currentUser or @currentUser.username == "admin" %>
 <script>
 TableKit.options.editAjaxURI = '<%= url_for :controller => "project", :action => "updater"%>';
