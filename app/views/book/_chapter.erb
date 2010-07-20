@@ -1,8 +1,11 @@
-<div><h2><% if chapter.title.nil? %>
+<div><h2>
+<% if chapter.title.nil? %>
 Chapter <%= chapter.number %>
 <% else %>
 <%= chapter.title %>
 <% end %>
 </h2>
+<small>Written by <%= link_to h(chapter.user.username), :controller => "users", :action => "profile", :id =>chapter.user.id %></small>
+<br/>
 <%= chapter.contents%></div>
 <hline/>
