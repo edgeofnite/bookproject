@@ -2,6 +2,10 @@
 <% if @book.published or @currentUser.id == 1 or @currentUser == @project.owner or @currentUser == @book.editor %>
 <p align="right"><%= link_to "Printable Version", :controller => "book", :action =>"read", :id => @book.id %></p>
 <% end %>
+<% if @book.cur_chapter >1 %>
+<h1><%= @book.title %></h1>
+<% end %>
+<small>Editor: <%= link_to h(@book.editor.username), :controller => "users", :action => "profile", :id =>@book.editor.id %></small>
 <% for chapter in @book.chapters %>
  <% if chapter.user_can_edit(@currentUser) or (chapter.number <= @lastChapterThisBook and chapter.number <= @lastVisibleChapter) %>
   <div class="chapter<%= chapter.number %>">
