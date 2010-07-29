@@ -23,9 +23,8 @@ class ChapterObserver < ActiveRecord::Observer
     # Race Condition: What if the next chapter does not have the writer set yet!!!!
     book = chapter.book
     next_chapter = book.chapters[chapter.number + 1]
-    #Commented out due date since due date is not yet implemented.
-    if next_chapter != nil #and chapter.due_date < Date.today
-      Notifier.deliver_chapter_ready_to_write(chapter)
+    if next_chapter != nil and chapter.due_date < Date.today
+      Notifier.deliver_chapter_ready_to_write(next_chapter)
     end
   end
 end
