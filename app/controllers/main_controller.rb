@@ -14,6 +14,7 @@ class MainController < ApplicationController
     @chaptersToWrite = @me.chapters.select {|c| c.user == @me and (c.writing? or c.rejected?)}
     @chaptersToEdit = @me.edited_books.collect{|b| b.chapters.select{|c| c.editing?}}.flatten
     @myProjects = @me.owned_projects
+    @activeProjects = Project.find(:all, :conditions => { :status => Project::OPEN})
     @myCompletedBooks = @me.chapters.map{|c| if c.book.published then c.book end }.compact + @me.edited_books.select{|b| b.published}.compact
     @myCompletedBooks = @myCompletedBooks.uniq
     @currentProjects = @me.projects.select {|p| p.status == Project::NEW or p.status == Project::OPEN or p.status == Project::WRITING or p.status == Project::EDITING }

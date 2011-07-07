@@ -69,6 +69,24 @@
 </table>
 <% end %>
 
+<% unless @activeProjects.empty? %>
+ <h3>Projects that I can join</h3>
+<table class="sortable" border=1>
+  <tr>
+  <td>Project Name</td>
+  <td>Signing Date</td>
+  <td>Days Per Chapter</td>
+  <td>Number of Chapters</td>
+  <td>Writers</td>
+  <td>Editors</td>
+  <td>Status</td>
+  <td>Owner</td>
+  </tr>
+  <%= render(:partial => "project/project", :collection => @activeProjects) %>
+</table>
+<% end %>
+
+
 <% unless @myCompletedBooks.empty? %>
  <h3> My Completed Books</h3>
  <% for book in @myCompletedBooks %>
