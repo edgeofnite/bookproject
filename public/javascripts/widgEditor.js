@@ -53,6 +53,7 @@
 **    widgEditor.initEdit()
 **    widgEditor.insertNewParagraph()
 **    widgEditor.modifyFormSubmit()
+**    widgEditor.enableAutoSave()
 **    widgEditor.paragraphise()
 **    widgEditor.refreshDisplay()
 **    widgEditor.switchMode()
@@ -270,7 +271,10 @@ function widgEditor(replacedTextareaID)
 	
 	/* Attach onsubmit to parent form */
 	this.modifyFormSubmit();
-	
+
+	/* Enable autosave */
+	this.enableAutoSave();
+    
 	return true;
 }
 
@@ -437,6 +441,7 @@ widgEditor.prototype.cleanSource = function()
 	/* Remove empty tags */
 	theHTML = theHTML.replace(/(<[^\/]>|<[^\/][^>]*[^\/]>)\s*<\/[^>]*>/g, "");
 	
+    /* Resetting the field messes up cursor when autosaving, and the work is done every time anyways.
 	if (this.wysiwyg)
 	{
 		this.theIframe.contentWindow.document.getElementsByTagName("body")[0].innerHTML = theHTML;
@@ -445,7 +450,7 @@ widgEditor.prototype.cleanSource = function()
 	{
 		this.theTextarea.value = theHTML;
 	}
-	
+    */	
 	this.theInput.value = theHTML;
 	
 	return true;
@@ -717,7 +722,28 @@ widgEditor.prototype.modifyFormSubmit = function()
 	return true;
 }
 
-
+/* Add autosave functionality */
+widgEditor.prototype.enableAutoSave = function()
+{
+	var self = this;
+	var theForm = this.theContainer.parentNode;
+	
+	/* Find the parent form element */
+	while (theForm.nodeName.toLowerCase() != "form")
+	{
+		theForm = theForm.parentNode;
+	}
+	setInterval(
+		function(){
+			var action = theForm.action;
+			self.updateWidgInput();
+			new Ajax.Request(action, {
+		    	    method: 'post',
+		    	    parameters: theForm.serialize()
+	    	    	});
+		}
+	,30000); // do it every 30 seconds
+}
 
 
 /* Format the HTML with paragraphs. Any parentless text is enclosed in a paragraph, double breaks are paragraph markers */
