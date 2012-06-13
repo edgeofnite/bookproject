@@ -94,7 +94,7 @@ Rails::Initializer.run do |config|
   # This is the default, other options are :sendmail and :test
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = {:host => "bookproject.heroku.com"}
+  config.action_mailer.default_url_options = {:host => "summerbookproject.com"}
   #config.action_mailer.default_url_options = {:host => "localhost:3000"}
   config.action_mailer.smtp_settings = {
     :tls => true,
