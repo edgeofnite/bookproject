@@ -4,7 +4,7 @@
 <% if @chapter.number == 1 or @chapter.book.chapters[@chapter.number-2].state == "accepted" %>
 <p>
 Please log into our site to start writing.  When you are done writing,
-select the "Finished" button.  We will sent the chapter to your editor
+select the "Finished" button.  We will send the chapter to your editor
 for review.
 </p><p>
 <%= link_to "Click here to write your chapter.",  :controller => "book", :action =>"editBook", :id => @chapter.book, :only_path => false  %>
