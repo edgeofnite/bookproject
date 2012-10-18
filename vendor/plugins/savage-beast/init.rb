@@ -5,11 +5,11 @@ ActionController::Base.send :include, SavageBeast::AuthenticationSystem
 #ApplicationHelper.send :include, SavageBeast::ApplicationHelper
 
 # FIX for engines model reloading issue in development mode
-if ENV['RAILS_ENV'] != 'production'
-	load_paths.each do |path|
-		ActiveSupport::Dependencies.load_once_paths.delete(path)
-	end
-end
+#if ENV['RAILS_ENV'] != 'production'
+#	ActiveSupport::Dependencies.autoload_paths.each do |path|
+#		ActiveSupport::Dependencies.load_once_paths.delete(path)
+#	end
+#end
 
 # Include your application configuration below
 # @WBH@ would be nice for this to not be necessary somehow...
