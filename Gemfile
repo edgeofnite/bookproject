@@ -19,7 +19,6 @@ gem 'jquery-rails'
 gem 'sanitize'
 gem 'RedCloth'
 gem 'dalli'
-gem 'ruby-debug19'
 gem 'mysql'
 gem 'forem', :git => "git://github.com/radar/forem.git"
 gem 'forem-theme-base', :git => "git://github.com/radar/forem-theme-base.git"
@@ -27,6 +26,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'acts_as_list'
 gem 'state_machine'
 group :development do
+  gem 'ruby-debug19'
   gem 'taps',:require => false
   gem 'sqlite3'
 end
