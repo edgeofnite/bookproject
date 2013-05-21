@@ -26,7 +26,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'acts_as_list'
 gem 'state_machine'
 group :development do
-  gem 'ruby-debug19'
+  #gem 'ruby-debug19'
   gem 'taps',:require => false
   gem 'sqlite3'
 end
