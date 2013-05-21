@@ -1,6 +1,6 @@
 <% unless @book.nil? %>
 <% if @book.published or @currentUser.id == 1 or @currentUser == @project.owner or @currentUser == @book.editor %>
-<p align="right"><%= link_to "Printable Version", :controller => "book", :action =>"read", :id => @book.id %></p>
+<p align="right"><%= link_to "Printable Version", :controller => :book, :action =>:print, :id => @book.id %></p>
 <% end %>
 <% if @book.cur_chapter >1 %>
 <h1 align="center"><%= @book.title %></h1>

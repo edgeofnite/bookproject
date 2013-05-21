@@ -96,6 +96,8 @@ class BookController < ApplicationController
     unless @book.published or @currentUser.id == 1 or @currentUser.id == @book.project.owner.id or @currentUser.id == @book.editor.id then
       @book = nil
       flash[:notice] = "This book has not been published yet."
+      redirect_to :controller => :main, :action => :personalPage
+      return false
     end
     @title = @book.title
   end
