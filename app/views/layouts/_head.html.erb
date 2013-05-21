@@ -3,31 +3,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title><%= "#{h @page_title} - " if @page_title %><%= 'BookProject'[:beast_title] %></title>
-  <%= stylesheet_link_tag 'savage_beast/display' %>
-  <%= stylesheet_link_tag "display", :media => "all" %> 
+  <title><%= "#{h @page_title} - " if @page_title %><%= 'BookProject' %></title>
+  <%= stylesheet_link_tag 'display', :media => "all"%>
   <%= stylesheet_link_tag 'widgEditor', :media => "all"%>
   <%= javascript_include_tag "prototype", "effects" %>
-  <%= javascript_include_tag "lowpro" %>
-  <%= javascript_include_tag :defaults, "fastinit" %>
-  <%= javascript_include_tag :defaults, "tablekit" %>
-  <%= javascript_include_tag :defaults, "date-en-US" %>
-  <%= javascript_include_tag :defaults, "widgEditor" %>
+  <!-- <%= javascript_include_tag "lowpro" %> -->
+  <%= javascript_include_tag "fastinit" %>
+  <%= javascript_include_tag  "tablekit" %>
+  <%= javascript_include_tag  "date-en-US" %>
+  <%= javascript_include_tag  "widgEditor" %>
 
 <% unless @feed_icons.blank? -%>
   <% @feed_icons.each do |feed| -%>
   <%= auto_discovery_link_tag :rss, feed[:url], :title => "Subscribe to '#{feed[:title]}'" %>
   <% end -%>
 <% end -%>
-  <%= head_extras %>
-  <link rel="search" type="application/opensearchdescription+xml" href="http://<%= request.host_with_port %>/open_search.xml" />
 </head>
 <body>
 
 <div id="header">
-	<% form_tag search_all_posts_url, :method => :get do -%>
+	<%= form_tag "forem/posts/find_post", :method => :get do -%>
 	<ul id="nav">
 		<% if @currentUser -%> 
+		<% if @currentUser.forem_admin %>
+		<li><%= link_to "Administrate", forem.admin_root_url %></li>
+		<% end %>
 		<% if @currentUser.id == 1 -%> 
 		<li><%= link_to "List Users", :controller =>"login", :action => "list_users" %><li/> 
 	        <% end -%>
@@ -39,11 +39,9 @@
 		<li><%= link_to "Books", :controller =>"Book" %></li>
 		<li><%= link_to "Rules", :controller =>"Main", :action => "rules" %></li>
 		<li><%= link_to "Help", :controller =>"Main", :action => "contact" %></li>
-		<li><%= link_to 'Forums'[:forums_title], forums_path, :rel => 'home' %></li>
-		<li id="search">
-		<%= text_field_tag :q, params[:q], :size => 15, :id => :search_box %></li>
-		<li><%= submit_tag 'Search'[:search_title] %></li>
-		<li class="login"><%= beast_user_link %></li>
+		<% if @currentUser != nil -%> 
+		<li class="login"><%= @currentUser.username %></li>
+		<% end -%>
   </ul>
   <% end -%>
   <h1><%= link_to 'BookProject', :controller => "main" %></h1>

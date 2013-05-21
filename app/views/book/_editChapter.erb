@@ -1,4 +1,4 @@
-<% form_for :chapter, chapter do |form| %>
+<%= form_for(chapter) do |form| %>
 <% if chapter.number == 1 %>
 <%= form.label "Book Title" %>
 <%= text_field :book, :title, :object => @book %> (Only the writer of the first chapter can change the title!)<br/>

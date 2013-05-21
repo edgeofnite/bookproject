@@ -3,6 +3,9 @@ class MainController < ApplicationController
   before_filter :authorize, :only => :personalPage
 
   def index
+    if @currentUser
+        redirect_to({ :controller => "main", :action => "personalPage" })
+    end
   end
 
   def personalPage

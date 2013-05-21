@@ -17,7 +17,6 @@
 #
 
 class Chapter < ActiveRecord::Base
-  cachable_model
   validates_numericality_of :author_id, :number, :book_id, :only_integer => true
   validates_presence_of :due_date
   belongs_to :user, :foreign_key => :author_id
@@ -94,7 +93,11 @@ class Chapter < ActiveRecord::Base
         Sanitize::Config::RELAXED[:attributes]["table"] << "align"
       end
 
-      html = Sanitize.clean( html, Sanitize::Config::RELAXED)
+      config = Sanitize::Config::RELAXED
+      if (html.encoding.name == 'ASCII-8BIT')
+        config[:output_encoding] = 'ASCII'
+      end
+      html = Sanitize.clean( html, config)
 
       # butt up any tags
       html.gsub! />\s+</                  , '><'

@@ -81,13 +81,13 @@ TableKit.Editable.selectInput('writers', {}, [
 <p>
 <% if (@project.owner == @currentUser or @currentUser.username == "admin") and @project.books[0].cur_chapter<= @project.chapters %>
 <% if @project.books[0].chapters[@project.books[0].cur_chapter-1].state == "new" %>
-<% form_tag :controller => :project, :action =>:startNextChapter, :id => @project.id do %>
+<%= form_tag :controller => :project, :action =>:startNextChapter, :id => @project.id do %>
 Click here to notify writers of the new chapter
 <%= submit_tag "Send out chapter notices" %>
 <% end %>
 <% else %>
 <% if @project.books[0].cur_chapter< @project.chapters %>
-<% form_tag :controller => :project, :action =>:nextChapter, :id => @project.id do %>
+<%= form_tag :controller => :project, :action =>:nextChapter, :id => @project.id do %>
 Click here to start the next chapter:
 <%= submit_tag "Begin next chapter" %>
 <% end %>
@@ -123,7 +123,7 @@ Click here to start the next chapter:
 <% if @project.owner == @currentUser  or @currentUser.username == "admin" %>
 <% unless @next_state.nil? %>
 <h3>Update Project Status</h3>
-<% form_for :project, @project, :url => { :action => "advanceProject", :id => @project.id } do |form| %>
+<%= form_for @project, :url => { :action => "advanceProject", :id => @project.id } do |form| %>
 <%= hidden_field_tag 'next_state', @next_state %>
 <%= submit_tag "Set Project to #{@next_state}"%>
 <% end %>
@@ -132,7 +132,7 @@ Click here to start the next chapter:
 
 <h3>Project Details</h3>
 <% if @project.owner == @currentUser  or @currentUser.username == "admin" %>
-<% form_for :project, @project, :url => { :action => "individualProject" } do |form| %>
+<%= form_for @project, :url => { :action => "individualProject" } do |form| %>
 <%= form.label "Status: " %>  <%= @project.phase %><br/>
 <%= form.label "Start Date" %>
 <%= form.date_select :start_date %><br/>

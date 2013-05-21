@@ -9,7 +9,7 @@
 understand this and are willing to commit to writing a chapter every
 <%= @project.days_per_chapter %> days, check below and submit.  If you
 are a real glutton for punishment, you can also sign up as an editor.</p>
-		<%form_for :signUp do |form| %>
+		<%= form_for :signUp do |form| %>
 		<%= form.check_box :writer%>
 		<%= form.label "I will write in this project"%><br><br>
 		<%= form.check_box :editor%>

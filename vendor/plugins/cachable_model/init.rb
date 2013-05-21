@@ -1,1 +1,0 @@
-require 'cachable_model'

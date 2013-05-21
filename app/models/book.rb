@@ -13,7 +13,6 @@
 #
 
 class Book < ActiveRecord::Base
-  cachable_model
   has_many :chapters, :order => "number"
   belongs_to :editor, :class_name => "User", :foreign_key => "uber_id"
   validates_presence_of :uber_id, :project_id, :title  

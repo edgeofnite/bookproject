@@ -178,7 +178,7 @@ class ProjectController < ApplicationController
     end
     render :text => result
     return
-    rescue Exception => exc:
+    rescue Exception => exc
       render :text => "failed: #{exc.message}"
   end
 

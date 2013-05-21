@@ -9,7 +9,7 @@
   The link given will no longer function after your password is changed. 
 </p>
  
-<% form_tag :controller => :users, :action => :recover, :method => :post do %>
+<%= form_tag :controller => :users, :action => :recover, :method => :post do %>
  
   <label for="user_name">Name:</label><br />
   <%= text_field_tag :name %><br />

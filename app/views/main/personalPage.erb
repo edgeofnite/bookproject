@@ -3,7 +3,7 @@
 
 <h2>About Me</h2>
 <p>
-<% form_for :user, @me do |form| %>
+<%= form_for @me do |form| %>
 <%= form.text_area :aboutMe, :rows => 4, :cols => 60 %><br/>
 <%= submit_tag "Update" %>
 <% end %>

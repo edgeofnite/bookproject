@@ -18,7 +18,6 @@
 #
 
 class Project < ActiveRecord::Base
-  cachable_model
   validates_numericality_of :chapters, :days_per_chapter, :status
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
   has_many :writers, :through => :groups, :source => :user, :uniq => true
