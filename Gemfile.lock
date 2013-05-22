@@ -96,6 +96,7 @@ GEM
     multi_json (1.7.3)
     mysql (2.9.1)
     nokogiri (1.5.9)
+    pg (0.15.1)
     polyglot (0.3.3)
     pygments.rb (0.2.4)
       rubypython (~> 0.5.3)
@@ -180,6 +181,7 @@ DEPENDENCIES
   forem-theme-base!
   jquery-rails
   mysql
+  pg
   rails (= 3.2.13)
   sanitize
   sass-rails (~> 3.2.3)

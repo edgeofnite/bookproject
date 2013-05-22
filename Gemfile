@@ -30,4 +30,7 @@ group :development do
   gem 'taps',:require => false
   gem 'sqlite3'
 end
+group :production do
+  gem 'pg'
+end
 
